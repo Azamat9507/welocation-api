@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: cafe-coupon-spring
+  datasource:
+    url: jdbc:mysql://localhost:3306/cafe
+    username: cafe
+    password: cafe
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true

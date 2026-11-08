@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: cafe
+      MYSQL_USER: cafe
+      MYSQL_PASSWORD: cafe
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+  redis:
+    image: redis:7.4
+    ports:
+      - "6379:6379"
