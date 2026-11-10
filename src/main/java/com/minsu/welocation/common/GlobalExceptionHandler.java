@@ -1,4 +1,4 @@
-package com.minsu.cafe.common;
+package com.minsu.welocation.common;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;

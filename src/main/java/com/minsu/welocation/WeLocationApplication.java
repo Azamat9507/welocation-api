@@ -1,12 +1,12 @@
-package com.minsu.cafe;
+package com.minsu.welocation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CafeApplication {
+public class WeLocationApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CafeApplication.class, args);
+        SpringApplication.run(WeLocationApplication.class, args);
     }
 }

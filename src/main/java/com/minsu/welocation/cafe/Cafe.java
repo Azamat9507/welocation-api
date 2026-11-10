@@ -1,4 +1,4 @@
-package com.minsu.cafe.cafe;
+package com.minsu.welocation.cafe;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

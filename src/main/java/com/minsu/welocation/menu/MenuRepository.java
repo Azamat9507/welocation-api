@@ -1,4 +1,4 @@
-package com.minsu.cafe.menu;
+package com.minsu.welocation.menu;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

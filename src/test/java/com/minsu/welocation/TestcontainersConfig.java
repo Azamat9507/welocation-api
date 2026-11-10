@@ -1,4 +1,4 @@
-package com.minsu.cafe;
+package com.minsu.welocation;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;

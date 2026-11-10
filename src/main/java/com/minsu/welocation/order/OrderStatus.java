@@ -1,4 +1,4 @@
-package com.minsu.cafe.order;
+package com.minsu.welocation.order;
 
 public enum OrderStatus {
     PLACED,

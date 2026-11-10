@@ -1,8 +1,8 @@
-package com.minsu.cafe.cafe;
+package com.minsu.welocation.cafe;
 
-import com.minsu.cafe.cafe.CafeDtos.CafeResponse;
-import com.minsu.cafe.cafe.CafeDtos.CreateCafeRequest;
-import com.minsu.cafe.common.NotFoundException;
+import com.minsu.welocation.cafe.CafeDtos.CafeResponse;
+import com.minsu.welocation.cafe.CafeDtos.CreateCafeRequest;
+import com.minsu.welocation.common.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

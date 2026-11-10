@@ -1,9 +1,9 @@
-package com.minsu.cafe.menu;
+package com.minsu.welocation.menu;
 
-import com.minsu.cafe.cafe.Cafe;
-import com.minsu.cafe.cafe.CafeService;
-import com.minsu.cafe.menu.MenuDtos.CreateMenuRequest;
-import com.minsu.cafe.menu.MenuDtos.MenuResponse;
+import com.minsu.welocation.cafe.Cafe;
+import com.minsu.welocation.cafe.CafeService;
+import com.minsu.welocation.menu.MenuDtos.CreateMenuRequest;
+import com.minsu.welocation.menu.MenuDtos.MenuResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

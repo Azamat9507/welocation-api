@@ -1,4 +1,4 @@
-package com.minsu.cafe.menu;
+package com.minsu.welocation.menu;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

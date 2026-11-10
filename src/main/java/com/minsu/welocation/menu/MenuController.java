@@ -1,7 +1,7 @@
-package com.minsu.cafe.cafe;
+package com.minsu.welocation.menu;
 
-import com.minsu.cafe.cafe.CafeDtos.CafeResponse;
-import com.minsu.cafe.cafe.CafeDtos.CreateCafeRequest;
+import com.minsu.welocation.menu.MenuDtos.CreateMenuRequest;
+import com.minsu.welocation.menu.MenuDtos.MenuResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,21 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api/cafes")
-@RequiredArgsConstructor
-public class CafeController {
+import java.util.List;
 
-    private final CafeService cafeService;
+@RestController
+@RequestMapping("/api/cafes/{cafeId}/menus")
+@RequiredArgsConstructor
+public class MenuController {
+
+    private final MenuService menuService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CafeResponse create(@Valid @RequestBody CreateCafeRequest request) {
-        return cafeService.create(request);
+    public MenuResponse create(@PathVariable Long cafeId, @Valid @RequestBody CreateMenuRequest request) {
+        return menuService.create(cafeId, request);
     }
 
-    @GetMapping("/{id}")
-    public CafeResponse get(@PathVariable Long id) {
-        return cafeService.get(id);
+    @GetMapping
+    public List<MenuResponse> list(@PathVariable Long cafeId) {
+        return menuService.list(cafeId);
     }
 }

@@ -1,4 +1,4 @@
-package com.minsu.cafe.cafe;
+package com.minsu.welocation.cafe;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

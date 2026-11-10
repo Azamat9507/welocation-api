@@ -1,4 +1,4 @@
-package com.minsu.cafe.common;
+package com.minsu.welocation.common;
 
 public class BadRequestException extends RuntimeException {
 

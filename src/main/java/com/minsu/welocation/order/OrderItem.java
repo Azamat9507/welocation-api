@@ -1,6 +1,6 @@
-package com.minsu.cafe.order;
+package com.minsu.welocation.order;
 
-import com.minsu.cafe.menu.Menu;
+import com.minsu.welocation.menu.Menu;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

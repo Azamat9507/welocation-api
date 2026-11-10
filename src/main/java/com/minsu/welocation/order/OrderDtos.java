@@ -1,4 +1,4 @@
-package com.minsu.cafe.order;
+package com.minsu.welocation.order;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;

@@ -1,10 +1,10 @@
-package com.minsu.cafe.order;
+package com.minsu.welocation.order;
 
-import com.minsu.cafe.TestcontainersConfig;
-import com.minsu.cafe.cafe.Cafe;
-import com.minsu.cafe.cafe.CafeRepository;
-import com.minsu.cafe.menu.Menu;
-import com.minsu.cafe.menu.MenuRepository;
+import com.minsu.welocation.TestcontainersConfig;
+import com.minsu.welocation.cafe.Cafe;
+import com.minsu.welocation.cafe.CafeRepository;
+import com.minsu.welocation.menu.Menu;
+import com.minsu.welocation.menu.MenuRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

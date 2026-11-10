@@ -1,7 +1,7 @@
-package com.minsu.cafe.menu;
+package com.minsu.welocation.order;
 
-import com.minsu.cafe.menu.MenuDtos.CreateMenuRequest;
-import com.minsu.cafe.menu.MenuDtos.MenuResponse;
+import com.minsu.welocation.order.OrderDtos.CreateOrderRequest;
+import com.minsu.welocation.order.OrderDtos.OrderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,23 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/cafes/{cafeId}/menus")
+@RequestMapping("/api/orders")
 @RequiredArgsConstructor
-public class MenuController {
+public class OrderController {
 
-    private final MenuService menuService;
+    private final OrderService orderService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MenuResponse create(@PathVariable Long cafeId, @Valid @RequestBody CreateMenuRequest request) {
-        return menuService.create(cafeId, request);
+    public OrderResponse place(@Valid @RequestBody CreateOrderRequest request) {
+        return orderService.place(request);
     }
 
-    @GetMapping
-    public List<MenuResponse> list(@PathVariable Long cafeId) {
-        return menuService.list(cafeId);
+    @GetMapping("/{id}")
+    public OrderResponse get(@PathVariable Long id) {
+        return orderService.get(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.minsu.cafe.cafe;
+package com.minsu.welocation.cafe;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

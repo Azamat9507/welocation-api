@@ -1,6 +1,6 @@
 spring:
   application:
-    name: cafe-coupon-spring
+    name: welocation
   datasource:
     url: jdbc:mysql://localhost:3306/cafe
     username: cafe
