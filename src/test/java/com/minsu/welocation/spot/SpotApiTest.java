@@ -1,0 +1,127 @@
+package com.minsu.welocation.spot;
+
+import com.minsu.welocation.TestcontainersConfig;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@Import(TestcontainersConfig.class)
+class SpotApiTest {
+
+    @Autowired
+    MockMvc mvc;
+
+    @Autowired
+    SpotRepository spotRepository;
+
+    @AfterEach
+    void cleanUp() {
+        spotRepository.deleteAll();
+    }
+
+    private Spot save(String name, SpotCategory category, Region region, SpotTag... tags) {
+        Spot spot = new Spot(name, category, region, "test address", 35.1, 129.1, SpotSource.MANUAL, null);
+        for (SpotTag tag : tags) {
+            spot.addTag(tag);
+        }
+        return spotRepository.save(spot);
+    }
+
+    @Test
+    void filtersByRegionCategoryAndTag() throws Exception {
+        save("Sea Cafe", SpotCategory.CAFE, Region.BUSAN, SpotTag.OCEAN_VIEW, SpotTag.ROOFTOP);
+        save("Plain Cafe", SpotCategory.CAFE, Region.BUSAN);
+        save("Busan Beach", SpotCategory.BEACH, Region.BUSAN, SpotTag.OCEAN_VIEW);
+        save("Seoul Cafe", SpotCategory.CAFE, Region.SEOUL, SpotTag.OCEAN_VIEW);
+
+        mvc.perform(get("/api/spots")
+                        .param("region", "BUSAN").param("category", "CAFE").param("tag", "OCEAN_VIEW"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalElements").value(1))
+                .andExpect(jsonPath("$.items[0].name").value("Sea Cafe"));
+
+        mvc.perform(get("/api/spots").param("region", "BUSAN"))
+                .andExpect(jsonPath("$.totalElements").value(3));
+    }
+
+    @Test
+    void pagesNewestFirst() throws Exception {
+        for (int i = 1; i <= 5; i++) {
+            save("Spot " + i, SpotCategory.LAKE, Region.GANGWON);
+        }
+
+        mvc.perform(get("/api/spots").param("size", "2").param("page", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items.length()").value(2))
+                .andExpect(jsonPath("$.items[0].name").value("Spot 3"))
+                .andExpect(jsonPath("$.page").value(1))
+                .andExpect(jsonPath("$.totalElements").value(5))
+                .andExpect(jsonPath("$.totalPages").value(3));
+    }
+
+    @Test
+    void rejectsPageSizeAboveLimit() throws Exception {
+        mvc.perform(get("/api/spots").param("size", "500"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.detail").value(containsString("size")));
+    }
+
+    @Test
+    void unknownEnumIsBadRequestWithoutJavaTypeNames() throws Exception {
+        mvc.perform(get("/api/spots").param("region", "MOON"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.detail").value("region: invalid value"))
+                .andExpect(content().string(not(containsString("com.minsu"))));
+    }
+
+    @Test
+    void detailIncludesTagsAndImagesInOrder() throws Exception {
+        Spot spot = new Spot("Lake View", SpotCategory.CAFE, Region.GYEONGGI, "Gapyeong", 37.8, 127.5,
+                SpotSource.MANUAL, null);
+        spot.describe("quiet cafe by the lake");
+        spot.addTag(SpotTag.LAKE_VIEW);
+        spot.addTag(SpotTag.PARKING);
+        spot.addImage("https://img.example/1.jpg");
+        spot.addImage("https://img.example/2.jpg");
+        Long id = spotRepository.save(spot).getId();
+
+        mvc.perform(get("/api/spots/{id}", id))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.description").value("quiet cafe by the lake"))
+                .andExpect(jsonPath("$.tags[0]").value("LAKE_VIEW"))
+                .andExpect(jsonPath("$.tags[1]").value("PARKING"))
+                .andExpect(jsonPath("$.images[0]").value("https://img.example/1.jpg"))
+                .andExpect(jsonPath("$.images[1]").value("https://img.example/2.jpg"));
+
+        mvc.perform(get("/api/spots").param("region", "GYEONGGI"))
+                .andExpect(jsonPath("$.items[0].thumbnailUrl").value("https://img.example/1.jpg"));
+    }
+
+    @Test
+    void missingSpotIs404WithoutStackTrace() throws Exception {
+        mvc.perform(get("/api/spots/{id}", 999_999))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.detail").value("spot 999999 not found"))
+                .andExpect(jsonPath("$.trace").doesNotExist());
+    }
+
+    @Test
+    void nonNumericIdIsBadRequest() throws Exception {
+        mvc.perform(get("/api/spots/abc"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.detail").value("id: invalid value"));
+    }
+}

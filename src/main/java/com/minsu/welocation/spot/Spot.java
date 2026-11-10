@@ -1,0 +1,125 @@
+package com.minsu.welocation.spot;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Table(name = "spots",
+        uniqueConstraints = @UniqueConstraint(name = "uk_spot_source_external", columnNames = {"source", "external_id"}),
+        indexes = @Index(name = "idx_spot_region_category", columnList = "region, category"))
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Spot {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 200)
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private SpotCategory category;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private Region region;
+
+    @Column(nullable = false, length = 300)
+    private String address;
+
+    @Column(nullable = false)
+    private double latitude;
+
+    @Column(nullable = false)
+    private double longitude;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    // copy of the first image so list pages don't have to touch spot_images
+    @Column(length = 500)
+    private String thumbnailUrl;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private SpotSource source;
+
+    // TourAPI contentid; lets a re-run of the sync update instead of duplicating
+    @Column(name = "external_id", length = 50)
+    private String externalId;
+
+    @ElementCollection
+    @CollectionTable(name = "spot_tags", joinColumns = @JoinColumn(name = "spot_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tag", nullable = false, length = 30)
+    private Set<SpotTag> tags = EnumSet.noneOf(SpotTag.class);
+
+    @OneToMany(mappedBy = "spot", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("sortOrder")
+    private List<SpotImage> images = new ArrayList<>();
+
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private Instant updatedAt;
+
+    public Spot(String name, SpotCategory category, Region region, String address,
+                double latitude, double longitude, SpotSource source, String externalId) {
+        if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+            throw new IllegalArgumentException("coordinates out of range");
+        }
+        this.name = name;
+        this.category = category;
+        this.region = region;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.source = source;
+        this.externalId = externalId;
+    }
+
+    public void describe(String description) {
+        this.description = description;
+    }
+
+    public void addTag(SpotTag tag) {
+        tags.add(tag);
+    }
+
+    public void addImage(String url) {
+        images.add(new SpotImage(this, url, images.size()));
+        if (thumbnailUrl == null) {
+            thumbnailUrl = url;
+        }
+    }
+}
