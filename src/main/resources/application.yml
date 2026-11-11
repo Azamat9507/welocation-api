@@ -23,12 +23,25 @@ spring:
       # only StringRedisTemplate is used; this stops Spring Data probing the JPA repositories for Redis
       repositories:
         enabled: false
+  ai:
+    # Spring AI passes this to RetryPolicy.maxRetries, so 0 means a single attempt. GuideService moves on to the
+    # fallback model instead of retrying.
+    retry:
+      max-attempts: 0
   jackson:
     deserialization:
       # "rating": 3.7 must be rejected, not quietly stored as 3
       accept-float-as-int: false
 
 server:
+  # Login is rate limited per client IP. Behind the web app's server (Next.js) or nginx every request comes from the
+  # proxy, so the client IP is taken from X-Forwarded-For, but only when the request comes from a trusted proxy.
+  # Anyone else's X-Forwarded-For is ignored, so a client can't pick its own IP to dodge the limit.
+  forward-headers-strategy: native
+  tomcat:
+    remoteip:
+      # loopback by default; set TRUSTED_PROXIES to the proxy's address on a server (CIDR, comma separated)
+      internal-proxies: ${TRUSTED_PROXIES:127.0.0.0/8, ::1/128}
   error:
     include-stacktrace: never
     include-message: never
@@ -57,6 +70,30 @@ welocation:
     # every hour at :05, rebuild this week's ranking from MySQL
     rebuild-cron: "0 5 * * * *"
     redis-backoff: 30s
+  guide:
+    # Gemini API key from Google AI Studio; empty turns POST /api/guide into a 503 and nothing else changes
+    api-key: ${GEMINI_API_KEY:}
+    # Checked with this project's key on 2026-11-12. The 2.5 models answer 404 to new keys; gemini-3.8-flash and
+    # gemini-flash-latest timed out (40 s); gemini-3.6-flash works but the free tier allows it 20 requests a day.
+    # The Flash Lite models get 15 a minute and 500 a day each (AI Studio, Rate Limit page), and a question takes
+    # two to four calls.
+    model: ${GEMINI_MODEL:gemini-3.5-flash-lite}
+    fallback-model: ${GEMINI_FALLBACK_MODEL:gemini-3.1-flash-lite}
+    # a model that answered 429 (out of quota) is skipped for this long, so each question doesn't pay for the failure
+    quota-backoff: 60s
+    # per model call; the whole question, fallback model included, gets `deadline` to start its calls
+    # live runs: a normal call takes 1 to 3 s, a stuck one never answers; 10 s leaves the fallback time to answer
+    timeout: 10s
+    deadline: 30s
+    max-output-tokens: 1024
+    # Gemini 3 sets thinking by level (MINIMAL, LOW, MEDIUM, HIGH) and rejects the 2.5 thinkingBudget with a 400
+    thinking-level: ${GEMINI_THINKING_LEVEL:LOW}
+    # searches per question, however the model spreads them over its turns
+    max-searches: 3
+    # every question costs money, so both limits count requests, not successful answers
+    per-user-daily: 20
+    # about what 500 model calls a day buy; past it a clear 429 beats a slow 503
+    global-daily: ${GUIDE_GLOBAL_DAILY:150}
 springdoc:
   swagger-ui:
     # opens with the parameter fields ready to fill instead of behind a "Try it out" click

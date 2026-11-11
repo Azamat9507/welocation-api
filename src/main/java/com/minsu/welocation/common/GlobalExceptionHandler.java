@@ -48,6 +48,11 @@ public class GlobalExceptionHandler {
                 .body(ProblemDetail.forStatusAndDetail(HttpStatus.TOO_MANY_REQUESTS, e.getMessage()));
     }
 
+    @ExceptionHandler(ServiceUnavailableException.class)
+    public ProblemDetail unavailable(ServiceUnavailableException e) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.SERVICE_UNAVAILABLE, e.getMessage());
+    }
+
     // Jackson's message quotes the offending input and Java types; none of that goes back to the client
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ProblemDetail unreadable(HttpMessageNotReadableException e) {
