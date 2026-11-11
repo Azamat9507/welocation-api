@@ -17,7 +17,7 @@ public final class SpotDtos {
             Region region,
             SpotCategory category,
             SpotTag tag,
-            @Min(0) Integer page,
+            @Min(0) @Max(10_000) Integer page,
             @Min(1) @Max(50) Integer size) {
 
         int pageOrDefault() {
@@ -30,23 +30,36 @@ public final class SpotDtos {
     }
 
     public record SpotSummary(Long id, String name, SpotCategory category, Region region,
-                              String address, double latitude, double longitude, String thumbnailUrl) {
+                              String address, double latitude, double longitude, String thumbnailUrl,
+                              List<SpotTag> tags, long reviewCount, Double averageRating) {
 
-        static SpotSummary from(Spot spot) {
+        static SpotSummary from(Spot spot, Rating rating) {
             return new SpotSummary(spot.getId(), spot.getName(), spot.getCategory(), spot.getRegion(),
-                    spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getThumbnailUrl());
+                    spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getThumbnailUrl(),
+                    spot.getTags().stream().sorted().toList(), rating.count(), rating.average());
+        }
+    }
+
+    // average is null while a spot has no reviews, so "no rating yet" can't be mistaken for 0 stars
+    public record Rating(long count, Double average) {
+
+        static final Rating NONE = new Rating(0, null);
+
+        static Rating of(long count, double average) {
+            return new Rating(count, Math.round(average * 10) / 10.0);
         }
     }
 
     public record SpotDetail(Long id, String name, SpotCategory category, Region region, String address,
                              double latitude, double longitude, String description,
-                             List<SpotTag> tags, List<String> images) {
+                             List<SpotTag> tags, List<String> images, long reviewCount, Double averageRating) {
 
-        static SpotDetail from(Spot spot) {
+        static SpotDetail from(Spot spot, Rating rating) {
             return new SpotDetail(spot.getId(), spot.getName(), spot.getCategory(), spot.getRegion(),
                     spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getDescription(),
                     spot.getTags().stream().sorted().toList(),
-                    spot.getImages().stream().map(SpotImage::getUrl).toList());
+                    spot.getImages().stream().map(SpotImage::getUrl).toList(),
+                    rating.count(), rating.average());
         }
     }
 

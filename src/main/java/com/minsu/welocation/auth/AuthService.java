@@ -6,6 +6,7 @@ import com.minsu.welocation.auth.AuthDtos.TokenResponse;
 import com.minsu.welocation.auth.AuthDtos.UserResponse;
 import com.minsu.welocation.common.BadRequestException;
 import com.minsu.welocation.common.ConflictException;
+import com.minsu.welocation.common.Constraints;
 import com.minsu.welocation.common.NotFoundException;
 import com.minsu.welocation.common.UnauthorizedException;
 import com.minsu.welocation.user.User;
@@ -61,7 +62,10 @@ public class AuthService {
             return UserResponse.from(user);
         } catch (DataIntegrityViolationException e) {
             // two signups with the same email at once: the unique key catches the second
-            throw new ConflictException("email is already registered");
+            if (Constraints.isViolationOf(e, "uk_user_email")) {
+                throw new ConflictException("email is already registered");
+            }
+            throw e;
         }
     }
 

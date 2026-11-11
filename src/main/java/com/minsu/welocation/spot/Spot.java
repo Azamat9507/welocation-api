@@ -19,6 +19,7 @@ import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -75,6 +76,9 @@ public class Spot {
     @Column(name = "external_id", length = 50)
     private String externalId;
 
+    // A list page shows tags for every spot. A fetch join can't be paged in SQL (rows multiply per tag),
+    // so tags for the whole page are loaded in one IN query instead; 50 = the largest page size.
+    @BatchSize(size = 50)
     @ElementCollection
     @CollectionTable(name = "spot_tags", joinColumns = @JoinColumn(name = "spot_id"))
     @Enumerated(EnumType.STRING)

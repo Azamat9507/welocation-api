@@ -1,5 +1,6 @@
 package com.minsu.welocation.spot;
 
+import com.minsu.welocation.review.ReviewRepository;
 import com.minsu.welocation.spot.SpotDtos.NearbySearch;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.when;
 class SpotServiceNearbyTest {
 
     SpotRepository repository = mock(SpotRepository.class);
-    SpotService service = new SpotService(repository);
+    SpotService service = new SpotService(repository, mock(ReviewRepository.class));
 
     private void radius(double km, List<SpotRepository.NearbyRow> rows) {
         when(repository.findNearby(anyDouble(), anyDouble(), eq(km * 1000), any(), any(), anyInt())).thenReturn(rows);

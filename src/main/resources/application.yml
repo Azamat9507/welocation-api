@@ -11,6 +11,10 @@ spring:
       # schema is owned by Flyway (db/migration); Hibernate only checks it matches the entities
       ddl-auto: validate
     open-in-view: false
+  jackson:
+    deserialization:
+      # "rating": 3.7 must be rejected, not quietly stored as 3
+      accept-float-as-int: false
 
 server:
   error:

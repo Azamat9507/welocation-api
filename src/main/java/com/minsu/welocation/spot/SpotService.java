@@ -2,12 +2,15 @@ package com.minsu.welocation.spot;
 
 import com.minsu.welocation.common.NotFoundException;
 import com.minsu.welocation.common.PageResponse;
+import com.minsu.welocation.review.ReviewRepository;
 import com.minsu.welocation.spot.SpotDtos.NearbySearch;
 import com.minsu.welocation.spot.SpotDtos.NearbySpot;
+import com.minsu.welocation.spot.SpotDtos.Rating;
 import com.minsu.welocation.spot.SpotDtos.SpotDetail;
 import com.minsu.welocation.spot.SpotDtos.SpotSearch;
 import com.minsu.welocation.spot.SpotDtos.SpotSummary;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,19 +32,29 @@ public class SpotService {
     private static final double[] SEARCH_STEPS_KM = {1, 3, 10, 30};
 
     private final SpotRepository spotRepository;
+    private final ReviewRepository reviewRepository;
 
     public PageResponse<SpotSummary> search(SpotSearch search) {
         PageRequest pageable = PageRequest.of(search.pageOrDefault(), search.sizeOrDefault(),
                 Sort.by(Sort.Direction.DESC, "id"));
-        return PageResponse.from(spotRepository
-                .findAll(SpotSpecs.matching(search.region(), search.category(), search.tag()), pageable)
-                .map(SpotSummary::from));
+        Page<Spot> page = spotRepository.findAll(SpotSpecs.matching(search.region(), search.category(), search.tag()), pageable);
+        Map<Long, Rating> ratings = ratingsOf(page.map(Spot::getId).getContent());
+        return PageResponse.from(page.map(spot -> SpotSummary.from(spot, ratings.getOrDefault(spot.getId(), Rating.NONE))));
     }
 
     public SpotDetail get(Long id) {
         Spot spot = spotRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("spot " + id + " not found"));
-        return SpotDetail.from(spot);
+        return SpotDetail.from(spot, ratingsOf(List.of(id)).getOrDefault(id, Rating.NONE));
+    }
+
+    private Map<Long, Rating> ratingsOf(List<Long> spotIds) {
+        if (spotIds.isEmpty()) {
+            return Map.of();
+        }
+        return reviewRepository.summarize(spotIds).stream().collect(Collectors.toMap(
+                ReviewRepository.RatingSummary::getSpotId,
+                r -> Rating.of(r.getReviewCount(), r.getAverageRating())));
     }
 
     // Every spot in the bounding box gets its distance computed and sorted, so a wide radius over a dense
