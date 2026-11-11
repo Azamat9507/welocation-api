@@ -127,7 +127,7 @@ class TourApiSyncTest {
         Function<Map<String, String>, Answer> o = override;
         Answer a = o == null ? null : o.apply(q);
         if (a == null) {
-            a = new Answer(200, page(q), 0);
+            a = new Answer(200, q.containsKey("contentId") ? gallery() : page(q), 0);
         }
         try {
             if (a.delayMillis() > 0) {
@@ -167,6 +167,21 @@ class TourApiSyncTest {
         }
         body.put("numOfRows", size).put("pageNo", pageNo).put("totalCount", all.size());
         return JSON.writeValueAsString(root);
+    }
+
+    // detailImage2 for 완도타워 (632089), recorded 2026-11-12: 15 photos, Type1 and Type3. Served for any contentId.
+    static String gallery() {
+        try (InputStream in = TourApiSyncTest.class.getResourceAsStream("/tourapi/detail-images-632089.json")) {
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    static long galleryRequests() {
+        synchronized (requests) {
+            return requests.stream().filter(q -> q.containsKey("contentId")).count();
+        }
     }
 
     static long requestsFor(String code) {
@@ -396,5 +411,96 @@ class TourApiSyncTest {
         assertThat(second.alreadyRunning()).isTrue();
         assertThat(second.created()).isZero();
         assertThat(first.get(10, TimeUnit.SECONDS).created()).isEqualTo(ITEMS);
+    }
+
+    @Test
+    void galleryKeepsTheMainPhotoFirstAndIsFetchedOnce() {
+        sync.sync();
+        long withPhoto = spotRepository.findAll().stream().filter(sp -> sp.getThumbnailUrl() != null).count();
+
+        GalleryReport first = sync.syncGalleries(100);
+
+        // spots without a main photo are not asked about: TourAPI has no gallery for them
+        assertThat(galleryRequests()).isEqualTo(withPhoto);
+        assertThat(requests).filteredOn(q -> q.containsKey("contentId"))
+                .allSatisfy(q -> assertThat(q.get("serviceKey")).isEqualTo(KEY));
+        assertThat(first.checked()).isEqualTo((int) withPhoto);
+        assertThat(first.failed()).isZero();
+        tx.executeWithoutResult(st -> {
+            Spot wando = byExternalId("632089");
+            // main photo + 9 of the 15 recorded ones (gallery-max-images 10 by default)
+            assertThat(wando.getImages()).hasSize(10);
+            assertThat(wando.getImages().getFirst().getUrl()).isEqualTo(wando.getThumbnailUrl());
+            assertThat(wando.getImages()).extracting("sortOrder").containsExactly(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+            assertThat(wando.getImages()).extracting("url").doesNotHaveDuplicates()
+                    .allSatisfy(u -> assertThat((String) u).startsWith("https://tong.visitkorea.or.kr/"));
+            assertThat(byExternalId("631066").getImages()).isEmpty();
+        });
+
+        requests.clear();
+        GalleryReport second = sync.syncGalleries(100);
+        assertThat(second.checked()).isZero();
+        assertThat(galleryRequests()).isZero();
+
+        // the list sync seeing the same main photo leaves the gallery alone
+        sync.sync();
+        tx.executeWithoutResult(st -> assertThat(byExternalId("632089").getImages()).hasSize(10));
+    }
+
+    @Test
+    void galleryDropsUnlicensedAndForeignPhotos() {
+        sync.sync();
+        override = q -> q.containsKey("contentId") ? new Answer(200, """
+                {"response":{"header":{"resultCode":"0000","resultMsg":"OK"},"body":{"items":{"item":[
+                  {"originimgurl":"https://tong.visitkorea.or.kr/cms/resource/1/ok_1.jpg","cpyrhtDivCd":"Type3"},
+                  {"originimgurl":"https://tong.visitkorea.or.kr/cms/resource/1/no_license.jpg","cpyrhtDivCd":"Type2"},
+                  {"originimgurl":"https://evil.example.com/x.jpg","cpyrhtDivCd":"Type1"},
+                  {"originimgurl":"http://tong.visitkorea.or.kr/cms/resource/1/plain_http.jpg","cpyrhtDivCd":"Type1"},
+                  {"originimgurl":"https://tong.visitkorea.or.kr/cms/resource/1/ok_1.jpg","cpyrhtDivCd":"Type3"}
+                ]},"numOfRows":50,"pageNo":1,"totalCount":5}}}""", 0) : null;
+
+        sync.syncGalleries(100);
+
+        tx.executeWithoutResult(st -> assertThat(byExternalId("632089").getImages()).extracting("url")
+                .containsExactly(byExternalId("632089").getThumbnailUrl(),
+                        "https://tong.visitkorea.or.kr/cms/resource/1/ok_1.jpg"));
+    }
+
+    @Test
+    void galleryStopsAfterThreeFailuresInARowAndRetriesThoseSpotsLater() {
+        sync.sync();
+        override = q -> q.containsKey("contentId") ? new Answer(500, "busy", 0) : null;
+
+        GalleryReport report = sync.syncGalleries(100);
+
+        assertThat(report.failed()).isEqualTo(3);
+        assertThat(report.checked()).isZero();
+        assertThat(galleryRequests()).isEqualTo(3L * 3); // 3 spots x max-attempts 3
+
+        override = null;
+        requests.clear();
+        long withPhoto = spotRepository.findAll().stream().filter(sp -> sp.getThumbnailUrl() != null).count();
+        assertThat(sync.syncGalleries(100).checked()).isEqualTo((int) withPhoto);
+    }
+
+    @Test
+    void newMainPhotoMeansTheGalleryIsFetchedAgain() {
+        sync.sync();
+        sync.syncGalleries(100);
+        ObjectNode tower = fixture.get("VE010200").stream()
+                .filter(n -> n.get("contentid").asString().equals("632089")).findFirst().orElseThrow();
+        tower.put("firstimage", "https://tong.visitkorea.or.kr/cms/resource/new_main.jpg");
+
+        sync.sync();
+        tx.executeWithoutResult(st -> assertThat(byExternalId("632089").getImages()).hasSize(1));
+        requests.clear();
+        GalleryReport again = sync.syncGalleries(100);
+
+        assertThat(again.checked()).isEqualTo(1);
+        tx.executeWithoutResult(st -> {
+            Spot wando = byExternalId("632089");
+            assertThat(wando.getImages().getFirst().getUrl()).endsWith("/new_main.jpg");
+            assertThat(wando.getImages()).hasSize(10);
+        });
     }
 }

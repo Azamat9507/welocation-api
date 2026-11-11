@@ -62,7 +62,27 @@ class TourApiClient {
                 // the key goes in as a variable so encode() escapes every reserved character in it;
                 // left inline, a '+' in a base64 key would reach the server as a space
                 .encode().buildAndExpand(requestKey(props.key())).toUri();
+        return fetch(uri, where);
+    }
 
+    // The photo gallery of one place. Only originals; imageYN=Y leaves out food menu pictures.
+    List<JsonNode> detailImages(String contentId) {
+        String where = "detailImage2 " + TourApiMapper.clean(contentId, 20) + " page 1";
+        URI uri = UriComponentsBuilder.fromUriString(props.baseUrl())
+                .path("/detailImage2")
+                .queryParam("serviceKey", "{key}")
+                .queryParam("MobileOS", "ETC")
+                .queryParam("MobileApp", "WeLocation")
+                .queryParam("_type", "json")
+                .queryParam("contentId", "{id}")
+                .queryParam("imageYN", "Y")
+                .queryParam("numOfRows", 50)
+                .queryParam("pageNo", 1)
+                .encode().buildAndExpand(requestKey(props.key()), contentId).toUri();
+        return fetch(uri, where).items();
+    }
+
+    private Page fetch(URI uri, String where) {
         String lastError = null;
         for (int attempt = 1; attempt <= props.maxAttempts(); attempt++) {
             try {

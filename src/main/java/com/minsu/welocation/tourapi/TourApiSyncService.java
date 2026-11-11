@@ -4,11 +4,13 @@ import com.minsu.welocation.spot.Spot;
 import com.minsu.welocation.spot.SpotSource;
 import com.minsu.welocation.tourapi.TourApiMapper.SpotData;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Limit;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 import tools.jackson.databind.JsonNode;
 
+import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +53,7 @@ public class TourApiSyncService {
             return;
         }
         sync();
+        syncGalleries(props.galleryPerNight());
     }
 
     public SyncReport sync() {
@@ -77,6 +80,59 @@ public class TourApiSyncService {
                 }
             }
             log.info("TourAPI sync finished: {}", report);
+            return report;
+        } finally {
+            running.set(false);
+        }
+    }
+
+    // Fetches photo galleries for spots that have none yet, at most `limit` spots (one request each).
+    // The HTTP call happens outside any transaction; each spot is saved in its own short one.
+    public GalleryReport syncGalleries(int limit) {
+        GalleryReport report = new GalleryReport();
+        if (limit <= 0) {
+            return report;
+        }
+        if (!running.compareAndSet(false, true)) {
+            log.warn("TourAPI sync is already running; the gallery run is skipped");
+            report.alreadyRunning = true;
+            return report;
+        }
+        try {
+            List<Spot> batch = spots.findBySourceAndGallerySyncedAtIsNullAndThumbnailUrlIsNotNullOrderByIdAsc(
+                    SpotSource.TOURAPI, Limit.of(limit));
+            int failuresInARow = 0;
+            for (Spot candidate : batch) {
+                if (Thread.currentThread().isInterrupted()) {
+                    report.stoppedBecause = "shutting down";
+                    break;
+                }
+                List<String> urls;
+                try {
+                    urls = TourApiMapper.galleryImages(client.detailImages(candidate.getExternalId()));
+                    failuresInARow = 0;
+                } catch (RuntimeException e) {
+                    String reason = e instanceof TourApiException ? e.getMessage() : e.getClass().getSimpleName();
+                    report.failed++;
+                    log.warn("TourAPI gallery of spot {} failed: {}", candidate.getId(), reason);
+                    // a used-up quota or a bad key fails every call the same way: stop instead of burning through the batch
+                    if (++failuresInARow >= 3) {
+                        report.stoppedBecause = reason;
+                        break;
+                    }
+                    continue;
+                }
+                Long id = candidate.getId();
+                Integer count = tx.execute(status -> spots.findById(id)
+                        .map(spot -> spot.replaceGallery(urls, props.galleryMaxImages(), Instant.now()))
+                        .orElse(null));
+                report.checked++;
+                if (count != null && count > 0) {
+                    report.withGallery++;
+                    report.photos += count;
+                }
+            }
+            log.info("TourAPI gallery sync finished: {}", report);
             return report;
         } finally {
             running.set(false);
