@@ -4,6 +4,7 @@ import com.minsu.welocation.auth.CurrentUser;
 import com.minsu.welocation.bookmark.BookmarkRepository;
 import com.minsu.welocation.common.NotFoundException;
 import com.minsu.welocation.like.SpotLikeRepository;
+import com.minsu.welocation.review.ReviewDtos.ReviewResponse;
 import com.minsu.welocation.review.ReviewRepository;
 import com.minsu.welocation.spot.SpotRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +29,11 @@ public class MySpotStateService {
         return new MySpotState(
                 likeRepository.existsByUserIdAndSpotId(me.id(), spotId),
                 bookmarkRepository.existsByUserIdAndSpotId(me.id(), spotId),
-                reviewRepository.findIdBySpotAndAuthor(spotId, me.id()).orElse(null));
+                reviewRepository.findBySpotIdAndAuthorId(spotId, me.id()).map(ReviewResponse::from).orElse(null));
     }
 
-    // reviewId is null while the user hasn't reviewed the spot
-    public record MySpotState(boolean liked, boolean bookmarked, Long reviewId) {
+    // The whole review, not just its id: the review list is paged newest first, so the user's own review may not be
+    // on the page the web has, and the edit form needs its text. null while the user hasn't reviewed the spot.
+    public record MySpotState(boolean liked, boolean bookmarked, ReviewResponse review) {
     }
 }

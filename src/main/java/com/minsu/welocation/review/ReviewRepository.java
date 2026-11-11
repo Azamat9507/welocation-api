@@ -19,8 +19,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     boolean existsBySpotIdAndAuthorId(Long spotId, Long authorId);
 
-    @Query("select r.id from Review r where r.spot.id = :spotId and r.author.id = :authorId")
-    Optional<Long> findIdBySpotAndAuthor(long spotId, long authorId);
+    // one review per author and spot (uk_review_author_spot); the author comes in the same query
+    @EntityGraph(attributePaths = "author")
+    Optional<Review> findBySpotIdAndAuthorId(Long spotId, Long authorId);
 
     // one grouped query for a whole page of spots instead of one per spot
     @Query("""

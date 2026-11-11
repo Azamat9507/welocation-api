@@ -25,7 +25,7 @@ public final class ReviewDtos {
     public record ReviewResponse(Long id, int rating, String content, Author author,
                                  Instant createdAt, Instant updatedAt) {
 
-        static ReviewResponse from(Review review) {
+        public static ReviewResponse from(Review review) {
             return new ReviewResponse(review.getId(), review.getRating(), review.getContent(),
                     new Author(review.getAuthor().getId(), review.getAuthor().getNickname()),
                     review.getCreatedAt(), review.getUpdatedAt());

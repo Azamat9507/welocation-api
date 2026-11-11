@@ -84,7 +84,7 @@ class MySpotStateApiTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.liked").value(false))
                 .andExpect(jsonPath("$.bookmarked").value(false))
-                .andExpect(jsonPath("$.reviewId").value(nullValue()));
+                .andExpect(jsonPath("$.review").value(nullValue()));
 
         mvc.perform(as(kim, post("/api/spots/{id}/like", spot))).andExpect(status().isOk());
         // liked but not bookmarked: the two flags come from different tables
@@ -101,12 +101,15 @@ class MySpotStateApiTest {
         mvc.perform(as(kim, get("/api/me/spots/{id}", spot)))
                 .andExpect(jsonPath("$.liked").value(true))
                 .andExpect(jsonPath("$.bookmarked").value(true))
-                .andExpect(jsonPath("$.reviewId").value(reviewId));
+                .andExpect(jsonPath("$.review.id").value(reviewId))
+                .andExpect(jsonPath("$.review.rating").value(5))
+                .andExpect(jsonPath("$.review.content").value("좋아요"))
+                .andExpect(jsonPath("$.review.author.nickname").value("kim"));
         // Lee sees only Lee's own state
         mvc.perform(as(lee, get("/api/me/spots/{id}", spot)))
                 .andExpect(jsonPath("$.liked").value(false))
                 .andExpect(jsonPath("$.bookmarked").value(false))
-                .andExpect(jsonPath("$.reviewId").value(nullValue()));
+                .andExpect(jsonPath("$.review").value(nullValue()));
     }
 
     @Test
