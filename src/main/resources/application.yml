@@ -29,6 +29,14 @@ spring:
       accept-float-as-int: false
 
 server:
+  # Login is rate limited per client IP. Behind the web app's server (Next.js) or nginx every request comes from the
+  # proxy, so the client IP is taken from X-Forwarded-For, but only when the request comes from a trusted proxy.
+  # Anyone else's X-Forwarded-For is ignored, so a client can't pick its own IP to dodge the limit.
+  forward-headers-strategy: native
+  tomcat:
+    remoteip:
+      # loopback by default; set TRUSTED_PROXIES to the proxy's address on a server (CIDR, comma separated)
+      internal-proxies: ${TRUSTED_PROXIES:127.0.0.0/8, ::1/128}
   error:
     include-stacktrace: never
     include-message: never
