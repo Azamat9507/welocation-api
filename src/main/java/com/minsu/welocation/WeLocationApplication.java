@@ -1,12 +1,17 @@
 package com.minsu.welocation;
 
 import org.springframework.boot.SpringApplication;
+import com.minsu.welocation.tourapi.TourApiProperties;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.Clock;
 
 @SpringBootApplication
+@EnableScheduling
+@EnableConfigurationProperties(TourApiProperties.class)
 public class WeLocationApplication {
 
     public static void main(String[] args) {

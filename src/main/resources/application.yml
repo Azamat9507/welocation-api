@@ -26,6 +26,16 @@ welocation:
   jwt:
     # base64, at least 256 bits; without it a random key is made at startup (see JwtConfig)
     secret: ${JWT_SECRET:}
+  tourapi:
+    base-url: https://apis.data.go.kr/B551011/KorService2
+    # data.go.kr service key; empty turns the nightly sync into a no-op
+    key: ${TOURAPI_KEY:}
+    cron: "0 30 3 * * *"
+    page-size: 100
+    connect-timeout: 3s
+    read-timeout: 10s
+    max-attempts: 3
+    retry-backoff: 1s
 springdoc:
   swagger-ui:
     # opens with the parameter fields ready to fill instead of behind a "Try it out" click
