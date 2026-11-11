@@ -104,21 +104,26 @@ to 3, and the spots page from 23 to 4. The weekly ranking page takes 3.
   ties, and Redis is left alone for 30 seconds so a hung Redis doesn't slow every like down. The set is rebuilt from
   MySQL at startup, every hour, when the key is missing and after a missed update. `WeeklyRankingTest` pauses the
   Redis container to check all of this.
-- **AI guide.** Gemini through Spring AI 2.0.
+- **AI guide.** Gemini (`gemini-3.5-flash-lite`, fallback `gemini-3.1-flash-lite`) through Spring AI 2.0.
   - The model never states facts. It searches the database through one read-only tool and answers with spot ids
     and a short reason.
   - Only ids the search actually showed it are accepted. Names, addresses and ratings on each card come from the
     database.
-  - A route's order and distances are computed in code: nearest next stop, on the same sphere as MySQL.
+  - A route's order and distances are computed in code: the shortest order of the stops, on the same sphere as
+    MySQL.
   - "A café by the sea" is answered with real distances to beaches, because the data has no descriptions or tags.
   - At most 3 searches per question, counted in the tool itself, because the model can ask for several in one turn.
-  - Every model call has a 15-second timeout. The whole question has 30 seconds to start its calls, the fallback
+  - Every model call has a 10-second timeout. The whole question has 30 seconds to start its calls, the fallback
     model included.
   - No retries; a failed call goes to the fallback model.
   - Daily limits per user and overall, counted in Redis.
   - The question is never logged.
   - Without `GEMINI_API_KEY` the endpoint answers 503 and the rest of the API runs as usual.
   - `GuideApiTest` scripts the model, so no test calls Gemini.
+  - A live run of 12 questions (2026-11-12, free tier) answered 11 within 2.4 to 9.4 s, all with real spots. The
+    exception was one question where both models stopped responding, which got a 503 after 31.6 s. Questions in
+    Korean, English and Uzbek were answered in the same language. A request to print the system prompt and a
+    weather question got no prompt and no made-up facts.
 - **TourAPI sync.** Runs nightly. Five categories, upsert by TourAPI content id, retries with backoff on I/O errors
   and 5xx. It never deletes. The service key never appears in logs or error messages. Tests use recorded responses
   and never call the real API.
