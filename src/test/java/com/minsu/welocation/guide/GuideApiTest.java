@@ -317,6 +317,36 @@ class GuideApiTest {
     }
 
     @Test
+    void anAnswerMadeOnlyOfUnseenSpotsIsAFailureNotAnEmptyPromise() throws Exception {
+        // the primary model names spots without searching; the fallback searches and answers properly
+        List<String> models = new ArrayList<>();
+        model.script = prompt -> {
+            String name = prompt.getOptions().getModel();
+            models.add(name);
+            if ("primary-model".equals(name)) {
+                return answers("{\"intro\": \"두 곳을 추천해요.\", \"wantsRoute\": false, "
+                        + "\"picks\": [{\"spotId\": 999998, \"reason\": \"x\"}, {\"spotId\": 999999, \"reason\": \"y\"}]}");
+            }
+            return prompt.getInstructions().getLast() instanceof ToolResponseMessage
+                    ? answers("{\"intro\": \"한 곳이에요.\", \"wantsRoute\": false, \"picks\": [{\"spotId\": %d, \"reason\": \"z\"}]}"
+                    .formatted(nearCafe))
+                    : searches("{\"category\":\"CAFE\"}");
+        };
+
+        ask(token("promised"), "카페 두 곳")
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.answer").value("한 곳이에요."))
+                .andExpect(jsonPath("$.spots[*].spot.id").value(contains((int) nearCafe)));
+        assertThat(models.getFirst()).isEqualTo("primary-model");
+    }
+
+    @Test
+    void anAnswerWithNoPicksAtAllIsStillFine() throws Exception {
+        model.script = prompt -> answers("{\"intro\": \"날씨는 알 수 없어요.\", \"wantsRoute\": false, \"picks\": []}");
+        ask(token("weather"), "날씨").andExpect(status().isOk()).andExpect(jsonPath("$.spots.length()").value(0));
+    }
+
+    @Test
     void failingModelFallsBackAndBothFailingIs503() throws Exception {
         List<String> models = new ArrayList<>();
         model.script = prompt -> {

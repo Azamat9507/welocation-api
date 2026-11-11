@@ -190,6 +190,11 @@ public class GuideService {
                 .filter(distinctBy())
                 .limit(MAX_PICKS)
                 .toList();
+        // Every pick made up: the intro then promises spots the page can't show. Seen live when the fallback model
+        // answered without searching. Counted as a failed answer, so the next model gets a turn or the user a 503.
+        if (picks.isEmpty() && answer.picks() != null && !answer.picks().isEmpty()) {
+            throw new IllegalStateException("every pick was a spot the search never showed");
+        }
         Map<Long, SpotSummary> spots = spotService.summariesById(picks.stream().map(ModelPick::spotId).toList());
         List<Pick> result = picks.stream()
                 .filter(pick -> spots.containsKey(pick.spotId()))
