@@ -26,6 +26,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -97,6 +98,9 @@ public class Spot {
     @Column(name = "tag", nullable = false, length = 30)
     private Set<SpotTag> tags = EnumSet.noneOf(SpotTag.class);
 
+    // last TourAPI gallery fetch; null until fetched, and again whenever the main photo changes
+    private Instant gallerySyncedAt;
+
     @OneToMany(mappedBy = "spot", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("sortOrder")
     private List<SpotImage> images = new ArrayList<>();
@@ -156,11 +160,33 @@ public class Spot {
         if (imageChanged) {
             images.clear();
             thumbnailUrl = null;
+            gallerySyncedAt = null;
             if (imageUrl != null) {
                 addImage(imageUrl);
             }
         }
         return true;
+    }
+
+    // Keeps the main photo first and replaces everything after it with the source's gallery.
+    // Returns how many gallery photos the spot has now.
+    public int replaceGallery(List<String> urls, int maxImages, Instant now) {
+        gallerySyncedAt = now;
+        if (thumbnailUrl == null) {
+            return 0;
+        }
+        images.clear();
+        images.add(new SpotImage(this, thumbnailUrl, 0));
+        Set<String> seen = new HashSet<>(Set.of(thumbnailUrl));
+        for (String url : urls) {
+            if (images.size() >= maxImages) {
+                break;
+            }
+            if (seen.add(url)) {
+                images.add(new SpotImage(this, url, images.size()));
+            }
+        }
+        return images.size() - 1;
     }
 
     private static void requireValidCoordinates(double latitude, double longitude) {

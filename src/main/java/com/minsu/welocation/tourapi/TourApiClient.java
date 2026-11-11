@@ -62,9 +62,30 @@ class TourApiClient {
                 // the key goes in as a variable so encode() escapes every reserved character in it;
                 // left inline, a '+' in a base64 key would reach the server as a space
                 .encode().buildAndExpand(requestKey(props.key())).toUri();
+        return fetch(uri, where, props.maxAttempts());
+    }
 
+    // The photo gallery of one place. Only originals; imageYN=Y leaves out food menu pictures.
+    List<JsonNode> detailImages(String contentId) {
+        String where = "detailImage2 " + TourApiMapper.clean(contentId, 20) + " page 1";
+        URI uri = UriComponentsBuilder.fromUriString(props.baseUrl())
+                .path("/detailImage2")
+                .queryParam("serviceKey", "{key}")
+                .queryParam("MobileOS", "ETC")
+                .queryParam("MobileApp", "WeLocation")
+                .queryParam("_type", "json")
+                .queryParam("contentId", "{id}")
+                .queryParam("imageYN", "Y")
+                .queryParam("numOfRows", 50)
+                .queryParam("pageNo", 1)
+                .encode().buildAndExpand(requestKey(props.key()), contentId).toUri();
+        // one try only: this runs for hundreds of spots, retries would multiply the daily quota use
+        return fetch(uri, where, 1).items();
+    }
+
+    private Page fetch(URI uri, String where, int maxAttempts) {
         String lastError = null;
-        for (int attempt = 1; attempt <= props.maxAttempts(); attempt++) {
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
                 // decoded here: without a charset in Content-Type, body(String.class) falls back to ISO-8859-1
                 byte[] body = http.get().uri(uri).retrieve().body(byte[].class);
@@ -79,12 +100,12 @@ class TourApiClient {
                 // e.g. the body stalling past the read timeout after the headers arrived
                 lastError = e.getClass().getSimpleName() + " (" + rootCause(e).getClass().getSimpleName() + ")";
             }
-            log.warn("TourAPI {} attempt {}/{} failed: {}", where, attempt, props.maxAttempts(), lastError);
-            if (attempt < props.maxAttempts()) {
+            log.warn("TourAPI {} attempt {}/{} failed: {}", where, attempt, maxAttempts, lastError);
+            if (attempt < maxAttempts) {
                 sleep(props.retryBackoff().multipliedBy(attempt).toMillis());
             }
         }
-        throw fail(where + ": gave up after " + props.maxAttempts() + " attempts, last " + lastError);
+        throw fail(where + ": gave up after " + maxAttempts + " attempts, last " + lastError);
     }
 
     private Page parse(String body, String where) {
@@ -96,14 +117,14 @@ class TourApiClient {
         try {
             root = json.readTree(body);
         } catch (JacksonException e) {
-            throw fail(where + ": broken JSON");
+            throw fail(where + ": broken JSON", false);
         }
         JsonNode response = root.path("response");
         String resultCode = response.path("header").path("resultCode").asString("");
         if (!"0000".equals(resultCode)) {
             // upstream text: no line breaks into our log, and kept short
             String msg = TourApiMapper.clean(response.path("header").path("resultMsg").asString(""), 100);
-            throw fail(where + ": resultCode " + TourApiMapper.clean(resultCode, 10) + " " + msg);
+            throw fail(where + ": resultCode " + TourApiMapper.clean(resultCode, 10) + " " + msg, false);
         }
         JsonNode bodyNode = response.path("body");
         // an empty result comes back as "items": "" instead of an empty object
@@ -116,7 +137,7 @@ class TourApiClient {
         }
         int total = bodyNode.path("totalCount").asInt(0);
         if (items.isEmpty() && total > 0 && where.endsWith(" page 1")) {
-            throw fail(where + ": totalCount " + total + " but no items, response shape changed?");
+            throw fail(where + ": totalCount " + total + " but no items, response shape changed?", false);
         }
         return new Page(total, items);
     }
@@ -130,11 +151,15 @@ class TourApiClient {
     }
 
     private TourApiException fail(String message) {
+        return fail(message, true);
+    }
+
+    private TourApiException fail(String message, boolean serviceDown) {
         String key = props.key();
         if (key != null && !key.isBlank()) {
             message = message.replace(key.strip(), "***").replace(requestKey(key), "***");
         }
-        return new TourApiException(message);
+        return new TourApiException(message, serviceDown);
     }
 
     private static Throwable rootCause(Throwable e) {

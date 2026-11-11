@@ -7,7 +7,9 @@ import tools.jackson.databind.JsonNode;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -113,7 +115,23 @@ final class TourApiMapper {
     // Only KTO's own image host: the 공공누리 license covers their photos, and any other host would
     // be a third party seeing every visitor's IP.
     private static String image(JsonNode item) {
-        String url = item.path("firstimage").asString("").strip();
+        return checkedImage(item.path("firstimage").asString(""), item);
+    }
+
+    // detailImage2 rows carry their own license code, checked per photo
+    static List<String> galleryImages(List<JsonNode> items) {
+        List<String> urls = new ArrayList<>();
+        for (JsonNode item : items) {
+            String url = checkedImage(item.path("originimgurl").asString(""), item);
+            if (url != null) {
+                urls.add(url);
+            }
+        }
+        return urls;
+    }
+
+    private static String checkedImage(String raw, JsonNode item) {
+        String url = raw.strip();
         if (url.length() > 500 || !url.chars().allMatch(c -> c > ' ' && c < 0x7f)
                 || !IMAGE_LICENSES.contains(item.path("cpyrhtDivCd").asString(""))) {
             return null;
