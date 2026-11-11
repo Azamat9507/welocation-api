@@ -18,3 +18,7 @@ server:
     include-message: never
     include-binding-errors: never
     include-exception: false
+springdoc:
+  swagger-ui:
+    # opens with the parameter fields ready to fill instead of behind a "Try it out" click
+    try-it-out-enabled: true
