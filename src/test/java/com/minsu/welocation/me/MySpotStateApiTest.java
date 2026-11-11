@@ -87,6 +87,10 @@ class MySpotStateApiTest {
                 .andExpect(jsonPath("$.reviewId").value(nullValue()));
 
         mvc.perform(as(kim, post("/api/spots/{id}/like", spot))).andExpect(status().isOk());
+        // liked but not bookmarked: the two flags come from different tables
+        mvc.perform(as(kim, get("/api/me/spots/{id}", spot)))
+                .andExpect(jsonPath("$.liked").value(true))
+                .andExpect(jsonPath("$.bookmarked").value(false));
         mvc.perform(as(kim, post("/api/spots/{id}/bookmark", spot))).andExpect(status().isNoContent());
         String review = mvc.perform(as(kim, post("/api/spots/{id}/reviews", spot))
                         .contentType(MediaType.APPLICATION_JSON).content("{\"rating\": 5, \"content\": \"좋아요\"}"))
