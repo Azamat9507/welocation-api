@@ -23,6 +23,11 @@ spring:
       # only StringRedisTemplate is used; this stops Spring Data probing the JPA repositories for Redis
       repositories:
         enabled: false
+  ai:
+    # Spring AI passes this to RetryPolicy.maxRetries, so 0 means a single attempt. GuideService moves on to the
+    # fallback model instead of retrying.
+    retry:
+      max-attempts: 0
   jackson:
     deserialization:
       # "rating": 3.7 must be rejected, not quietly stored as 3
@@ -54,6 +59,23 @@ welocation:
     # every hour at :05, rebuild this week's ranking from MySQL
     rebuild-cron: "0 5 * * * *"
     redis-backoff: 30s
+  guide:
+    # Gemini API key from Google AI Studio; empty turns POST /api/guide into a 503 and nothing else changes
+    api-key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-2.5-flash}
+    fallback-model: ${GEMINI_FALLBACK_MODEL:gemini-2.5-flash-lite}
+    # per model call; the whole question, fallback model included, gets `deadline` to start its calls
+    timeout: 15s
+    deadline: 30s
+    max-output-tokens: 1024
+    # thinking tokens count against max-output-tokens; 0 turns thinking off on the 2.5 Flash models.
+    # Pro models can't turn it off and reject 0: set GEMINI_THINKING_BUDGET to an empty value for those.
+    thinking-budget: ${GEMINI_THINKING_BUDGET:0}
+    # searches per question, however the model spreads them over its turns
+    max-searches: 3
+    # every question costs money, so both limits count requests, not successful answers
+    per-user-daily: 20
+    global-daily: 500
 springdoc:
   swagger-ui:
     # opens with the parameter fields ready to fill instead of behind a "Try it out" click

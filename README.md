@@ -56,6 +56,7 @@ missing or empty among `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `REDIS_HOST`, `RE
 | GET | `/api/me/bookmarks` | token | My bookmarks, newest first |
 | POST | `/api/auth/signup`, `/api/auth/login` | open | Login is rate limited per email and per IP |
 | GET | `/api/me` | token | Current user |
+| POST | `/api/guide` | token | Ask the AI guide; answers only with spots from the database (see below) |
 
 ## What was measured
 
@@ -103,6 +104,21 @@ to 3, and the spots page from 23 to 4. The weekly ranking page takes 3.
   ties, and Redis is left alone for 30 seconds so a hung Redis doesn't slow every like down. The set is rebuilt from
   MySQL at startup, every hour, when the key is missing and after a missed update. `WeeklyRankingTest` pauses the
   Redis container to check all of this.
+- **AI guide.** Gemini through Spring AI 2.0.
+  - The model never states facts. It searches the database through one read-only tool and answers with spot ids
+    and a short reason.
+  - Only ids the search actually showed it are accepted. Names, addresses and ratings on each card come from the
+    database.
+  - A route's order and distances are computed in code: nearest next stop, on the same sphere as MySQL.
+  - "A café by the sea" is answered with real distances to beaches, because the data has no descriptions or tags.
+  - At most 3 searches per question, counted in the tool itself, because the model can ask for several in one turn.
+  - Every model call has a 15-second timeout. The whole question has 30 seconds to start its calls, the fallback
+    model included.
+  - No retries; a failed call goes to the fallback model.
+  - Daily limits per user and overall, counted in Redis.
+  - The question is never logged.
+  - Without `GEMINI_API_KEY` the endpoint answers 503 and the rest of the API runs as usual.
+  - `GuideApiTest` scripts the model, so no test calls Gemini.
 - **TourAPI sync.** Runs nightly. Five categories, upsert by TourAPI content id, retries with backoff on I/O errors
   and 5xx. It never deletes. The service key never appears in logs or error messages. Tests use recorded responses
   and never call the real API.

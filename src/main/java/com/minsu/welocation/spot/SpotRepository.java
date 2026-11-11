@@ -57,4 +57,41 @@ public interface SpotRepository extends JpaRepository<Spot, Long>, JpaSpecificat
 
         double getDistanceMeters();
     }
+
+    // Candidates for the AI guide. nameLike is already escaped for LIKE by the caller.
+    @Query(value = """
+            SELECT s.id AS id
+            FROM spots s
+            WHERE (:region IS NULL OR s.region = :region)
+              AND (:category IS NULL OR s.category = :category)
+              AND (:nameLike IS NULL OR s.name LIKE :nameLike)
+            ORDER BY s.like_count DESC, s.has_image DESC, s.id DESC
+            LIMIT :limit
+            """, nativeQuery = true)
+    List<Candidate> findCandidates(String region, String category, String nameLike, int limit);
+
+    // Coordinates of every spot matching the filters, for the AI guide's "near a beach" search. Filtering pairs in
+    // SQL was tried first: MySQL hash-joined all cafés with all beaches and computed ST_Distance_Sphere for each of the
+    // 1.2 million pairs before any cheaper filter (4.9 s on the 3,715 local spots), so the distances are worked out
+    // in Java instead.
+    @Query(value = """
+            SELECT s.id AS id, s.latitude AS latitude, s.longitude AS longitude
+            FROM spots s
+            WHERE (:region IS NULL OR s.region = :region)
+              AND (:category IS NULL OR s.category = :category)
+              AND (:nameLike IS NULL OR s.name LIKE :nameLike)
+            """, nativeQuery = true)
+    List<Located> findLocated(String region, String category, String nameLike);
+
+    interface Candidate {
+        Long getId();
+    }
+
+    interface Located {
+        Long getId();
+
+        double getLatitude();
+
+        double getLongitude();
+    }
 }
