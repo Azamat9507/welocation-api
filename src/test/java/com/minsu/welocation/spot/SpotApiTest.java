@@ -9,6 +9,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -70,6 +71,24 @@ class SpotApiTest {
                 .andExpect(jsonPath("$.page").value(1))
                 .andExpect(jsonPath("$.totalElements").value(5))
                 .andExpect(jsonPath("$.totalPages").value(3));
+    }
+
+    // half the TourAPI cafés have no photo; a first page of empty cards looked broken (V8)
+    @Test
+    void spotsWithAPhotoComeFirstThenNewest() throws Exception {
+        Spot oldWithPhoto = save("Old with photo", SpotCategory.CAFE, Region.BUSAN);
+        oldWithPhoto.addImage("https://example.com/old.jpg");
+        spotRepository.save(oldWithPhoto);
+        save("New without photo", SpotCategory.CAFE, Region.BUSAN);
+        Spot newWithPhoto = save("New with photo", SpotCategory.CAFE, Region.BUSAN);
+        newWithPhoto.addImage("https://example.com/new.jpg");
+        spotRepository.save(newWithPhoto);
+        save("Seoul without photo", SpotCategory.CAFE, Region.SEOUL);
+
+        mvc.perform(get("/api/spots").param("region", "BUSAN"))
+                .andExpect(jsonPath("$.items[*].name").value(contains("New with photo", "Old with photo", "New without photo")));
+        mvc.perform(get("/api/spots").param("size", "2").param("page", "1"))
+                .andExpect(jsonPath("$.items[*].name").value(contains("Seoul without photo", "New without photo")));
     }
 
     @Test

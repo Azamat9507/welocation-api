@@ -25,7 +25,7 @@ public class SpotController {
 
     private final SpotService spotService;
 
-    @Operation(summary = "List spots, filtered by region, category and tag, newest first")
+    @Operation(summary = "List spots, filtered by region, category and tag; spots with a photo first, then newest")
     @GetMapping
     public PageResponse<SpotSummary> search(@Valid @ParameterObject @ModelAttribute SpotSearch search) {
         return spotService.search(search);
