@@ -11,6 +11,17 @@ spring:
       # schema is owned by Flyway (db/migration); Hibernate only checks it matches the entities
       ddl-auto: validate
     open-in-view: false
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      # compose.yaml maps 6380: on the dev machine 6379 belongs to a Homebrew Redis used by another project
+      port: ${REDIS_PORT:6380}
+      # how long a like can wait on a hung Redis; after a failure the ranking skips Redis for redis-backoff
+      timeout: 500ms
+      connect-timeout: 500ms
+      # only StringRedisTemplate is used; this stops Spring Data probing the JPA repositories for Redis
+      repositories:
+        enabled: false
   jackson:
     deserialization:
       # "rating": 3.7 must be rejected, not quietly stored as 3
@@ -36,6 +47,10 @@ welocation:
     read-timeout: 10s
     max-attempts: 3
     retry-backoff: 1s
+  ranking:
+    # every hour at :05, rebuild this week's ranking from MySQL
+    rebuild-cron: "0 5 * * * *"
+    redis-backoff: 30s
 springdoc:
   swagger-ui:
     # opens with the parameter fields ready to fill instead of behind a "Try it out" click

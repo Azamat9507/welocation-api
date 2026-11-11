@@ -7,6 +7,13 @@ import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.geo.Point;
+import org.springframework.data.redis.connection.RedisGeoCommands.GeoSearchCommandArgs;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.domain.geo.GeoReference;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -19,7 +26,11 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,6 +47,8 @@ class NearbyBenchmarkTest {
     // Seoul City Hall
     static final double CENTER_LAT = 37.5663;
     static final double CENTER_LNG = 126.9779;
+    // Redis GEO has no WHERE: a category filter means one set per category (and per region, tag... for more filters)
+    static final String GEO_KEY = "benchmark:geo:";
 
     // what the query would look like without the bounding box: every row gets a distance computed
     static final String FULL_SCAN_SQL = """
@@ -59,17 +72,26 @@ class NearbyBenchmarkTest {
     @Autowired
     PlatformTransactionManager transactionManager;
 
+    @Autowired
+    StringRedisTemplate redis;
+
     @AfterEach
     void cleanUp() {
         jdbc.getJdbcTemplate().update("DELETE FROM spots");
+        redis.delete(redis.keys(GEO_KEY + "*"));
     }
 
     @Test
-    void fullScanAgainstSpatialIndexAgainstWideningSearch() throws IOException {
+    void fullScanAgainstSpatialIndexAgainstWideningSearchAgainstRedisGeo() throws IOException {
         seed();
+        long memoryBefore = redisUsedMemory();
+        long loadStart = System.nanoTime();
+        int geoMembers = loadIntoRedisGeo();
+        double loadSeconds = (System.nanoTime() - loadStart) / 1e9;
+        long geoBytes = redisUsedMemory() - memoryBefore;
 
         StringBuilder report = new StringBuilder()
-                .append("# Nearby search: full scan vs one indexed pass vs widening search\n\n")
+                .append("# Nearby search: full scan vs one indexed pass vs widening search vs Redis GEO\n\n")
                 .append(SPOTS).append(" spots: 20% clustered around Seoul City Hall (Gaussian, σ ≈ 15 km), 80% spread ")
                 .append("evenly over Korea's bounding box (33.1-38.6°N, 124.6-131.0°E, sea included); 1% are LAKE, ")
                 .append("the rest CAFE. MySQL 8.4 in Testcontainers on a laptop, ").append(RUNS)
@@ -78,11 +100,16 @@ class NearbyBenchmarkTest {
                 .append("- one pass: bounding box on the spatial index, whole radius at once (`SpotRepository.findNearby` ")
                 .append("in a read-only transaction)\n")
                 .append("- widening: 1, 3, 10, 30 km, then the full radius, stopping once `size` are found, skipping ahead ")
-                .append("when a short step predicts the full radius won't fill the page (`SpotService.nearby`)\n\n")
-                .append("All three return the same ids in the same order (asserted). Numbers compare the approaches; ")
-                .append("they are not production latency.\n\n")
-                .append("| radius | category | size | matching spots inside | full scan | one pass | widening |\n")
-                .append("|---|---|---|---|---|---|---|\n");
+                .append("when a short step predicts the full radius won't fill the page (`SpotService.nearby`)\n")
+                .append("- Redis GEO: Redis 7.4 in Testcontainers, `GEOSEARCH FROMLONLAT BYRADIUS ASC COUNT size`, one sorted ")
+                .append("set for all spots and one per category (").append(geoMembers).append(" members in all, ")
+                .append(String.format("%.1f MB", geoBytes / 1024.0 / 1024.0)).append(" more `used_memory`, loaded in ")
+                .append(String.format("%.1f s", loadSeconds)).append(")\n\n")
+                .append("The three MySQL approaches return the same ids in the same order (asserted). Redis is compared ")
+                .append("with them, not asserted: it measures on a different sphere radius and rounds points to a ")
+                .append("52-bit geohash. Numbers compare the approaches; they are not production latency.\n\n")
+                .append("| radius | category | size | matching spots inside | full scan | one pass | widening | Redis GEO | Redis = MySQL |\n")
+                .append("|---|---|---|---|---|---|---|---|---|\n");
 
         // BEACH has no spots at all: the case where a widening search could pay for every step
         record Case(double radiusKm, SpotCategory category, int size) {
@@ -104,6 +131,7 @@ class NearbyBenchmarkTest {
             Runnable onePass = () -> readOnly.executeWithoutResult(status ->
                     spotRepository.findNearby(CENTER_LAT, CENTER_LNG, c.radiusKm() * 1000, box, category, c.size()));
             Runnable widening = () -> spotService.nearby(search);
+            Runnable geo = () -> geoSearch(category, c.radiusKm(), c.size());
 
             List<Long> fullIds = jdbc.queryForList(FULL_SCAN_SQL, params).stream()
                     .map(row -> ((Number) row.get("id")).longValue()).toList();
@@ -112,6 +140,9 @@ class NearbyBenchmarkTest {
             List<Long> wideningIds = spotService.nearby(search).stream().map(SpotDtos.NearbySpot::id).toList();
             assertThat(onePassIds).isEqualTo(fullIds);
             assertThat(wideningIds).isEqualTo(fullIds);
+            List<Long> geoIds = geoSearch(category, c.radiusKm(), c.size());
+            String sameAsMysql = geoIds.equals(fullIds) ? "same ids, same order"
+                    : sameMembers(geoIds, fullIds) + " of " + fullIds.size() + " ids shared (Redis gave " + geoIds.size() + ")";
 
             Long inside = jdbc.queryForObject("""
                     SELECT COUNT(*) FROM spots s
@@ -125,6 +156,8 @@ class NearbyBenchmarkTest {
                     .append(" | ").append(String.format("%.2f ms", medianMillis(fullScan)))
                     .append(" | ").append(String.format("%.2f ms", medianMillis(onePass)))
                     .append(" | ").append(String.format("%.2f ms", medianMillis(widening)))
+                    .append(" | ").append(String.format("%.2f ms", medianMillis(geo)))
+                    .append(" | ").append(sameAsMysql)
                     .append(" |\n");
         }
 
@@ -158,6 +191,45 @@ class NearbyBenchmarkTest {
             }
         }
         jdbc.getJdbcTemplate().execute("ANALYZE TABLE spots");
+    }
+
+    private int loadIntoRedisGeo() {
+        Map<String, Map<String, Point>> byKey = new HashMap<>();
+        jdbc.getJdbcTemplate().query("SELECT id, category, latitude, longitude FROM spots", row -> {
+            Point point = new Point(row.getDouble("longitude"), row.getDouble("latitude"));
+            String id = String.valueOf(row.getLong("id"));
+            byKey.computeIfAbsent(GEO_KEY + "all", k -> new HashMap<>()).put(id, point);
+            byKey.computeIfAbsent(GEO_KEY + row.getString("category"), k -> new HashMap<>()).put(id, point);
+        });
+        int members = 0;
+        for (var entry : byKey.entrySet()) {
+            List<Map.Entry<String, Point>> points = new ArrayList<>(entry.getValue().entrySet());
+            for (int from = 0; from < points.size(); from += 5_000) {
+                Map<String, Point> batch = new HashMap<>();
+                points.subList(from, Math.min(from + 5_000, points.size())).forEach(p -> batch.put(p.getKey(), p.getValue()));
+                redis.opsForGeo().add(entry.getKey(), batch);
+            }
+            members += points.size();
+        }
+        return members;
+    }
+
+    private long redisUsedMemory() {
+        return Long.parseLong(redis.execute((RedisCallback<Properties>) connection ->
+                connection.serverCommands().info("memory")).getProperty("used_memory"));
+    }
+
+    private List<Long> geoSearch(String category, double radiusKm, int size) {
+        var results = redis.opsForGeo().search(GEO_KEY + (category == null ? "all" : category),
+                GeoReference.fromCoordinate(CENTER_LNG, CENTER_LAT), new Distance(radiusKm, Metrics.KILOMETERS),
+                GeoSearchCommandArgs.newGeoSearchArgs().sortAscending().limit(size));
+        return results.getContent().stream().map(r -> Long.valueOf(r.getContent().getName())).toList();
+    }
+
+    private static int sameMembers(List<Long> a, List<Long> b) {
+        HashSet<Long> shared = new HashSet<>(a);
+        shared.retainAll(b);
+        return shared.size();
     }
 
     private double medianMillis(Runnable query) {

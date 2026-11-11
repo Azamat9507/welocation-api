@@ -46,6 +46,13 @@ public class SpotService {
         return PageResponse.from(page.map(spot -> SpotSummary.from(spot, ratings.getOrDefault(spot.getId(), Rating.NONE))));
     }
 
+    // for lists ordered somewhere else (the weekly ranking): the caller keeps its order and skips missing ids
+    public Map<Long, SpotSummary> summariesById(List<Long> ids) {
+        Map<Long, Rating> ratings = ratingsOf(ids);
+        return spotRepository.findAllById(ids).stream().collect(Collectors.toMap(
+                Spot::getId, spot -> SpotSummary.from(spot, ratings.getOrDefault(spot.getId(), Rating.NONE))));
+    }
+
     public SpotDetail get(Long id) {
         Spot spot = spotRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("spot " + id + " not found"));

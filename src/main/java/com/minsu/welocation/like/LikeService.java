@@ -6,8 +6,12 @@ import com.minsu.welocation.common.UnauthorizedException;
 import com.minsu.welocation.spot.SpotRepository;
 import com.minsu.welocation.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
+import java.util.Optional;
 
 // Liking twice is not an error: both calls end with the spot liked, and the count goes up once.
 // See TASK.md T5 for how this compares with no lock, a bare atomic UPDATE and Redis under 1,000 threads.
@@ -19,6 +23,7 @@ public class LikeService {
     private final SpotLikeRepository likeRepository;
     private final SpotRepository spotRepository;
     private final UserRepository userRepository;
+    private final ApplicationEventPublisher events;
 
     @Transactional
     public LikeResponse like(long spotId, CurrentUser me) {
@@ -28,9 +33,10 @@ public class LikeService {
             throw new UnauthorizedException("missing or invalid token");
         }
         if (!likeRepository.existsByUserIdAndSpotId(me.id(), spotId)) {
-            likeRepository.save(new SpotLike(userRepository.getReferenceById(me.id()), spotRepository.getReferenceById(spotId)));
+            SpotLike like = likeRepository.save(new SpotLike(userRepository.getReferenceById(me.id()), spotRepository.getReferenceById(spotId)));
             spotRepository.addLikes(spotId, 1);
             likeCount++;
+            events.publishEvent(new LikeChanged(spotId, like.getCreatedAt(), 1));
         }
         return new LikeResponse(true, likeCount);
     }
@@ -38,9 +44,12 @@ public class LikeService {
     @Transactional
     public LikeResponse unlike(long spotId, CurrentUser me) {
         int likeCount = lockSpot(spotId);
-        if (likeRepository.deleteByUserAndSpot(me.id(), spotId) > 0) {
+        Optional<Instant> likedAt = likeRepository.findCreatedAt(me.id(), spotId);
+        if (likedAt.isPresent()) {
+            likeRepository.deleteByUserAndSpot(me.id(), spotId);
             spotRepository.addLikes(spotId, -1);
             likeCount--;
+            events.publishEvent(new LikeChanged(spotId, likedAt.get(), -1));
         }
         return new LikeResponse(false, likeCount);
     }
