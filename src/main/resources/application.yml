@@ -2,7 +2,7 @@ spring:
   application:
     name: welocation
   datasource:
-    # local defaults match compose.yaml; real environments must set all three
+    # local defaults match compose.yaml; the prod profile (application-prod.yml) has none
     url: ${DB_URL:jdbc:mysql://localhost:3306/welocation}
     username: ${DB_USERNAME:welocation}
     password: ${DB_PASSWORD:welocation}
@@ -16,6 +16,7 @@ spring:
       host: ${REDIS_HOST:localhost}
       # compose.yaml maps 6380: on the dev machine 6379 belongs to a Homebrew Redis used by another project
       port: ${REDIS_PORT:6380}
+      password: ${REDIS_PASSWORD:welocation}
       # how long a like can wait on a hung Redis; after a failure the ranking skips Redis for redis-backoff
       timeout: 500ms
       connect-timeout: 500ms
@@ -37,6 +38,8 @@ welocation:
   jwt:
     # base64, at least 256 bits; without it a random key is made at startup (see JwtConfig)
     secret: ${JWT_SECRET:}
+    # true in the prod profile: an empty secret stops startup instead of falling back to a random key
+    require-secret: false
   tourapi:
     base-url: https://apis.data.go.kr/B551011/KorService2
     # data.go.kr service key; empty turns the nightly sync into a no-op

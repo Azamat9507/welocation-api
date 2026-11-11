@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+.git
+.gradle
+build
+.idea
+*.iml
+out
+AGENTS.md
+CLAUDE.md
+.claude
+.agent
+.cursor
+.codex
+.mcp.json

@@ -29,8 +29,12 @@ public class JwtConfig {
     static final String ISSUER = "welocation";
 
     @Bean
-    SecretKey jwtKey(@Value("${welocation.jwt.secret}") String secret) {
+    SecretKey jwtKey(@Value("${welocation.jwt.secret}") String secret,
+                     @Value("${welocation.jwt.require-secret}") boolean requireSecret) {
         if (secret.isBlank()) {
+            if (requireSecret) {
+                throw new IllegalStateException("JWT_SECRET is required (base64, at least 256 bits)");
+            }
             // fine for a laptop; a real deployment must set JWT_SECRET or tokens die on every restart
             log.warn("JWT_SECRET is not set; using a random key, issued tokens stop working after a restart");
             byte[] random = new byte[32];

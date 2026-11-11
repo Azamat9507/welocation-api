@@ -1,0 +1,23 @@
+# Everything a real deployment depends on comes from the environment, with no fallback:
+# a missing variable stops startup instead of quietly using a laptop default.
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+welocation:
+  jwt:
+    secret: ${JWT_SECRET}
+    require-secret: true
+# The API map stays private in production; both paths answer 404. With api-docs off springdoc 3.0.3
+# doesn't load the UI either; swagger-ui is switched off too so that doesn't depend on springdoc internals.
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
