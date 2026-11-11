@@ -130,6 +130,9 @@ to 3, and the spots page from 23 to 4. The weekly ranking page takes 3.
 - **Security.**
   - Everything is closed by default and the open endpoints are listed in one place.
   - BCrypt for passwords.
+  - Login is rate limited per IP. The client IP is read from `X-Forwarded-For` only when the request comes from a
+    trusted proxy (`TRUSTED_PROXIES`, loopback by default), so a client can't pick its own IP. `TrustedProxyTest`
+    checks both cases on a real Tomcat.
   - Ownership checks for reviews use the database, not the token.
   - Error responses carry no stack traces or SQL.
   - The coordinates sent to `/nearby` are never stored or logged.
