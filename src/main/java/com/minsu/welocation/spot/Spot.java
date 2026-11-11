@@ -175,10 +175,8 @@ public class Spot {
         if (thumbnailUrl == null) {
             return 0;
         }
-        images.removeIf(image -> !image.getUrl().equals(thumbnailUrl));
-        if (images.size() > 1) {
-            images.subList(1, images.size()).clear();
-        }
+        images.clear();
+        images.add(new SpotImage(this, thumbnailUrl, 0));
         Set<String> seen = new HashSet<>(Set.of(thumbnailUrl));
         for (String url : urls) {
             if (images.size() >= maxImages) {

@@ -40,6 +40,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -448,16 +449,18 @@ class TourApiSyncTest {
     }
 
     @Test
-    void galleryDropsUnlicensedAndForeignPhotos() {
+    void galleryDropsUnlicensedAndForeignPhotosAndTheMainPhotoAgain() {
         sync.sync();
+        String mainPhoto = byExternalId("632089").getThumbnailUrl();
         override = q -> q.containsKey("contentId") ? new Answer(200, """
                 {"response":{"header":{"resultCode":"0000","resultMsg":"OK"},"body":{"items":{"item":[
                   {"originimgurl":"https://tong.visitkorea.or.kr/cms/resource/1/ok_1.jpg","cpyrhtDivCd":"Type3"},
                   {"originimgurl":"https://tong.visitkorea.or.kr/cms/resource/1/no_license.jpg","cpyrhtDivCd":"Type2"},
                   {"originimgurl":"https://evil.example.com/x.jpg","cpyrhtDivCd":"Type1"},
                   {"originimgurl":"http://tong.visitkorea.or.kr/cms/resource/1/plain_http.jpg","cpyrhtDivCd":"Type1"},
-                  {"originimgurl":"https://tong.visitkorea.or.kr/cms/resource/1/ok_1.jpg","cpyrhtDivCd":"Type3"}
-                ]},"numOfRows":50,"pageNo":1,"totalCount":5}}}""", 0) : null;
+                  {"originimgurl":"https://tong.visitkorea.or.kr/cms/resource/1/ok_1.jpg","cpyrhtDivCd":"Type3"},
+                  {"originimgurl":"%s","cpyrhtDivCd":"Type1"}
+                ]},"numOfRows":50,"pageNo":1,"totalCount":6}}}""".formatted(mainPhoto), 0) : null;
 
         sync.syncGalleries(100);
 
@@ -466,21 +469,61 @@ class TourApiSyncTest {
                         "https://tong.visitkorea.or.kr/cms/resource/1/ok_1.jpg"));
     }
 
+    // what data.go.kr sends with HTTP 200 once the daily quota is used up
+    static final String QUOTA_EXCEEDED = """
+            <OpenAPI_ServiceResponse><cmmMsgHeader><errMsg>SERVICE ERROR</errMsg>
+            <returnAuthMsg>LIMITED_NUMBER_OF_SERVICE_REQUESTS_EXCEEDS_ERROR</returnAuthMsg>
+            <returnReasonCode>22</returnReasonCode></cmmMsgHeader></OpenAPI_ServiceResponse>""";
+
     @Test
-    void galleryStopsAfterThreeFailuresInARowAndRetriesThoseSpotsLater() {
+    void galleryStopsAfterThreeServiceFailuresInARowAndRetriesThoseSpotsLater() {
         sync.sync();
-        override = q -> q.containsKey("contentId") ? new Answer(500, "busy", 0) : null;
+        override = q -> q.containsKey("contentId") ? new Answer(200, QUOTA_EXCEEDED, 0) : null;
 
         GalleryReport report = sync.syncGalleries(100);
 
         assertThat(report.failed()).isEqualTo(3);
         assertThat(report.checked()).isZero();
-        assertThat(galleryRequests()).isEqualTo(3L * 3); // 3 spots x max-attempts 3
+        // one request per spot, no retries for galleries
+        assertThat(galleryRequests()).isEqualTo(3);
 
         override = null;
         requests.clear();
         long withPhoto = spotRepository.findAll().stream().filter(sp -> sp.getThumbnailUrl() != null).count();
         assertThat(sync.syncGalleries(100).checked()).isEqualTo((int) withPhoto);
+    }
+
+    @Test
+    void galleryKeepsGoingWhenFailuresAreNotInARow() {
+        sync.sync();
+        AtomicInteger n = new AtomicInteger();
+        // fail, fail, ok, fail, fail, ok ...
+        override = q -> q.containsKey("contentId") && n.incrementAndGet() % 3 != 0 ? new Answer(500, "busy", 0) : null;
+        long withPhoto = spotRepository.findAll().stream().filter(sp -> sp.getThumbnailUrl() != null).count();
+
+        GalleryReport report = sync.syncGalleries(100);
+
+        assertThat(galleryRequests()).isEqualTo(withPhoto);
+        assertThat(report.checked() + report.failed()).isEqualTo((int) withPhoto);
+    }
+
+    @Test
+    void spotWithAnUnusableAnswerIsMarkedSoItDoesNotBlockTheQueue() {
+        sync.sync();
+        AtomicInteger n = new AtomicInteger();
+        // the first three spots always get an error answer for themselves, the rest are fine
+        override = q -> q.containsKey("contentId") && n.incrementAndGet() <= 3 ? new Answer(200, """
+                {"response":{"header":{"resultCode":"10","resultMsg":"INVALID_REQUEST_PARAMETER_ERROR"},"body":{}}}""", 0)
+                : null;
+        long withPhoto = spotRepository.findAll().stream().filter(sp -> sp.getThumbnailUrl() != null).count();
+
+        GalleryReport report = sync.syncGalleries(100);
+
+        assertThat(report.failed()).isEqualTo(3);
+        assertThat(report.checked()).isEqualTo((int) withPhoto);
+        requests.clear();
+        assertThat(sync.syncGalleries(100).checked()).isZero();
+        assertThat(galleryRequests()).isZero();
     }
 
     @Test

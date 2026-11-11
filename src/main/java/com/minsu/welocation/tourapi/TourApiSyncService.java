@@ -115,16 +115,24 @@ public class TourApiSyncService {
                     String reason = e instanceof TourApiException ? e.getMessage() : e.getClass().getSimpleName();
                     report.failed++;
                     log.warn("TourAPI gallery of spot {} failed: {}", candidate.getId(), reason);
-                    // a used-up quota or a bad key fails every call the same way: stop instead of burning through the batch
-                    if (++failuresInARow >= 3) {
-                        report.stoppedBecause = reason;
-                        break;
+                    if (e instanceof TourApiException t && !t.serviceDown()) {
+                        // only this spot's answer was unusable: mark it done with no gallery, or it would
+                        // sit at the head of the queue every night
+                        urls = List.of();
+                    } else {
+                        // a used-up quota or a dead network fails every call the same way: stop instead of
+                        // burning through the batch; these spots stay unmarked and are tried next night
+                        if (++failuresInARow >= 3) {
+                            report.stoppedBecause = reason;
+                            break;
+                        }
+                        continue;
                     }
-                    continue;
                 }
                 Long id = candidate.getId();
+                List<String> found = urls;
                 Integer count = tx.execute(status -> spots.findById(id)
-                        .map(spot -> spot.replaceGallery(urls, props.galleryMaxImages(), Instant.now()))
+                        .map(spot -> spot.replaceGallery(found, props.galleryMaxImages(), Instant.now()))
                         .orElse(null));
                 report.checked++;
                 if (count != null && count > 0) {
