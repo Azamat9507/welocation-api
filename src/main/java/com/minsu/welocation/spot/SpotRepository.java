@@ -18,7 +18,7 @@ public interface SpotRepository extends JpaRepository<Spot, Long>, JpaSpecificat
             WHERE MBRContains(ST_GeomFromText(:box, 4326, 'axis-order=long-lat'), s.location)
               AND ST_Distance_Sphere(s.location, ST_SRID(POINT(:lng, :lat), 4326)) <= :radiusMeters
               AND (:category IS NULL OR s.category = :category)
-            ORDER BY distanceMeters
+            ORDER BY distanceMeters, s.id
             LIMIT :limit
             """;
 

@@ -104,6 +104,32 @@ class NearbyApiTest {
                 .andExpect(jsonPath("$[0].name").value("Gwangalli Beach"));
     }
 
+    // the search starts with a 1 km circle and widens; the answer must match one big search
+    @Test
+    void widensTheSearchUntilEnoughSpotsAreFound() throws Exception {
+        double degreePerKm = 1 / (Math.PI * 6370.986 / 180);
+        save("0.5 km", SpotCategory.CAFE, Region.BUSAN, LAT + 0.5 * degreePerKm, LNG);
+        save("2 km", SpotCategory.CAFE, Region.BUSAN, LAT + 2 * degreePerKm, LNG);
+        save("5 km", SpotCategory.CAFE, Region.BUSAN, LAT - 5 * degreePerKm, LNG);
+        save("20 km", SpotCategory.CAFE, Region.BUSAN, LAT - 20 * degreePerKm, LNG);
+        save("45 km", SpotCategory.CAFE, Region.BUSAN, LAT + 45 * degreePerKm, LNG);
+
+        mvc.perform(get("/api/spots/nearby").param("lat", String.valueOf(LAT)).param("lng", String.valueOf(LNG))
+                        .param("radiusKm", "50").param("size", "3"))
+                .andExpect(jsonPath("$.length()").value(3))
+                .andExpect(jsonPath("$[2].name").value("5 km"));
+
+        mvc.perform(get("/api/spots/nearby").param("lat", String.valueOf(LAT)).param("lng", String.valueOf(LNG))
+                        .param("radiusKm", "50").param("size", "5"))
+                .andExpect(jsonPath("$.length()").value(5))
+                .andExpect(jsonPath("$[0].name").value("0.5 km"))
+                .andExpect(jsonPath("$[4].name").value("45 km"));
+
+        mvc.perform(get("/api/spots/nearby").param("lat", String.valueOf(LAT)).param("lng", String.valueOf(LNG))
+                        .param("radiusKm", "40").param("size", "5"))
+                .andExpect(jsonPath("$.length()").value(4));
+    }
+
     // the bounding box must never cut off a spot that is inside the circle
     @Test
     void keepsSpotsJustInsideTheRadiusInEveryDirection() throws Exception {

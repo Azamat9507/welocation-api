@@ -24,6 +24,7 @@ public class SpotService {
     // same sphere ST_Distance_Sphere uses, so the box is measured in the same units as the distance check
     private static final double EARTH_RADIUS_KM = 6370.986;
     private static final double KM_PER_DEGREE = Math.PI * EARTH_RADIUS_KM / 180;
+    private static final double[] SEARCH_STEPS_KM = {1, 3, 10, 30};
 
     private final SpotRepository spotRepository;
 
@@ -41,14 +42,37 @@ public class SpotService {
         return SpotDetail.from(spot);
     }
 
+    // Every spot in the bounding box gets its distance computed and sorted, so a wide radius over a dense
+    // city is slow. Searching small circles first is cheaper and gives the same answer: once a circle
+    // holds `size` spots, everything outside it is farther away than all of them.
+    // A circle that comes back short is also a density sample. If even the full radius isn't expected to
+    // fill the page (k * (R/r)^2 < size), skip the remaining steps, or a rare category pays for every step.
     public List<NearbySpot> nearby(NearbySearch search) {
-        String box = boundingBox(search.lat(), search.lng(), search.radiusKm());
         String category = search.category() == null ? null : search.category().name();
-        return spotRepository.findNearby(search.lat(), search.lng(), search.radiusKm() * 1000, box, category,
-                        search.sizeOrDefault())
-                .stream()
-                .map(NearbySpot::from)
-                .toList();
+        int size = search.sizeOrDefault();
+        double radiusKm = search.radiusKm();
+        for (double step : SEARCH_STEPS_KM) {
+            if (step >= radiusKm) {
+                break;
+            }
+            List<SpotRepository.NearbyRow> rows = findWithin(search, step, category, size);
+            if (rows.size() == size) {
+                return toSpots(rows);
+            }
+            if (rows.size() * Math.pow(radiusKm / step, 2) < size) {
+                break;
+            }
+        }
+        return toSpots(findWithin(search, radiusKm, category, size));
+    }
+
+    private List<SpotRepository.NearbyRow> findWithin(NearbySearch search, double radiusKm, String category, int size) {
+        return spotRepository.findNearby(search.lat(), search.lng(), radiusKm * 1000,
+                boundingBox(search.lat(), search.lng(), radiusKm), category, size);
+    }
+
+    private static List<NearbySpot> toSpots(List<SpotRepository.NearbyRow> rows) {
+        return rows.stream().map(NearbySpot::from).toList();
     }
 
     // The box only has to contain the whole circle; anything extra is dropped by the distance check.
