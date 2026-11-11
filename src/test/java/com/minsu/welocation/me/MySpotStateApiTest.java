@@ -9,6 +9,7 @@ import com.minsu.welocation.spot.SpotRepository;
 import com.minsu.welocation.spot.SpotSource;
 import com.minsu.welocation.user.User;
 import com.minsu.welocation.user.UserRepository;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -96,7 +97,7 @@ class MySpotStateApiTest {
                         .contentType(MediaType.APPLICATION_JSON).content("{\"rating\": 5, \"content\": \"좋아요\"}"))
                 .andExpect(status().isCreated())
                 .andReturn().getResponse().getContentAsString();
-        long reviewId = Long.parseLong(review.replaceAll(".*\"id\":(\\d+).*", "$1"));
+        long reviewId = ((Number) JsonPath.read(review, "$.id")).longValue();
 
         mvc.perform(as(kim, get("/api/me/spots/{id}", spot)))
                 .andExpect(jsonPath("$.liked").value(true))
