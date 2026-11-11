@@ -76,6 +76,11 @@ public class Spot {
     @Column(name = "external_id", length = 50)
     private String externalId;
 
+    // Never written through the entity: Hibernate's UPDATE sets every column, so saving a spot loaded
+    // before a like would put the old count back. Only LikeService's SQL changes it.
+    @Column(nullable = false, insertable = false, updatable = false)
+    private int likeCount;
+
     // A list page shows tags for every spot. A fetch join can't be paged in SQL (rows multiply per tag),
     // so tags for the whole page are loaded in one IN query instead; 50 = the largest page size.
     @BatchSize(size = 50)

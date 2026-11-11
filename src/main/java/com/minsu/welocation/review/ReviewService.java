@@ -6,9 +6,9 @@ import com.minsu.welocation.common.ConflictException;
 import com.minsu.welocation.common.Constraints;
 import com.minsu.welocation.common.ForbiddenException;
 import com.minsu.welocation.common.NotFoundException;
+import com.minsu.welocation.common.PageParams;
 import com.minsu.welocation.common.PageResponse;
 import com.minsu.welocation.common.UnauthorizedException;
-import com.minsu.welocation.review.ReviewDtos.ReviewPage;
 import com.minsu.welocation.review.ReviewDtos.ReviewRequest;
 import com.minsu.welocation.review.ReviewDtos.ReviewResponse;
 import com.minsu.welocation.spot.Spot;
@@ -32,7 +32,7 @@ public class ReviewService {
     private final SpotRepository spotRepository;
     private final UserRepository userRepository;
 
-    public PageResponse<ReviewResponse> list(long spotId, ReviewPage page) {
+    public PageResponse<ReviewResponse> list(long spotId, PageParams page) {
         if (!spotRepository.existsById(spotId)) {
             throw new NotFoundException("spot " + spotId + " not found");
         }

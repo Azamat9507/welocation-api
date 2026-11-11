@@ -1,6 +1,9 @@
 package com.minsu.welocation.review;
 
 import com.minsu.welocation.TestcontainersConfig;
+import com.minsu.welocation.auth.CurrentUser;
+import com.minsu.welocation.auth.TokenService;
+import com.minsu.welocation.bookmark.BookmarkService;
 import com.minsu.welocation.spot.Region;
 import com.minsu.welocation.spot.Spot;
 import com.minsu.welocation.spot.SpotCategory;
@@ -19,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpHeaders;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,6 +55,15 @@ class QueryCountTest {
     @Autowired
     EntityManagerFactory entityManagerFactory;
 
+    @Autowired
+    BookmarkService bookmarkService;
+
+    @Autowired
+    TokenService tokenService;
+
+    @Autowired
+    JdbcTemplate jdbc;
+
     Statistics statistics;
 
     @BeforeEach
@@ -62,13 +76,22 @@ class QueryCountTest {
     void cleanUp() {
         statistics.setStatisticsEnabled(false);
         reviewRepository.deleteAll();
+        jdbc.update("DELETE FROM bookmarks");
         spotRepository.deleteAll();
         userRepository.deleteAll();
     }
 
     private long statementsFor(String url, Object... vars) throws Exception {
+        return statementsFor(null, url, vars);
+    }
+
+    private long statementsFor(String token, String url, Object... vars) throws Exception {
         statistics.clear();
-        mvc.perform(get(url, vars)).andExpect(status().isOk()).andExpect(jsonPath("$.items.length()").value(ROWS));
+        var request = get(url, vars);
+        if (token != null) {
+            request.header(HttpHeaders.AUTHORIZATION, token);
+        }
+        mvc.perform(request).andExpect(status().isOk()).andExpect(jsonPath("$.items.length()").value(ROWS));
         return statistics.getPrepareStatementCount();
     }
 
@@ -99,5 +122,20 @@ class QueryCountTest {
 
         // page of spots + count + tags for the whole page + ratings for the whole page
         assertThat(statementsFor("/api/spots?size=" + ROWS)).isEqualTo(4);
+    }
+
+    @Test
+    void bookmarkPageLoadsSpotsWithTheBookmarks() throws Exception {
+        User me = userRepository.save(User.signUp("saver@example.com", "$2a$10$unused", "saver"));
+        for (int i = 0; i < ROWS; i++) {
+            Spot spot = new Spot("Spot " + i, SpotCategory.CAFE, Region.SEOUL, "test address",
+                    37.5, 127.0, SpotSource.MANUAL, null);
+            spot.addTag(SpotTag.ROOFTOP);
+            bookmarkService.add(spotRepository.save(spot).getId(), new CurrentUser(me.getId()));
+        }
+        String token = "Bearer " + tokenService.issue(me).accessToken();
+
+        // page of bookmarks joined with spots + count + tags for the whole page + ratings for the whole page
+        assertThat(statementsFor(token, "/api/me/bookmarks?size=" + ROWS)).isEqualTo(4);
     }
 }

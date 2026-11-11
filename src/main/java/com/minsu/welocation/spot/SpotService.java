@@ -37,7 +37,11 @@ public class SpotService {
     public PageResponse<SpotSummary> search(SpotSearch search) {
         PageRequest pageable = PageRequest.of(search.pageOrDefault(), search.sizeOrDefault(),
                 Sort.by(Sort.Direction.DESC, "id"));
-        Page<Spot> page = spotRepository.findAll(SpotSpecs.matching(search.region(), search.category(), search.tag()), pageable);
+        return summaries(spotRepository.findAll(SpotSpecs.matching(search.region(), search.category(), search.tag()), pageable));
+    }
+
+    // tags come in one batched query (Spot.tags) and ratings in one grouped query for the whole page
+    public PageResponse<SpotSummary> summaries(Page<Spot> page) {
         Map<Long, Rating> ratings = ratingsOf(page.map(Spot::getId).getContent());
         return PageResponse.from(page.map(spot -> SpotSummary.from(spot, ratings.getOrDefault(spot.getId(), Rating.NONE))));
     }

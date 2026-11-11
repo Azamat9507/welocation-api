@@ -31,12 +31,12 @@ public final class SpotDtos {
 
     public record SpotSummary(Long id, String name, SpotCategory category, Region region,
                               String address, double latitude, double longitude, String thumbnailUrl,
-                              List<SpotTag> tags, long reviewCount, Double averageRating) {
+                              List<SpotTag> tags, int likeCount, long reviewCount, Double averageRating) {
 
         static SpotSummary from(Spot spot, Rating rating) {
             return new SpotSummary(spot.getId(), spot.getName(), spot.getCategory(), spot.getRegion(),
                     spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getThumbnailUrl(),
-                    spot.getTags().stream().sorted().toList(), rating.count(), rating.average());
+                    spot.getTags().stream().sorted().toList(), spot.getLikeCount(), rating.count(), rating.average());
         }
     }
 
@@ -52,14 +52,14 @@ public final class SpotDtos {
 
     public record SpotDetail(Long id, String name, SpotCategory category, Region region, String address,
                              double latitude, double longitude, String description,
-                             List<SpotTag> tags, List<String> images, long reviewCount, Double averageRating) {
+                             List<SpotTag> tags, List<String> images, int likeCount, long reviewCount, Double averageRating) {
 
         static SpotDetail from(Spot spot, Rating rating) {
             return new SpotDetail(spot.getId(), spot.getName(), spot.getCategory(), spot.getRegion(),
                     spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getDescription(),
                     spot.getTags().stream().sorted().toList(),
                     spot.getImages().stream().map(SpotImage::getUrl).toList(),
-                    rating.count(), rating.average());
+                    spot.getLikeCount(), rating.count(), rating.average());
         }
     }
 

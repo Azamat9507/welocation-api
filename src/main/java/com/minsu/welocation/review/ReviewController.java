@@ -1,8 +1,8 @@
 package com.minsu.welocation.review;
 
 import com.minsu.welocation.auth.CurrentUser;
+import com.minsu.welocation.common.PageParams;
 import com.minsu.welocation.common.PageResponse;
-import com.minsu.welocation.review.ReviewDtos.ReviewPage;
 import com.minsu.welocation.review.ReviewDtos.ReviewRequest;
 import com.minsu.welocation.review.ReviewDtos.ReviewResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,7 +31,7 @@ public class ReviewController {
 
     @Operation(summary = "Reviews of a spot, newest first")
     @GetMapping("/api/spots/{spotId}/reviews")
-    public PageResponse<ReviewResponse> list(@PathVariable Long spotId, @Valid @ParameterObject @ModelAttribute ReviewPage page) {
+    public PageResponse<ReviewResponse> list(@PathVariable Long spotId, @Valid @ParameterObject @ModelAttribute PageParams page) {
         return reviewService.list(spotId, page);
     }
 
