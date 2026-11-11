@@ -18,6 +18,10 @@ server:
     include-message: never
     include-binding-errors: never
     include-exception: false
+welocation:
+  jwt:
+    # base64, at least 256 bits; without it a random key is made at startup (see JwtConfig)
+    secret: ${JWT_SECRET:}
 springdoc:
   swagger-ui:
     # opens with the parameter fields ready to fill instead of behind a "Try it out" click
