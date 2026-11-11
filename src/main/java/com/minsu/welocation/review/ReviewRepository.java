@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
@@ -17,6 +18,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Page<Review> findBySpotId(Long spotId, Pageable pageable);
 
     boolean existsBySpotIdAndAuthorId(Long spotId, Long authorId);
+
+    @Query("select r.id from Review r where r.spot.id = :spotId and r.author.id = :authorId")
+    Optional<Long> findIdBySpotAndAuthor(long spotId, long authorId);
 
     // one grouped query for a whole page of spots instead of one per spot
     @Query("""
