@@ -26,6 +26,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -95,9 +96,7 @@ public class Spot {
 
     public Spot(String name, SpotCategory category, Region region, String address,
                 double latitude, double longitude, SpotSource source, String externalId) {
-        if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
-            throw new IllegalArgumentException("coordinates out of range");
-        }
+        requireValidCoordinates(latitude, longitude);
         this.name = name;
         this.category = category;
         this.region = region;
@@ -120,6 +119,38 @@ public class Spot {
         images.add(new SpotImage(this, url, images.size()));
         if (thumbnailUrl == null) {
             thumbnailUrl = url;
+        }
+    }
+
+    // For spots owned by an outside source (TourAPI): overwrite with what the source says now.
+    // Returns false when nothing differs, so an unchanged row is not written at all.
+    public boolean updateFromSource(String name, SpotCategory category, Region region, String address,
+                                    double latitude, double longitude, String imageUrl) {
+        boolean imageChanged = !Objects.equals(thumbnailUrl, imageUrl);
+        if (!imageChanged && Objects.equals(this.name, name) && this.category == category && this.region == region
+                && Objects.equals(this.address, address) && this.latitude == latitude && this.longitude == longitude) {
+            return false;
+        }
+        requireValidCoordinates(latitude, longitude);
+        this.name = name;
+        this.category = category;
+        this.region = region;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        if (imageChanged) {
+            images.clear();
+            thumbnailUrl = null;
+            if (imageUrl != null) {
+                addImage(imageUrl);
+            }
+        }
+        return true;
+    }
+
+    private static void requireValidCoordinates(double latitude, double longitude) {
+        if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+            throw new IllegalArgumentException("coordinates out of range");
         }
     }
 }
