@@ -1,5 +1,6 @@
 package com.minsu.welocation.guide;
 
+import org.springframework.ai.google.genai.common.GoogleGenAiThinkingLevel;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.time.Duration;
@@ -12,8 +13,9 @@ public record GuideProperties(
         Duration timeout,
         Duration deadline,
         int maxOutputTokens,
-        Integer thinkingBudget,
+        GoogleGenAiThinkingLevel thinkingLevel,
         int maxSearches,
+        Duration quotaBackoff,
         int perUserDaily,
         int globalDaily) {
 

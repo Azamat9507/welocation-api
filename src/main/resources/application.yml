@@ -62,20 +62,27 @@ welocation:
   guide:
     # Gemini API key from Google AI Studio; empty turns POST /api/guide into a 503 and nothing else changes
     api-key: ${GEMINI_API_KEY:}
-    model: ${GEMINI_MODEL:gemini-2.5-flash}
-    fallback-model: ${GEMINI_FALLBACK_MODEL:gemini-2.5-flash-lite}
+    # Checked with this project's key on 2026-11-12. The 2.5 models answer 404 to new keys; gemini-3.8-flash and
+    # gemini-flash-latest timed out (40 s); gemini-3.6-flash works but the free tier allows it 20 requests a day.
+    # The Flash Lite models get 15 a minute and 500 a day each (AI Studio, Rate Limit page), and a question takes
+    # two to four calls.
+    model: ${GEMINI_MODEL:gemini-3.5-flash-lite}
+    fallback-model: ${GEMINI_FALLBACK_MODEL:gemini-3.1-flash-lite}
+    # a model that answered 429 (out of quota) is skipped for this long, so each question doesn't pay for the failure
+    quota-backoff: 60s
     # per model call; the whole question, fallback model included, gets `deadline` to start its calls
-    timeout: 15s
+    # live runs: a normal call takes 1 to 3 s, a stuck one never answers; 10 s leaves the fallback time to answer
+    timeout: 10s
     deadline: 30s
     max-output-tokens: 1024
-    # thinking tokens count against max-output-tokens; 0 turns thinking off on the 2.5 Flash models.
-    # Pro models can't turn it off and reject 0: set GEMINI_THINKING_BUDGET to an empty value for those.
-    thinking-budget: ${GEMINI_THINKING_BUDGET:0}
+    # Gemini 3 sets thinking by level (MINIMAL, LOW, MEDIUM, HIGH) and rejects the 2.5 thinkingBudget with a 400
+    thinking-level: ${GEMINI_THINKING_LEVEL:LOW}
     # searches per question, however the model spreads them over its turns
     max-searches: 3
     # every question costs money, so both limits count requests, not successful answers
     per-user-daily: 20
-    global-daily: 500
+    # about what 500 model calls a day buy; past it a clear 429 beats a slow 503
+    global-daily: ${GUIDE_GLOBAL_DAILY:150}
 springdoc:
   swagger-ui:
     # opens with the parameter fields ready to fill instead of behind a "Try it out" click

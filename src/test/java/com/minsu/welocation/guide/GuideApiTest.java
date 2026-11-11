@@ -220,7 +220,8 @@ class GuideApiTest {
     @Test
     void routeOrderAndDistancesComeFromCodeNotFromTheModel() throws Exception {
         long between = spot("중간 카페", SpotCategory.CAFE, 35.1570, 129.1186);
-        // the model lists far, near, between; the route starts at its first pick and walks to the nearest next
+        // The model lists far, near, between. The shortest walk is far, between, near (or the same in reverse); equal
+        // lengths keep the model's first pick at the start.
         model.script = prompt -> offersTools(prompt) && !(prompt.getInstructions().getLast() instanceof ToolResponseMessage)
                 ? searches("{\"region\":\"BUSAN\",\"category\":\"CAFE\"}")
                 : answers("""
