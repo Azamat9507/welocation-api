@@ -20,10 +20,11 @@ public class GuideController {
     private final GuideService guideService;
 
     @Operation(summary = "Ask the AI guide; it answers only with spots from the database",
-            description = "Limited per user and per day. 503 when the guide isn't set up or the model is unavailable.",
+            description = "Answers in the language given in lang (ko, en, ru or uz; ko when left out); any other "
+                    + "value is a 400. Limited per user and per day. 503 when the guide isn't set up or the model is unavailable.",
             security = @SecurityRequirement(name = "bearer"))
     @PostMapping("/api/guide")
     public GuideResponse ask(@Valid @RequestBody GuideRequest request, @Parameter(hidden = true) JwtAuthenticationToken auth) {
-        return guideService.ask(request.question(), CurrentUser.from(auth));
+        return guideService.ask(request.question(), request.language(), CurrentUser.from(auth));
     }
 }

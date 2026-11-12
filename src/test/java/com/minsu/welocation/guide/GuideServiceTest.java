@@ -60,7 +60,7 @@ class GuideServiceTest {
                 mock(SpotService.class), mock(GuideQuota.class), properties(Duration.ofMillis(800), Duration.ofMillis(500)));
 
         long started = System.nanoTime();
-        assertThatThrownBy(() -> service.ask("카페", new CurrentUser(1)))
+        assertThatThrownBy(() -> service.ask("카페", GuideLanguage.KO, new CurrentUser(1)))
                 .isInstanceOf(ServiceUnavailableException.class);
 
         // calls start at about 0 and 300 ms, before the 500 ms deadline; the next would start at 600. The margins are
@@ -85,7 +85,7 @@ class GuideServiceTest {
         GuideService service = new GuideService(failing, ToolCallingManager.builder().build(), mock(SpotRepository.class),
                 mock(SpotService.class), mock(GuideQuota.class), properties(Duration.ofMillis(800), Duration.ofMillis(500)));
 
-        assertThatThrownBy(() -> service.ask("카페", new CurrentUser(1))).isInstanceOf(ServiceUnavailableException.class);
+        assertThatThrownBy(() -> service.ask("카페", GuideLanguage.KO, new CurrentUser(1))).isInstanceOf(ServiceUnavailableException.class);
         assertThat(models).containsExactly("primary");
     }
 
@@ -152,8 +152,8 @@ class GuideServiceTest {
         GuideService service = new GuideService(chat, ToolCallingManager.builder().build(), mock(SpotRepository.class),
                 mock(SpotService.class), mock(GuideQuota.class), properties(Duration.ofSeconds(5), Duration.ofSeconds(10)));
 
-        service.ask("카페", new CurrentUser(1));
-        service.ask("카페", new CurrentUser(1));
+        service.ask("카페", GuideLanguage.KO, new CurrentUser(1));
+        service.ask("카페", GuideLanguage.KO, new CurrentUser(1));
 
         // the second question goes straight to the fallback instead of paying for another 429
         assertThat(models).containsExactly("primary", "fallback", "fallback");

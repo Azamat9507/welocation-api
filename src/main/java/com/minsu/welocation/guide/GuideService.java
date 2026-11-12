@@ -68,7 +68,8 @@ public class GuideService {
             the database.
             - If the wish depends on something the data doesn't show (quiet, cheap, open late), say in one short \
             sentence that you can't check it, instead of guessing.
-            - Write intro and reasons in the language of the question. intro: at most 2 sentences. reason: under \
+            - Write intro and reasons in %s, whatever language the question is in. Spot names stay exactly as \
+            the tool returned them; don't translate or romanize them. intro: at most 2 sentences. reason: under \
             100 characters, built only from what the tool returned: kind of place, region, closeness to the \
             nearCategory you searched for, rating, likes. Don't describe atmosphere, taste, size or views; the data \
             doesn't say, so words like cozy, quiet or charming would be made up.
@@ -86,7 +87,7 @@ public class GuideService {
     private final GuideProperties properties;
     private final Map<String, Long> restingUntil = new ConcurrentHashMap<>();
 
-    public GuideResponse ask(String question, CurrentUser me) {
+    public GuideResponse ask(String question, GuideLanguage language, CurrentUser me) {
         if (!properties.configured()) {
             throw new ServiceUnavailableException("the AI guide is not set up");
         }
@@ -105,11 +106,11 @@ public class GuideService {
                 continue;
             }
             try {
-                ModelAnswer answer = run(model, question, tool, deadline);
+                ModelAnswer answer = run(model, question, language, tool, deadline);
                 GuideResponse response = toResponse(answer, tool.shown());
                 // the question itself is never logged: people type all sorts of things into a box
-                log.info("guide answered: model={} questionLength={} shown={} picks={} ms={}", model,
-                        question.length(), tool.shown().size(), response.spots().size(),
+                log.info("guide answered: model={} lang={} questionLength={} shown={} picks={} ms={}", model,
+                        language.code(), question.length(), tool.shown().size(), response.spots().size(),
                         (System.nanoTime() - started) / 1_000_000);
                 return response;
             } catch (RuntimeException e) {
@@ -129,9 +130,10 @@ public class GuideService {
     // rounds. Running them here keeps two limits: the tool itself refuses searches past maxSearches (a model can ask
     // for several in one turn), and there are at most that many rounds. The last call offers no tools at all, which
     // leaves the model nothing to do but answer.
-    private ModelAnswer run(String model, String question, SpotSearchTool tool, long deadline) {
+    private ModelAnswer run(String model, String question, GuideLanguage language, SpotSearchTool tool, long deadline) {
+        // the language comes from a fixed list and goes into the system prompt; the question stays in the user message
         List<Message> messages = List.of(
-                new SystemMessage(SYSTEM_PROMPT.formatted(properties.maxSearches()) + "\n" + ANSWER.getFormat()),
+                new SystemMessage(systemPrompt(language) + "\n" + ANSWER.getFormat()),
                 new UserMessage("<question>\n" + inert(question) + "\n</question>"));
         for (int round = 0; ; round++) {
             if (System.nanoTime() > deadline) {
@@ -148,6 +150,10 @@ public class GuideService {
             }
             messages = toolCallingManager.executeToolCalls(prompt, response).conversationHistory();
         }
+    }
+
+    private String systemPrompt(GuideLanguage language) {
+        return SYSTEM_PROMPT.formatted(properties.maxSearches(), language.inEnglish());
     }
 
     // Gemini may split one answer into several text parts, and thinking models add thought parts; only the
