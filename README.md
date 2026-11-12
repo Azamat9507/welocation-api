@@ -44,7 +44,7 @@ missing or empty among `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `REDIS_HOST`, `RE
 
 | Method | Path | Auth | What it does |
 |---|---|---|---|
-| GET | `/api/spots?region=&category=&tag=&page=&size=` | open | Filtered list, spots with a photo first, then newest; with tags, like count and rating |
+| GET | `/api/spots?region=&category=&tag=&q=&page=&size=` | open | Filtered list (`q`: text in the name or address, up to 50 chars), spots with a photo first, then newest; with tags, like count and rating |
 | GET | `/api/spots/{id}` | open | Detail with images, tags, like count and rating |
 | GET | `/api/spots/nearby?lat=&lng=&radiusKm=&category=&size=` | open | Nearest spots within a radius, with distance |
 | GET | `/api/spots/ranking/weekly` | open | Top 10 by likes this week (Monday 00:00 KST onwards) |

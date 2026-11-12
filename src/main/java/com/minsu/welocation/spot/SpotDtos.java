@@ -5,6 +5,7 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -17,8 +18,13 @@ public final class SpotDtos {
             Region region,
             SpotCategory category,
             SpotTag tag,
+            @Size(max = 50) String q,
             @Min(0) @Max(10_000) Integer page,
             @Min(1) @Max(50) Integer size) {
+
+        public SpotSearch {
+            q = q == null || q.isBlank() ? null : q.strip();
+        }
 
         int pageOrDefault() {
             return page == null ? 0 : page;
