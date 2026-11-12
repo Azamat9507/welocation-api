@@ -99,7 +99,7 @@ public class TourApiSyncService {
             return report;
         }
         try {
-            List<Spot> batch = spots.findBySourceAndGallerySyncedAtIsNullAndThumbnailUrlIsNotNullOrderByIdAsc(
+            List<Spot> batch = spots.findBySourceAndGallerySyncedAtIsNullAndThumbnailUrlIsNotNullOrderByIdDesc(
                     SpotSource.TOURAPI, Limit.of(limit));
             int failuresInARow = 0;
             for (Spot candidate : batch) {

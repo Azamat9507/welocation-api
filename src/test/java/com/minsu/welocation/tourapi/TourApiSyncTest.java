@@ -449,6 +449,26 @@ class TourApiSyncTest {
     }
 
     @Test
+    void galleryStartsWithTheSpotsTheHomePageShowsFirst() {
+        sync.sync();
+        List<Long> newestWithPhoto = spotRepository.findAll().stream()
+                .filter(sp -> sp.getThumbnailUrl() != null)
+                .map(Spot::getId)
+                .sorted(Collections.reverseOrder())
+                .limit(2)
+                .toList();
+
+        sync.syncGalleries(2);
+
+        List<Long> fetched = spotRepository.findAll().stream()
+                .filter(sp -> sp.getGallerySyncedAt() != null)
+                .map(Spot::getId)
+                .sorted(Collections.reverseOrder())
+                .toList();
+        assertThat(fetched).isEqualTo(newestWithPhoto);
+    }
+
+    @Test
     void galleryDropsUnlicensedAndForeignPhotosAndTheMainPhotoAgain() {
         sync.sync();
         String mainPhoto = byExternalId("632089").getThumbnailUrl();
