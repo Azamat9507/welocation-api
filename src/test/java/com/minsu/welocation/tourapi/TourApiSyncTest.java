@@ -232,8 +232,8 @@ class TourApiSyncTest {
         assertThat(first.skipped()).isEmpty();
         assertThat(first.created()).isEqualTo(ITEMS);
         assertThat(spotRepository.count()).isEqualTo(ITEMS);
-        // 5 items at 2 per page is 3 pages for every category, plus one empty page for each of the 4 stay codes
-        assertThat(requests).hasSize(5 * 3 + 4);
+        // 5 items at 2 per page is 3 pages for every category, plus one empty page for each stay and leisure code
+        assertThat(requests).hasSize(5 * 3 + 4 + leisureCodes());
         assertThat(requests).allSatisfy(q -> assertThat(q.get("serviceKey")).isEqualTo(KEY));
 
         SyncReport second = sync.sync();
@@ -612,7 +612,7 @@ class TourApiSyncTest {
         assertThat(requestsFor("AC010100")).isEqualTo(1);
         assertThat(requestsFor("AC030100")).isEqualTo(1);
         assertThat(requests.indexOf(requests.stream().filter(q -> q.get("lclsSystm3").startsWith("AC"))
-                .findFirst().orElseThrow())).isEqualTo(5 * 3);
+                .findFirst().orElseThrow())).isEqualTo(5 * 3 + leisureCodes());
 
         SyncReport second = sync.sync();
 
@@ -682,5 +682,10 @@ class TourApiSyncTest {
         // the far hotel has a photo too, but it was never stored
         assertThat(requests).noneMatch(q -> "9900103".equals(q.get("contentId")));
         tx.executeWithoutResult(st -> assertThat(byExternalId("9900101").getImages()).hasSize(10));
+    }
+
+    // the fixture has no leisure items: each leisure code costs one empty page, before the stays
+    private static int leisureCodes() {
+        return (int) TourApiMapper.CATEGORIES.values().stream().filter(c -> c == SpotCategory.LEISURE).count();
     }
 }

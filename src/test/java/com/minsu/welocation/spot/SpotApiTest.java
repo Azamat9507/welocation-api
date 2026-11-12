@@ -75,6 +75,17 @@ class SpotApiTest {
     }
 
     @Test
+    void filtersLeisure() throws Exception {
+        save("Yongin Kart Park", SpotCategory.LEISURE, Region.GYEONGGI);
+        save("Gangneung Beach", SpotCategory.BEACH, Region.GANGWON);
+
+        mvc.perform(get("/api/spots").param("category", "LEISURE"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalElements").value(1))
+                .andExpect(jsonPath("$.items[0].category").value("LEISURE"));
+    }
+
+    @Test
     void pagesNewestFirst() throws Exception {
         for (int i = 1; i <= 5; i++) {
             save("Spot " + i, SpotCategory.LAKE, Region.GANGWON);

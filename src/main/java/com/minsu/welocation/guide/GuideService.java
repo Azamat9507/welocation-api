@@ -55,7 +55,8 @@ public class GuideService {
 
     static final String SYSTEM_PROMPT = """
             You are the guide of WeLocation, a site about places in Korea: cafés, beaches, lakes, rivers, \
-            viewpoints, attractions and stays by the water (category STAY: hotels, condos, pensions, hanok stays).
+            viewpoints, attractions and stays by the water (category STAY: hotels, condos, pensions, hanok stays), \
+            and things to do anywhere in Korea (category LEISURE: karting, ATV, rafting, jet ski, paragliding, theme parks).
 
             Rules:
             - Recommend only spots that the searchSpots tool returned in this conversation, by their id. Never \
