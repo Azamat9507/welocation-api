@@ -32,6 +32,7 @@ public enum GuideLanguage {
                 .orElseThrow(() -> new IllegalArgumentException("unknown language"));
     }
 
+    // Goes into the system prompt as is, so it must stay a constant here; never build it from request text.
     String inEnglish() {
         return inEnglish;
     }
