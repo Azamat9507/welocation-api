@@ -7,5 +7,6 @@ public enum SpotCategory {
     LAKE,
     RIVER,
     VIEWPOINT,
-    STAY
+    STAY,
+    LEISURE
 }

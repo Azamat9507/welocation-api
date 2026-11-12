@@ -32,6 +32,19 @@ final class TourApiMapper {
         m.put("AC020100", SpotCategory.STAY); // 콘도
         m.put("AC030100", SpotCategory.STAY); // 펜션
         m.put("AC030200", SpotCategory.STAY); // 한옥스테이
+        // LEISURE: things to do anywhere in the country, no water rule. Counts are from 2026-11-13.
+        m.put("LS010300", SpotCategory.LEISURE); // 카트 (22)
+        m.put("LS011200", SpotCategory.LEISURE); // 사격장 (18)
+        m.put("LS011500", SpotCategory.LEISURE); // ATV (14)
+        m.put("LS011700", SpotCategory.LEISURE); // 오프로드 (1)
+        m.put("LS011800", SpotCategory.LEISURE); // 번지점프 (4)
+        m.put("LS020100", SpotCategory.LEISURE); // 윈드서핑/제트스키 (46)
+        m.put("LS020200", SpotCategory.LEISURE); // 카약/카누 (17)
+        m.put("LS020800", SpotCategory.LEISURE); // 래프팅 (26)
+        m.put("LS030100", SpotCategory.LEISURE); // 스카이다이빙 (3)
+        m.put("LS030300", SpotCategory.LEISURE); // 행글라이딩/패러글라이딩 (24)
+        m.put("LS030400", SpotCategory.LEISURE); // 열기구 (2)
+        m.put("VE020100", SpotCategory.LEISURE); // 테마파크 (236)
         CATEGORIES = Map.copyOf(m);
     }
 

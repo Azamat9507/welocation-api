@@ -57,6 +57,14 @@ class TourApiMapperTest {
     }
 
     @Test
+    void leisureCodesBecomeLeisure() {
+        assertThat(map(item().put("lclsSystm3", "LS010300")).data().category()).isEqualTo(SpotCategory.LEISURE);
+        assertThat(map(item().put("lclsSystm3", "VE020100")).data().category()).isEqualTo(SpotCategory.LEISURE);
+        // 골프 is a leisure sport too, but not on the list
+        assertThat(map(item().put("lclsSystm3", "LS010400")).skipReason()).isEqualTo("category");
+    }
+
+    @Test
     void skipsItemsOutsideTheWhitelistOrWithBadFields() {
         assertThat(map(item().put("lclsSystm3", "HS030100")).skipReason()).isEqualTo("category");
         assertThat(map(item().put("lDongRegnCd", "")).skipReason()).isEqualTo("region");
