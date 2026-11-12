@@ -34,7 +34,11 @@ class SpotApiTest {
     }
 
     private Spot save(String name, SpotCategory category, Region region, SpotTag... tags) {
-        Spot spot = new Spot(name, category, region, "test address", 35.1, 129.1, SpotSource.MANUAL, null);
+        return save(name, "test address", category, region, tags);
+    }
+
+    private Spot save(String name, String address, SpotCategory category, Region region, SpotTag... tags) {
+        Spot spot = new Spot(name, category, region, address, 35.1, 129.1, SpotSource.MANUAL, null);
         for (SpotTag tag : tags) {
             spot.addTag(tag);
         }
@@ -116,6 +120,59 @@ class SpotApiTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.detail").value("region: invalid value"))
                 .andExpect(content().string(not(containsString("com.minsu"))));
+    }
+
+    @Test
+    void textSearchMatchesNameOrAddress() throws Exception {
+        save("Haeundae Blue Cafe", "Busan Haeundae-gu 1", SpotCategory.CAFE, Region.BUSAN);
+        save("Gwangan Bridge View", "Busan Suyeong-gu 2", SpotCategory.CAFE, Region.BUSAN);
+        save("Haeundae Beach", "Busan Haeundae-gu 3", SpotCategory.BEACH, Region.BUSAN);
+        save("Lake Cafe", "Gapyeong 4", SpotCategory.CAFE, Region.GYEONGGI);
+
+        mvc.perform(get("/api/spots").param("q", "  bridge "))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items[*].name").value(contains("Gwangan Bridge View")));
+        mvc.perform(get("/api/spots").param("q", "Suyeong"))
+                .andExpect(jsonPath("$.items[*].name").value(contains("Gwangan Bridge View")));
+        mvc.perform(get("/api/spots").param("q", "haeundae"))
+                .andExpect(jsonPath("$.items[*].name").value(contains("Haeundae Beach", "Haeundae Blue Cafe")));
+        mvc.perform(get("/api/spots").param("q", "haeundae").param("category", "CAFE"))
+                .andExpect(jsonPath("$.totalElements").value(1))
+                .andExpect(jsonPath("$.items[0].name").value("Haeundae Blue Cafe"));
+    }
+
+    @Test
+    void textSearchTreatsWildcardsLiterally() throws Exception {
+        save("100% Coffee", SpotCategory.CAFE, Region.SEOUL);
+        save("Plain Coffee", SpotCategory.CAFE, Region.SEOUL);
+        save("Snake_Case Bar", SpotCategory.CAFE, Region.SEOUL);
+        save("Back\\slash Cafe", SpotCategory.CAFE, Region.SEOUL);
+
+        mvc.perform(get("/api/spots").param("q", "%"))
+                .andExpect(jsonPath("$.items[*].name").value(contains("100% Coffee")));
+        mvc.perform(get("/api/spots").param("q", "_"))
+                .andExpect(jsonPath("$.items[*].name").value(contains("Snake_Case Bar")));
+        mvc.perform(get("/api/spots").param("q", "\\"))
+                .andExpect(jsonPath("$.items[*].name").value(contains("Back\\slash Cafe")));
+    }
+
+    @Test
+    void blankTextSearchIsUnfiltered() throws Exception {
+        save("One", SpotCategory.CAFE, Region.SEOUL);
+        save("Two", SpotCategory.CAFE, Region.SEOUL);
+
+        mvc.perform(get("/api/spots").param("q", "   "))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalElements").value(2));
+    }
+
+    @Test
+    void rejectsTextSearchAboveFiftyChars() throws Exception {
+        mvc.perform(get("/api/spots").param("q", "a".repeat(51)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.detail").value(containsString("q")));
+        mvc.perform(get("/api/spots").param("q", "a".repeat(50)))
+                .andExpect(status().isOk());
     }
 
     @Test

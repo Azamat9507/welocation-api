@@ -44,7 +44,7 @@ missing or empty among `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `REDIS_HOST`, `RE
 
 | Method | Path | Auth | What it does |
 |---|---|---|---|
-| GET | `/api/spots?region=&category=&tag=&page=&size=` | open | Filtered list, spots with a photo first, then newest; with tags, like count and rating |
+| GET | `/api/spots?region=&category=&tag=&q=&page=&size=` | open | Filtered list (`q`: text in the name or address, up to 50 chars), spots with a photo first, then newest; with tags, like count and rating |
 | GET | `/api/spots/{id}` | open | Detail with images, tags, like count and rating |
 | GET | `/api/spots/nearby?lat=&lng=&radiusKm=&category=&size=` | open | Nearest spots within a radius, with distance |
 | GET | `/api/spots/ranking/weekly` | open | Top 10 by likes this week (Monday 00:00 KST onwards) |
@@ -56,7 +56,7 @@ missing or empty among `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `REDIS_HOST`, `RE
 | GET | `/api/me/bookmarks` | token | My bookmarks, newest first |
 | POST | `/api/auth/signup`, `/api/auth/login` | open | Login is rate limited per email and per IP |
 | GET | `/api/me` | token | Current user |
-| POST | `/api/guide` | token | Ask the AI guide; answers only with spots from the database (see below) |
+| POST | `/api/guide` | token | Ask the AI guide: `{"question": "...", "lang": "en"}`, `lang` one of `ko` (default), `en`, `ru`, `uz`; answers only with spots from the database (see below) |
 
 `category` is one of `CAFE`, `BEACH`, `LAKE`, `RIVER`, `VIEWPOINT`, `ATTRACTION` or `STAY`. A `STAY` is a place to
 sleep near the water; the API has no prices or booking for it.
@@ -121,11 +121,14 @@ to 3, and the spots page from 23 to 4. The weekly ranking page takes 3.
   - No retries; a failed call goes to the fallback model.
   - Daily limits per user and overall, counted in Redis.
   - The question is never logged.
+  - `lang` picks the language of the guide's own words (intro and reasons); spot names and addresses stay as stored.
+    It is set in the system prompt from a fixed list, so the question can't change it. Without `lang` the guide
+    writes Korean; any other value is a 400.
   - Without `GEMINI_API_KEY` the endpoint answers 503 and the rest of the API runs as usual.
   - `GuideApiTest` scripts the model, so no test calls Gemini.
   - A live run of 12 questions (2026-11-12, free tier) answered 11 within 2.4 to 9.4 s, all with real spots. The
     exception was one question where both models stopped responding, which got a 503 after 31.6 s. Questions in
-    Korean, English and Uzbek were answered in the same language. A request to print the system prompt and a
+    Korean, English and Uzbek were answered in the same language (this run predates `lang`). A request to print the system prompt and a
     weather question got no prompt and no made-up facts.
 - **TourAPI sync.** Runs nightly. Five categories plus stays, upsert by TourAPI content id, retries with backoff on
   I/O errors and 5xx. It never deletes. The service key never appears in logs or error messages. Tests use recorded
