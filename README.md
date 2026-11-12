@@ -4,8 +4,8 @@ Backend for WeLocation, a guide to the places in Korea that make a good day out:
 viewpoints. Spots come from the Korea Tourism Organization's TourAPI every night; people can review, like and
 bookmark them, search around a point on the map, and see what was liked most this week.
 
-This repository is the backend only. A Next.js web client, an Expo mobile app and an AI guide that answers only from
-stored spots are planned next and do not exist yet.
+This repository is the backend only. The Next.js web client is
+[welocation-web](https://github.com/Azamat9507/welocation-web). An Expo mobile app is planned next and does not exist yet.
 
 ## Stack
 
