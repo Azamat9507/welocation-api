@@ -636,6 +636,25 @@ class TourApiSyncTest {
     }
 
     @Test
+    void onlyBeachesLakesAndRiversCountAsWater() throws IOException {
+        loadStays();
+        // ~300 m north of the café 커피친구 and ~6 km from 한강: a café or another stay nearby is not water
+        ObjectNode condo = fixture.get("AC030100").getFirst().deepCopy();
+        condo.put("contentid", "9900105");
+        condo.put("title", "종로 카페거리 콘도");
+        condo.put("mapy", "37.5752639352");
+        condo.put("mapx", "126.9815062982");
+        condo.put("lclsSystm2", "AC02");
+        condo.put("lclsSystm3", "AC020100");
+        fixture.put("AC020100", new ArrayList<>(List.of(condo)));
+
+        SyncReport report = sync.sync();
+
+        assertThat(report.skipped()).containsEntry("not waterside", 2);
+        assertThat(spotRepository.findAll()).noneMatch(sp -> "9900105".equals(sp.getExternalId()));
+    }
+
+    @Test
     void aStayThatIsNoLongerNearWaterIsLeftAsItWas() throws IOException {
         loadStays();
         sync.sync();
