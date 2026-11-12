@@ -1,6 +1,7 @@
 package com.minsu.welocation.guide;
 
 import com.minsu.welocation.spot.SpotDtos.SpotSummary;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -11,7 +12,14 @@ public final class GuideDtos {
     private GuideDtos() {
     }
 
-    public record GuideRequest(@NotBlank @Size(max = 300) String question) {
+    public record GuideRequest(
+            @NotBlank @Size(max = 300) String question,
+            @Schema(description = "Language of the guide's own words: ko (default), en, ru or uz. Spot names and "
+                    + "addresses stay as stored.") GuideLanguage lang) {
+
+        GuideLanguage language() {
+            return lang == null ? GuideLanguage.KO : lang;
+        }
     }
 
     // Every fact on a card (name, address, rating, coordinates) comes from the database; only answer and reason are

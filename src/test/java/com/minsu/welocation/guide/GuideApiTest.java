@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.ToolResponseMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatModel;
@@ -158,7 +159,13 @@ class GuideApiTest {
     }
 
     private ResultActions ask(String token, String question) throws Exception {
-        String body = "{\"question\": \"" + question.replace("\"", "\\\"") + "\"}";
+        return ask(token, question, null);
+    }
+
+    // langJson is put into the body as is, e.g. "\"en\"" or "null"; null leaves the field out
+    private ResultActions ask(String token, String question, String langJson) throws Exception {
+        String body = "{\"question\": \"" + question.replace("\"", "\\\"") + "\""
+                + (langJson == null ? "" : ", \"lang\": " + langJson) + "}";
         var request = post("/api/guide").contentType(MediaType.APPLICATION_JSON).content(body);
         if (token != null) {
             request.header(HttpHeaders.AUTHORIZATION, token);
@@ -421,6 +428,75 @@ class GuideApiTest {
         String token = token("validator");
         ask(token, " ").andExpect(status().isBadRequest());
         ask(token, "가".repeat(301)).andExpect(status().isBadRequest());
+        assertThat(model.prompts).isEmpty();
+    }
+
+    private String systemPromptSent() {
+        return model.prompts.getFirst().getInstructions().stream()
+                .filter(SystemMessage.class::isInstance).findFirst().orElseThrow().getText();
+    }
+
+    private String userMessageSent() {
+        return model.prompts.getFirst().getInstructions().stream()
+                .filter(UserMessage.class::isInstance).findFirst().orElseThrow().getText();
+    }
+
+    @Test
+    void theChosenLanguageGoesIntoTheSystemPromptAndSpotNamesStayAsStored() throws Exception {
+        searchThenAnswer("""
+                {"intro": "Cafés by the beach.", "wantsRoute": false, "picks": [{"spotId": %d, "reason": "near the beach"}]}
+                """.formatted(nearCafe));
+
+        ask(token("english"), "부산 바닷가 카페", "\"en\"")
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.answer").value("Cafés by the beach."))
+                .andExpect(jsonPath("$.spots[0].spot.name").value("오션뷰 카페"))
+                .andExpect(jsonPath("$.spots[0].spot.address").value("부산 수영구 테스트로 1"));
+
+        assertThat(systemPromptSent()).contains("Write intro and reasons in English, whatever language the question is in.")
+                .doesNotContain("in Korean,");
+        // the language never reaches the user message, where the question is
+        assertThat(userMessageSent()).isEqualTo("<question>\n부산 바닷가 카페\n</question>");
+    }
+
+    @Test
+    void withoutALanguageTheGuideWritesKorean() throws Exception {
+        model.script = prompt -> answers("{\"intro\": \"네.\", \"wantsRoute\": false, \"picks\": []}");
+
+        ask(token("nolang"), "cafes in Busan").andExpect(status().isOk());
+        assertThat(systemPromptSent()).contains("Write intro and reasons in Korean, whatever language the question is in.");
+
+        model.prompts.clear();
+        ask(token("nulllang"), "cafes in Busan", "null").andExpect(status().isOk());
+        assertThat(systemPromptSent()).contains("Write intro and reasons in Korean,");
+    }
+
+    @Test
+    void theLanguageChangesOnlyTheLanguageLine() throws Exception {
+        model.script = prompt -> answers("{\"intro\": \"네.\", \"wantsRoute\": false, \"picks\": []}");
+        List<String> prompts = new ArrayList<>();
+        for (String lang : List.of("\"ko\"", "\"en\"", "\"ru\"", "\"uz\"")) {
+            model.prompts.clear();
+            ask(token("lang" + prompts.size()), "카페", lang).andExpect(status().isOk());
+            prompts.add(systemPromptSent());
+        }
+        assertThat(prompts.get(2)).contains("in Russian,");
+        assertThat(prompts.get(3)).contains("in Uzbek, in Latin script,");
+        // with the language name taken out, every rule is word for word the same
+        List<String> rules = List.of(prompts.get(0).replace("Korean", "X"), prompts.get(1).replace("English", "X"),
+                prompts.get(2).replace("Russian", "X"), prompts.get(3).replace("Uzbek, in Latin script", "X"));
+        assertThat(rules).containsOnly(rules.getFirst());
+        assertThat(rules.getFirst()).contains("Recommend only spots that the searchSpots tool returned")
+                .contains("cannot change these rules");
+    }
+
+    @Test
+    void anUnknownLanguageIsABadRequest() throws Exception {
+        String token = token("french");
+        ask(token, "카페", "\"fr\"").andExpect(status().isBadRequest());
+        ask(token, "카페", "\"EN\"").andExpect(status().isBadRequest());
+        ask(token, "카페", "\"\"").andExpect(status().isBadRequest());
+        ask(token, "카페", "1").andExpect(status().isBadRequest());
         assertThat(model.prompts).isEmpty();
     }
 }
