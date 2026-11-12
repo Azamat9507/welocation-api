@@ -44,6 +44,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 // Runs the sync against a local stand-in for TourAPI that serves recorded items
 // (src/test/resources/tourapi/items.json, from areaBasedList2 on 2026-11-11), sliced into pages
@@ -96,9 +97,30 @@ class TourApiSyncTest {
     @Autowired
     TransactionTemplate tx;
 
+    @Autowired
+    TourApiClient client;
+
+    @Autowired
+    TourApiSpotRepository tourApiSpots;
+
+    @Autowired
+    TourApiProperties props;
+
+    TourApiProperties withWatersideKm(double km) {
+        return new TourApiProperties(props.baseUrl(), props.key(), props.pageSize(), props.connectTimeout(),
+                props.readTimeout(), props.maxAttempts(), props.retryBackoff(), props.galleryPerNight(),
+                props.galleryMaxImages(), km);
+    }
+
     @BeforeEach
     void loadFixture() throws IOException {
-        try (InputStream in = getClass().getResourceAsStream("/tourapi/items.json")) {
+        fixture = new HashMap<>(read("/tourapi/items.json"));
+        requests.clear();
+        override = null;
+    }
+
+    static Map<String, List<ObjectNode>> read(String resource) throws IOException {
+        try (InputStream in = TourApiSyncTest.class.getResourceAsStream(resource)) {
             JsonNode root = JSON.readTree(in);
             Map<String, List<ObjectNode>> m = new HashMap<>();
             for (String code : root.propertyNames()) {
@@ -106,10 +128,15 @@ class TourApiSyncTest {
                 root.get(code).values().forEach(n -> items.add((ObjectNode) n));
                 m.put(code, items);
             }
-            fixture = m;
+            return m;
         }
-        requests.clear();
-        override = null;
+    }
+
+    // Invented 숙박 items (stays.json), placed around recorded water spots: a pension ~300 m north of 강문해변,
+    // a hotel ~330 m north of the 한강 point, a hotel ~5 km south of 강문해변, a hanok stay without coordinates.
+    // Not part of the default fixture, so the other tests see the stay codes answer with no items.
+    static void loadStays() throws IOException {
+        fixture.putAll(read("/tourapi/stays.json"));
     }
 
     @AfterEach
@@ -205,8 +232,8 @@ class TourApiSyncTest {
         assertThat(first.skipped()).isEmpty();
         assertThat(first.created()).isEqualTo(ITEMS);
         assertThat(spotRepository.count()).isEqualTo(ITEMS);
-        // 5 items at 2 per page is 3 pages for every category
-        assertThat(requests).hasSize(5 * 3);
+        // 5 items at 2 per page is 3 pages for every category, plus one empty page for each of the 4 stay codes
+        assertThat(requests).hasSize(5 * 3 + 4);
         assertThat(requests).allSatisfy(q -> assertThat(q.get("serviceKey")).isEqualTo(KEY));
 
         SyncReport second = sync.sync();
@@ -565,5 +592,76 @@ class TourApiSyncTest {
             assertThat(wando.getImages().getFirst().getUrl()).endsWith("/new_main.jpg");
             assertThat(wando.getImages()).hasSize(10);
         });
+    }
+
+    @Test
+    void staysAreKeptOnlyNearWaterAndASecondRunChangesNothing() throws IOException {
+        loadStays();
+
+        SyncReport first = sync.sync();
+
+        assertThat(first.failed()).isEmpty();
+        assertThat(first.created()).isEqualTo(ITEMS + 2);
+        assertThat(first.skipped()).containsOnly(entry("not waterside", 1), entry("coordinates", 1));
+        assertThat(spotRepository.findAll()).filteredOn(sp -> sp.getCategory() == SpotCategory.STAY)
+                .extracting(Spot::getExternalId).containsExactlyInAnyOrder("9900101", "9900102");
+        Spot pension = byExternalId("9900101");
+        assertThat(pension.getName()).isEqualTo("강문 바다정원 펜션");
+        assertThat(pension.getRegion()).isEqualTo(Region.GANGWON);
+        // one request for each stay code: the water categories go first, the stays are checked against them
+        assertThat(requestsFor("AC010100")).isEqualTo(1);
+        assertThat(requestsFor("AC030100")).isEqualTo(1);
+        assertThat(requests.indexOf(requests.stream().filter(q -> q.get("lclsSystm3").startsWith("AC"))
+                .findFirst().orElseThrow())).isEqualTo(5 * 3);
+
+        SyncReport second = sync.sync();
+
+        assertThat(second.created()).isZero();
+        assertThat(second.updated()).isZero();
+        assertThat(second.unchanged()).isEqualTo(ITEMS + 2);
+        assertThat(second.skipped()).containsOnly(entry("not waterside", 1), entry("coordinates", 1));
+        assertThat(spotRepository.count()).isEqualTo(ITEMS + 2);
+    }
+
+    @Test
+    void waterDistanceIsAProperty() throws IOException {
+        loadStays();
+        // ~300 m and ~330 m from the water: both fail a 0.25 km limit
+        TourApiSyncService strict = new TourApiSyncService(client, tourApiSpots, tx, withWatersideKm(0.25));
+
+        SyncReport report = strict.sync();
+
+        assertThat(report.skipped()).containsEntry("not waterside", 3);
+        assertThat(spotRepository.findAll()).noneMatch(sp -> sp.getCategory() == SpotCategory.STAY);
+    }
+
+    @Test
+    void aStayThatIsNoLongerNearWaterIsLeftAsItWas() throws IOException {
+        loadStays();
+        sync.sync();
+        Spot before = byExternalId("9900101");
+        ObjectNode pension = fixture.get("AC030100").getFirst();
+        pension.put("title", "이사 간 펜션");
+        pension.put("mapy", "37.7497975418");
+
+        SyncReport report = sync.sync();
+
+        assertThat(report.skipped()).containsEntry("not waterside", 2);
+        Spot after = byExternalId("9900101");
+        assertThat(after.getName()).isEqualTo("강문 바다정원 펜션");
+        assertThat(after.getLatitude()).isEqualTo(before.getLatitude());
+    }
+
+    @Test
+    void storedStaysGetAGalleryLikeOtherSpots() throws IOException {
+        loadStays();
+        sync.sync();
+
+        sync.syncGalleries(100);
+
+        assertThat(requests).filteredOn(q -> "9900101".equals(q.get("contentId"))).hasSize(1);
+        // the far hotel has a photo too, but it was never stored
+        assertThat(requests).noneMatch(q -> "9900103".equals(q.get("contentId")));
+        tx.executeWithoutResult(st -> assertThat(byExternalId("9900101").getImages()).hasSize(10));
     }
 }

@@ -66,6 +66,8 @@ welocation:
     # photo galleries fetched after the nightly list sync, one request per spot
     gallery-per-night: 600
     gallery-max-images: 10
+    # stays (숙박) are stored only within this distance of a beach, lake or river spot
+    stay-waterside-km: 1.0
   ranking:
     # every hour at :05, rebuild this week's ranking from MySQL
     rebuild-cron: "0 5 * * * *"

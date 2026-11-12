@@ -105,7 +105,7 @@ public class SpotService {
     // The box only has to contain the whole circle; anything extra is dropped by the distance check.
     // Longitude degrees shrink with latitude, so the edge farthest from the equator sets the width.
     // Near the poles or ±180° the box gets clipped and can miss spots; WeLocation only covers Korea.
-    static String boundingBox(double lat, double lng, double radiusKm) {
+    public static String boundingBox(double lat, double lng, double radiusKm) {
         double padded = radiusKm * 1.01; // slack so rounding the WKT to 6 decimals never trims the edge
         double dLat = padded / KM_PER_DEGREE;
         double minLat = Math.max(-90, lat - dLat);
