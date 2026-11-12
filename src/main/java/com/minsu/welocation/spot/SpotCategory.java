@@ -6,5 +6,6 @@ public enum SpotCategory {
     BEACH,
     LAKE,
     RIVER,
-    VIEWPOINT
+    VIEWPOINT,
+    STAY
 }

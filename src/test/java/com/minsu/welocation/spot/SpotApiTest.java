@@ -59,6 +59,18 @@ class SpotApiTest {
     }
 
     @Test
+    void filtersStays() throws Exception {
+        save("Seaside Pension", SpotCategory.STAY, Region.GANGWON);
+        save("Gangneung Beach", SpotCategory.BEACH, Region.GANGWON);
+
+        mvc.perform(get("/api/spots").param("category", "STAY"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalElements").value(1))
+                .andExpect(jsonPath("$.items[0].name").value("Seaside Pension"))
+                .andExpect(jsonPath("$.items[0].category").value("STAY"));
+    }
+
+    @Test
     void pagesNewestFirst() throws Exception {
         for (int i = 1; i <= 5; i++) {
             save("Spot " + i, SpotCategory.LAKE, Region.GANGWON);
