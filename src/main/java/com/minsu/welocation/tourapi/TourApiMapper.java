@@ -18,6 +18,7 @@ import java.util.Set;
 final class TourApiMapper {
 
     // lclsSystm3 codes we sync, from lclsSystmCode2 (2026-11-11). ATTRACTION is left out on purpose.
+    // The AC (숙박) codes are only kept near water, see TourApiSyncService.
     static final Map<String, SpotCategory> CATEGORIES;
 
     static {
@@ -27,6 +28,10 @@ final class TourApiMapper {
         m.put("NA020200", SpotCategory.LAKE);
         m.put("NA020100", SpotCategory.RIVER);
         m.put("VE010200", SpotCategory.VIEWPOINT);
+        m.put("AC010100", SpotCategory.STAY); // 호텔
+        m.put("AC020100", SpotCategory.STAY); // 콘도
+        m.put("AC030100", SpotCategory.STAY); // 펜션
+        m.put("AC030200", SpotCategory.STAY); // 한옥스테이
         CATEGORIES = Map.copyOf(m);
     }
 

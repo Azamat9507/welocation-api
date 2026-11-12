@@ -1,8 +1,8 @@
 # WeLocation API (위로케이션)
 
-Backend for WeLocation, a guide to the places in Korea that make a good day out: cafés, beaches, lakes, rivers and
-viewpoints. Spots come from the Korea Tourism Organization's TourAPI every night; people can review, like and
-bookmark them, search around a point on the map, and see what was liked most this week.
+Backend for WeLocation, a guide to the places in Korea that make a good day out: cafés, beaches, lakes, rivers,
+viewpoints and stays by the water. Spots come from the Korea Tourism Organization's TourAPI every night; people can
+review, like and bookmark them, search around a point on the map, and see what was liked most this week.
 
 This repository is the backend only. The Next.js web client is
 [welocation-web](https://github.com/Azamat9507/welocation-web). An Expo mobile app is planned next and does not exist yet.
@@ -57,6 +57,9 @@ missing or empty among `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `REDIS_HOST`, `RE
 | POST | `/api/auth/signup`, `/api/auth/login` | open | Login is rate limited per email and per IP |
 | GET | `/api/me` | token | Current user |
 | POST | `/api/guide` | token | Ask the AI guide: `{"question": "...", "lang": "en"}`, `lang` one of `ko` (default), `en`, `ru`, `uz`; answers only with spots from the database (see below) |
+
+`category` is one of `CAFE`, `BEACH`, `LAKE`, `RIVER`, `VIEWPOINT`, `ATTRACTION` or `STAY`. A `STAY` is a place to
+sleep near the water; the API has no prices or booking for it.
 
 ## What was measured
 
@@ -127,9 +130,13 @@ to 3, and the spots page from 23 to 4. The weekly ranking page takes 3.
     exception was one question where both models stopped responding, which got a 503 after 31.6 s. Questions in
     Korean, English and Uzbek were answered in the same language (this run predates `lang`). A request to print the system prompt and a
     weather question got no prompt and no made-up facts.
-- **TourAPI sync.** Runs nightly. Five categories, upsert by TourAPI content id, retries with backoff on I/O errors
-  and 5xx. It never deletes. The service key never appears in logs or error messages. Tests use recorded responses
-  and never call the real API.
+- **TourAPI sync.** Runs nightly. Five categories plus stays, upsert by TourAPI content id, retries with backoff on
+  I/O errors and 5xx. It never deletes. The service key never appears in logs or error messages. Tests use recorded
+  responses and never call the real API.
+  - Stays (`STAY`: hotels, condos, pensions, hanok stays from TourAPI 숙박) are stored only within
+    `stay-waterside-km` (1 km by default) of a beach, lake or river already in the database, checked with one
+    spatial-index query per stay. A stay that later stops qualifying is left as it is. There are no prices and no
+    booking: TourAPI has no such data. `TourApiSyncTest` covers kept, skipped and repeated runs.
 - **Security.**
   - Everything is closed by default and the open endpoints are listed in one place.
   - BCrypt for passwords.

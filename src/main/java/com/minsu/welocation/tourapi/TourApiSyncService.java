@@ -1,6 +1,8 @@
 package com.minsu.welocation.tourapi;
 
 import com.minsu.welocation.spot.Spot;
+import com.minsu.welocation.spot.SpotCategory;
+import com.minsu.welocation.spot.SpotService;
 import com.minsu.welocation.spot.SpotSource;
 import com.minsu.welocation.tourapi.TourApiMapper.SpotData;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +13,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import tools.jackson.databind.JsonNode;
 
 import java.time.Instant;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +28,9 @@ import java.util.stream.Collectors;
 @Service
 public class TourApiSyncService {
 
-    // Caps a bogus totalCount. Cafés need 30 pages at 100; 5 categories x 50 pages x 3 attempts
-    // stays under the dev account's 1,000 requests a day.
+    // Caps a bogus totalCount. Cafés need 30 pages at 100. 9 codes x 50 pages x 3 attempts would be 1,350,
+    // more than the dev account's 1,000 a day, but only if every page needed every retry: a used-up quota
+    // answers with a gateway error that is not retried, so each code left then costs one request.
     private static final int MAX_PAGES = 50;
 
     private final TourApiClient client;
@@ -64,7 +68,12 @@ public class TourApiSyncService {
             return report;
         }
         try {
-            for (String code : TourApiMapper.CATEGORIES.keySet()) {
+            // stays last: whether one is kept depends on the beaches, lakes and rivers already stored
+            List<String> codes = TourApiMapper.CATEGORIES.keySet().stream()
+                    .sorted(Comparator.comparing((String code) -> TourApiMapper.CATEGORIES.get(code) == SpotCategory.STAY)
+                            .thenComparing(Comparator.naturalOrder()))
+                    .toList();
+            for (String code : codes) {
                 if (Thread.currentThread().isInterrupted()) {
                     report.failed.put(code, "not started, shutting down");
                     continue;
@@ -161,12 +170,21 @@ public class TourApiSyncService {
         } while (pageNo <= Math.min(pages, MAX_PAGES));
     }
 
+    private boolean nearWater(SpotData d) {
+        double km = props.stayWatersideKm();
+        return spots.waterWithin(d.latitude(), d.longitude(), km * 1000,
+                SpotService.boundingBox(d.latitude(), d.longitude(), km)) == 1;
+    }
+
     private void upsert(List<JsonNode> items, SyncReport report) {
         Map<String, SpotData> incoming = new LinkedHashMap<>();
         for (JsonNode item : items) {
             TourApiMapper.Result result = TourApiMapper.map(item);
             if (result.data() == null) {
                 report.skipped.merge(result.skipReason(), 1, Integer::sum);
+            } else if (result.data().category() == SpotCategory.STAY && !nearWater(result.data())) {
+                // a stay stored on an earlier night is left as it is, the sync never removes spots
+                report.skipped.merge("not waterside", 1, Integer::sum);
             } else {
                 incoming.put(result.data().externalId(), result.data());
             }
