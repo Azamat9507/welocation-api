@@ -93,6 +93,14 @@ public class TourApiSyncService {
                 run(label, report, () -> syncPages(pageNo -> client.searchKeyword(k.getKey(), pageNo),
                         item -> TourApiMapper.mapKeyword(item, k.getValue()), report));
             }
+            for (Map.Entry<String, SpotCategory> place : new TreeMap<>(TourApiMapper.PLACES).entrySet()) {
+                String label = "place " + place.getKey();
+                if (Thread.currentThread().isInterrupted()) {
+                    report.failed.put(label, "not started, shutting down");
+                    continue;
+                }
+                run(label, report, () -> syncPlace(place.getKey(), place.getValue(), report));
+            }
             log.info("TourAPI sync finished: {}", report);
             return report;
         } finally {
@@ -186,6 +194,28 @@ public class TourApiSyncService {
             pages = (page.totalCount() + props.pageSize() - 1) / props.pageSize();
             pageNo++;
         } while (pageNo <= Math.min(pages, MAX_PAGES));
+    }
+
+    // One request, two when TourAPI has no main photo for the place: then its first licensed gallery photo is used,
+    // so the place is not shown without a picture and the nightly gallery run (main photo required) picks it up.
+    private void syncPlace(String contentId, SpotCategory category, SyncReport report) {
+        List<JsonNode> items = client.detailCommon(contentId).items();
+        if (items.isEmpty()) {
+            // a spot stored earlier stays, as everywhere else; the list in TourApiMapper.PLACES needs a look
+            log.warn("TourAPI place {} not found", contentId);
+            return;
+        }
+        TourApiMapper.Result result = TourApiMapper.mapPlace(items.getFirst(), category);
+        if (result.data() != null && result.data().imageUrl() == null) {
+            List<String> photos = TourApiMapper.galleryImages(client.detailImages(contentId));
+            if (!photos.isEmpty()) {
+                SpotData d = result.data();
+                result = new TourApiMapper.Result(new SpotData(d.externalId(), d.name(), d.category(), d.region(),
+                        d.address(), d.latitude(), d.longitude(), photos.getFirst()), null);
+            }
+        }
+        TourApiMapper.Result mapped = result;
+        tx.executeWithoutResult(status -> upsert(List.of(items.getFirst()), item -> mapped, report));
     }
 
     private boolean nearWater(SpotData d) {

@@ -156,6 +156,15 @@ class TourApiSyncTest {
         if (q.containsKey("keyword")) {
             q.putIfAbsent("lclsSystm3", "keyword:" + q.get("keyword"));
         }
+        // detailCommon2 for a hand-picked place is filed as "place:<contentid>"; its id is renamed so that
+        // contentId keeps meaning a gallery request in the tests below
+        if (ex.getRequestURI().getPath().endsWith("/detailCommon2")) {
+            String id = q.remove("contentId");
+            q.put("placeId", id);
+            q.put("lclsSystm3", "place:" + id);
+            q.putIfAbsent("numOfRows", "100");
+            q.putIfAbsent("pageNo", "1");
+        }
         requests.add(q);
         Function<Map<String, String>, Answer> o = override;
         Answer a = o == null ? null : o.apply(q);
@@ -734,8 +743,40 @@ class TourApiSyncTest {
         assertThat(report.failed()).containsOnlyKeys("keyword 국궁", "keyword 양궁");
     }
 
+    @Test
+    void aHandPickedPlaceWithoutAMainPhotoTakesItsFirstGalleryPhoto() {
+        ObjectNode yeonmudae = fixture.get("FD050100").getFirst().deepCopy().put("contentid", "1064469")
+                .put("title", "연무대(동장대)").put("firstimage", "")
+                .put("lclsSystm1", "HS").put("lclsSystm2", "HS01").put("lclsSystm3", "HS010100");
+        fixture.put("place:1064469", new ArrayList<>(List.of(yeonmudae)));
+
+        SyncReport report = sync.sync();
+
+        assertThat(report.failed()).isEmpty();
+        assertThat(report.created()).isEqualTo(ITEMS + 1);
+        Spot spot = byExternalId("1064469");
+        assertThat(spot.getCategory()).isEqualTo(SpotCategory.LEISURE);
+        // the recorded gallery's first licensed photo
+        assertThat(spot.getThumbnailUrl()).startsWith("https://tong.visitkorea.or.kr/");
+        assertThat(galleryRequests()).isEqualTo(1);
+
+        SyncReport second = sync.sync();
+        assertThat(second.created()).isZero();
+        assertThat(second.updated()).isZero();
+    }
+
+    @Test
+    void aHandPickedPlaceTourApiNoLongerHasIsSkipped() {
+        SyncReport report = sync.sync();
+
+        assertThat(report.failed()).isEmpty();
+        assertThat(report.skipped()).isEmpty();
+        assertThat(report.created()).isEqualTo(ITEMS);
+        assertThat(spotRepository.findAll()).noneMatch(sp -> "1064469".equals(sp.getExternalId()));
+    }
+
     private static int keywords() {
-        return TourApiMapper.KEYWORDS.size();
+        return TourApiMapper.KEYWORDS.size() + TourApiMapper.PLACES.size();
     }
 
     // the fixture has no leisure items: each leisure code costs one empty page, before the stays

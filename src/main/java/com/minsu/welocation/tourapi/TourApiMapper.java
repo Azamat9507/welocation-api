@@ -58,6 +58,10 @@ final class TourApiMapper {
     record Keyword(SpotCategory category, String titleMustContain) {
     }
 
+    // Single places picked by hand (contentid -> category) whose own code is too broad to sync whole.
+    // 1064469 연무대(동장대), 수원화성: a 200-year-old 활터 by TourAPI's own description, filed under 고궁.
+    static final Map<String, SpotCategory> PLACES = Map.of("1064469", SpotCategory.LEISURE);
+
     // 공공누리 type 1 and 3 allow reuse with attribution; anything else (or no type) we don't store
     private static final Set<String> IMAGE_LICENSES = Set.of("Type1", "Type3");
 
@@ -90,6 +94,12 @@ final class TourApiMapper {
         }
         SpotCategory byCode = CATEGORIES.get(item.path("lclsSystm3").asString(""));
         return map(item, byCode != null ? byCode : keyword.category());
+    }
+
+    // A hand-picked place from detailCommon2. As with keywords, a code we sync anyway keeps its category.
+    static Result mapPlace(JsonNode item, SpotCategory category) {
+        SpotCategory byCode = CATEGORIES.get(item.path("lclsSystm3").asString(""));
+        return map(item, byCode != null ? byCode : category);
     }
 
     private static Result map(JsonNode item, SpotCategory category) {

@@ -82,6 +82,20 @@ class TourApiClient {
         return fetch(uri, where, props.maxAttempts());
     }
 
+    // One place by contentid (detailCommon2): the same list fields as areaBasedList2, plus the overview
+    Page detailCommon(String contentId) {
+        String where = "detailCommon2 " + TourApiMapper.clean(contentId, 20) + " page 1";
+        URI uri = UriComponentsBuilder.fromUriString(props.baseUrl())
+                .path("/detailCommon2")
+                .queryParam("serviceKey", "{key}")
+                .queryParam("MobileOS", "ETC")
+                .queryParam("MobileApp", "WeLocation")
+                .queryParam("_type", "json")
+                .queryParam("contentId", "{id}")
+                .encode().buildAndExpand(requestKey(props.key()), contentId).toUri();
+        return fetch(uri, where, props.maxAttempts());
+    }
+
     // The photo gallery of one place. Only originals; imageYN=Y leaves out food menu pictures.
     List<JsonNode> detailImages(String contentId) {
         String where = "detailImage2 " + TourApiMapper.clean(contentId, 20) + " page 1";
