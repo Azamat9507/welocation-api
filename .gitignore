@@ -6,3 +6,4 @@ out/
 bin/
 .DS_Store
 .env
+/photos/

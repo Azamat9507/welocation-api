@@ -2,13 +2,10 @@ package com.minsu.welocation.spot;
 
 import com.minsu.welocation.auth.CurrentUser;
 import com.minsu.welocation.common.BadRequestException;
-import com.minsu.welocation.common.ForbiddenException;
 import com.minsu.welocation.common.NotFoundException;
 import com.minsu.welocation.common.PageParams;
 import com.minsu.welocation.common.PageResponse;
 import com.minsu.welocation.spot.SpotDtos.ShortsItem;
-import com.minsu.welocation.user.Role;
-import com.minsu.welocation.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,7 +21,7 @@ import java.time.Instant;
 public class ShortsService {
 
     private final SpotRepository spotRepository;
-    private final UserRepository userRepository;
+    private final AdminGuard adminGuard;
 
     public PageResponse<ShortsItem> feed(PageParams params) {
         PageRequest pageable = PageRequest.of(params.pageOrDefault(), params.sizeOrDefault(),
@@ -53,11 +50,7 @@ public class ShortsService {
                 .orElseThrow(() -> new NotFoundException("spot " + spotId + " not found"));
     }
 
-    // read from the database, not the token: a demoted admin must lose this right immediately
     private void requireAdmin(CurrentUser me) {
-        boolean admin = userRepository.findById(me.id()).map(user -> user.getRole() == Role.ADMIN).orElse(false);
-        if (!admin) {
-            throw new ForbiddenException("admins only");
-        }
+        adminGuard.require(me);
     }
 }

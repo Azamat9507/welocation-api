@@ -12,6 +12,17 @@ import java.util.Optional;
 
 public interface SpotRepository extends JpaRepository<Spot, Long>, JpaSpecificationExecutor<Spot> {
 
+    // the admin's list of places added by hand, newest first
+    Page<Spot> findBySource(SpotSource source, Pageable pageable);
+
+    // anything visitors left on a spot; such a spot is not deleted, its reviews would point at nothing
+    @Query(value = """
+            SELECT EXISTS (SELECT 1 FROM reviews WHERE spot_id = :id)
+                OR EXISTS (SELECT 1 FROM spot_likes WHERE spot_id = :id)
+                OR EXISTS (SELECT 1 FROM bookmarks WHERE spot_id = :id)
+            """, nativeQuery = true)
+    long hasVisitorData(long id);
+
     // the /shorts feed; idx_spots_shorts_added_at covers the filter and the order
     Page<Spot> findByShortsAddedAtIsNotNull(Pageable pageable);
 
@@ -69,11 +80,12 @@ public interface SpotRepository extends JpaRepository<Spot, Long>, JpaSpecificat
             FROM spots s
             WHERE (:region IS NULL OR s.region = :region)
               AND (:category IS NULL OR s.category = :category)
+              AND (:activity IS NULL OR s.activity = :activity)
               AND (:nameLike IS NULL OR s.name LIKE :nameLike)
             ORDER BY s.like_count DESC, s.has_image DESC, s.id DESC
             LIMIT :limit
             """, nativeQuery = true)
-    List<Candidate> findCandidates(String region, String category, String nameLike, int limit);
+    List<Candidate> findCandidates(String region, String category, String activity, String nameLike, int limit);
 
     // Coordinates of every spot matching the filters, for the AI guide's "near a beach" search. Filtering pairs in
     // SQL was tried first: MySQL hash-joined all cafés with all beaches and computed ST_Distance_Sphere for each of the
@@ -84,9 +96,10 @@ public interface SpotRepository extends JpaRepository<Spot, Long>, JpaSpecificat
             FROM spots s
             WHERE (:region IS NULL OR s.region = :region)
               AND (:category IS NULL OR s.category = :category)
+              AND (:activity IS NULL OR s.activity = :activity)
               AND (:nameLike IS NULL OR s.name LIKE :nameLike)
             """, nativeQuery = true)
-    List<Located> findLocated(String region, String category, String nameLike);
+    List<Located> findLocated(String region, String category, String activity, String nameLike);
 
     interface Candidate {
         Long getId();

@@ -93,7 +93,7 @@ public class TourApiSyncService {
                 run(label, report, () -> syncPages(pageNo -> client.searchKeyword(k.getKey(), pageNo),
                         item -> TourApiMapper.mapKeyword(item, k.getValue()), report));
             }
-            for (Map.Entry<String, SpotCategory> place : new TreeMap<>(TourApiMapper.PLACES).entrySet()) {
+            for (Map.Entry<String, TourApiMapper.Place> place : new TreeMap<>(TourApiMapper.PLACES).entrySet()) {
                 String label = "place " + place.getKey();
                 if (Thread.currentThread().isInterrupted()) {
                     report.failed.put(label, "not started, shutting down");
@@ -198,19 +198,19 @@ public class TourApiSyncService {
 
     // One request, two when TourAPI has no main photo for the place: then its first licensed gallery photo is used,
     // so the place is not shown without a picture and the nightly gallery run (main photo required) picks it up.
-    private void syncPlace(String contentId, SpotCategory category, SyncReport report) {
+    private void syncPlace(String contentId, TourApiMapper.Place place, SyncReport report) {
         List<JsonNode> items = client.detailCommon(contentId).items();
         if (items.isEmpty()) {
             // a spot stored earlier stays, as everywhere else; the list in TourApiMapper.PLACES needs a look
             log.warn("TourAPI place {} not found", contentId);
             return;
         }
-        TourApiMapper.Result result = TourApiMapper.mapPlace(items.getFirst(), category);
+        TourApiMapper.Result result = TourApiMapper.mapPlace(items.getFirst(), place);
         if (result.data() != null && result.data().imageUrl() == null) {
             List<String> photos = TourApiMapper.galleryImages(client.detailImages(contentId));
             if (!photos.isEmpty()) {
                 SpotData d = result.data();
-                result = new TourApiMapper.Result(new SpotData(d.externalId(), d.name(), d.category(), d.region(),
+                result = new TourApiMapper.Result(new SpotData(d.externalId(), d.name(), d.category(), d.activity(), d.region(),
                         d.address(), d.latitude(), d.longitude(), photos.getFirst()), null);
             }
         }
@@ -248,12 +248,13 @@ public class TourApiSyncService {
             if (spot == null) {
                 spot = new Spot(d.name(), d.category(), d.region(), d.address(), d.latitude(), d.longitude(),
                         SpotSource.TOURAPI, d.externalId());
+                spot.setActivity(d.activity());
                 if (d.imageUrl() != null) {
                     spot.addImage(d.imageUrl());
                 }
                 spots.save(spot);
                 report.created++;
-            } else if (spot.updateFromSource(d.name(), d.category(), d.region(), d.address(),
+            } else if (spot.updateFromSource(d.name(), d.category(), d.activity(), d.region(), d.address(),
                     d.latitude(), d.longitude(), d.imageUrl())) {
                 report.updated++;
             } else {

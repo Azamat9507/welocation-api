@@ -1,6 +1,7 @@
 package com.minsu.welocation.tourapi;
 
 import com.minsu.welocation.TestcontainersConfig;
+import com.minsu.welocation.spot.Activity;
 import com.minsu.welocation.spot.Region;
 import com.minsu.welocation.spot.Spot;
 import com.minsu.welocation.spot.SpotCategory;
@@ -720,11 +721,13 @@ class TourApiSyncTest {
         assertThat(first.created()).isEqualTo(ITEMS + 3);
         assertThat(first.skipped()).containsOnly(entry("keyword title", 1));
         assertThat(byExternalId("9900201").getCategory()).isEqualTo(SpotCategory.LEISURE);
+        assertThat(byExternalId("9900201").getActivity()).isEqualTo(Activity.ARCHERY);
         assertThat(byExternalId("9900203").getCategory()).isEqualTo(SpotCategory.LEISURE);
         assertThat(byExternalId("9900204").getCategory()).isEqualTo(SpotCategory.CAFE);
+        assertThat(byExternalId("9900204").getActivity()).isNull();
         assertThat(spotRepository.findAll()).noneMatch(sp -> "9900202".equals(sp.getExternalId()));
         assertThat(requests).filteredOn(q -> q.containsKey("keyword")).extracting(q -> q.get("keyword"))
-                .containsExactly("국궁", "양궁");
+                .containsExactly("국궁", "서바이벌", "양궁");
 
         SyncReport second = sync.sync();
 
@@ -740,7 +743,34 @@ class TourApiSyncTest {
         SyncReport report = sync.sync();
 
         assertThat(report.created()).isEqualTo(ITEMS);
-        assertThat(report.failed()).containsOnlyKeys("keyword 국궁", "keyword 양궁");
+        assertThat(report.failed()).containsOnlyKeys("keyword 국궁", "keyword 서바이벌", "keyword 양궁");
+    }
+
+    @Test
+    void leisureSpotsGetTheirActivityAndASurvivalGameFoundByKeywordKeepsItsOwnCode() {
+        ObjectNode template = fixture.get("FD050100").getFirst();
+        ObjectNode kart = template.deepCopy().put("contentid", "9900301").put("title", "카트랜드")
+                .put("lclsSystm1", "LS").put("lclsSystm2", "LS01").put("lclsSystm3", "LS010300");
+        fixture.put("LS010300", new ArrayList<>(List.of(kart)));
+        // a laser tag hall under 체험 and a rafting company that also runs a survival game
+        ObjectNode laser = template.deepCopy().put("contentid", "9900302").put("title", "레이저 태그 서바이벌")
+                .put("lclsSystm1", "EX").put("lclsSystm2", "EX07").put("lclsSystm3", "EX070200");
+        ObjectNode rafting = template.deepCopy().put("contentid", "9900303").put("title", "래프팅 ATV 서바이벌")
+                .put("lclsSystm1", "LS").put("lclsSystm2", "LS02").put("lclsSystm3", "LS020800");
+        fixture.put("keyword:서바이벌", new ArrayList<>(List.of(laser, rafting)));
+
+        SyncReport first = sync.sync();
+
+        assertThat(first.failed()).isEmpty();
+        assertThat(byExternalId("9900301").getActivity()).isEqualTo(Activity.KART);
+        assertThat(byExternalId("9900302").getCategory()).isEqualTo(SpotCategory.LEISURE);
+        assertThat(byExternalId("9900302").getActivity()).isEqualTo(Activity.SURVIVAL);
+        assertThat(byExternalId("9900303").getActivity()).isEqualTo(Activity.RAFTING);
+
+        SyncReport second = sync.sync();
+
+        assertThat(second.created()).isZero();
+        assertThat(second.updated()).isZero();
     }
 
     @Test
@@ -756,6 +786,7 @@ class TourApiSyncTest {
         assertThat(report.created()).isEqualTo(ITEMS + 1);
         Spot spot = byExternalId("1064469");
         assertThat(spot.getCategory()).isEqualTo(SpotCategory.LEISURE);
+        assertThat(spot.getActivity()).isEqualTo(Activity.ARCHERY);
         // the recorded gallery's first licensed photo
         assertThat(spot.getThumbnailUrl()).startsWith("https://tong.visitkorea.or.kr/");
         assertThat(galleryRequests()).isEqualTo(1);

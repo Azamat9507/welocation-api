@@ -55,7 +55,7 @@ class GuideServiceTest {
                     new AssistantMessage.ToolCall("1", "function", "searchSpots", "{}"))).build())));
         };
         SpotRepository spots = mock(SpotRepository.class);
-        when(spots.findCandidates(any(), any(), any(), anyInt())).thenReturn(List.of());
+        when(spots.findCandidates(any(), any(), any(), any(), anyInt())).thenReturn(List.of());
         GuideService service = new GuideService(slow, ToolCallingManager.builder().build(), spots,
                 mock(SpotService.class), mock(GuideQuota.class), properties(Duration.ofMillis(800), Duration.ofMillis(500)));
 
@@ -103,11 +103,11 @@ class GuideServiceTest {
     @Test
     void databaseErrorsReachTheModelOnlyAsAPlainMessage() {
         SpotRepository spots = mock(SpotRepository.class);
-        when(spots.findCandidates(any(), any(), any(), anyInt()))
+        when(spots.findCandidates(any(), any(), any(), any(), anyInt()))
                 .thenThrow(new QueryTimeoutException("SELECT s.id FROM spots s WHERE secret_column = 1"));
         SpotSearchTool tool = new SpotSearchTool(spots, mock(SpotService.class), 3);
 
-        assertThatThrownBy(() -> tool.searchSpots(null, null, null, null, null))
+        assertThatThrownBy(() -> tool.searchSpots(null, null, null, null, null, null))
                 .hasMessage("search failed; answer with the spots already found");
     }
 
@@ -133,7 +133,7 @@ class GuideServiceTest {
     }
 
     static SpotSummary beach(long id, double lng) {
-        return new SpotSummary(id, "beach " + id, SpotCategory.BEACH, Region.JEJU, "a", 33.3, lng, null, List.of(),
+        return new SpotSummary(id, "beach " + id, SpotCategory.BEACH, null, Region.JEJU, "a", 33.3, lng, null, List.of(),
                 0, 0, null);
     }
 
