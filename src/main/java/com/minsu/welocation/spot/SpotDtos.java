@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.List;
+import java.util.Map;
 
 public final class SpotDtos {
 
@@ -39,13 +40,21 @@ public final class SpotDtos {
 
     public record SpotSummary(Long id, String name, SpotCategory category, Activity activity, Region region,
                               String address, double latitude, double longitude, String thumbnailUrl,
-                              List<SpotTag> tags, int likeCount, long reviewCount, Double averageRating) {
+                              List<SpotTag> tags, int likeCount, long reviewCount, Double averageRating,
+                              List<String> photos) {
 
-        static SpotSummary from(Spot spot, Rating rating) {
+        // photos: the first few gallery images (thumbnail first) for cards that flip through them
+        static SpotSummary from(Spot spot, Rating rating, List<String> photos) {
             return new SpotSummary(spot.getId(), spot.getName(), spot.getCategory(), spot.getActivity(), spot.getRegion(),
                     spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getThumbnailUrl(),
-                    spot.getTags().stream().sorted().toList(), spot.getLikeCount(), rating.count(), rating.average());
+                    spot.getTags().stream().sorted().toList(), spot.getLikeCount(), rating.count(), rating.average(),
+                    photos);
         }
+    }
+
+    // Every spot as a dot for the home page map: coordinates rounded to 3 decimals (about 100 m), grouped by
+    // category so the page can draw one path per colour, plus the number of spots in each region.
+    public record SpotMap(int total, Map<SpotCategory, List<double[]>> points, Map<Region, Long> regions) {
     }
 
     // average is null while a spot has no reviews, so "no rating yet" can't be mistaken for 0 stars

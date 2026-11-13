@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,6 +101,36 @@ public interface SpotRepository extends JpaRepository<Spot, Long>, JpaSpecificat
               AND (:nameLike IS NULL OR s.name LIKE :nameLike)
             """, nativeQuery = true)
     List<Located> findLocated(String region, String category, String activity, String nameLike);
+
+    // the home page map: every spot, four columns, about 3.7k rows
+    @Query(value = "SELECT s.category AS category, s.region AS region, s.latitude AS latitude, s.longitude AS longitude FROM spots s",
+            nativeQuery = true)
+    List<MapPoint> findMapPoints();
+
+    // the first `limit` gallery images of each spot on a list page, in one query instead of one per card
+    @Query(value = """
+            SELECT i.spot_id AS spotId, i.url AS url
+            FROM spot_images i
+            WHERE i.spot_id IN (:spotIds) AND i.sort_order < :limit
+            ORDER BY i.spot_id, i.sort_order
+            """, nativeQuery = true)
+    List<Photo> findFirstPhotos(Collection<Long> spotIds, int limit);
+
+    interface MapPoint {
+        String getCategory();
+
+        String getRegion();
+
+        double getLatitude();
+
+        double getLongitude();
+    }
+
+    interface Photo {
+        Long getSpotId();
+
+        String getUrl();
+    }
 
     interface Candidate {
         Long getId();

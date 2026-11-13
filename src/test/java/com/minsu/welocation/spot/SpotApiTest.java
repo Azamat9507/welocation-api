@@ -11,9 +11,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -60,6 +62,40 @@ class SpotApiTest {
 
         mvc.perform(get("/api/spots").param("region", "BUSAN"))
                 .andExpect(jsonPath("$.totalElements").value(3));
+    }
+
+    @Test
+    void listsCarryTheFirstFourPhotosInOrder() throws Exception {
+        Spot many = new Spot("Gallery Beach", SpotCategory.BEACH, Region.JEJU, "a", 33.3, 126.5, SpotSource.MANUAL, null);
+        for (int i = 0; i < 6; i++) {
+            many.addImage("https://img.test/" + i + ".jpg");
+        }
+        spotRepository.save(many);
+        save("No Photo Cafe", SpotCategory.CAFE, Region.JEJU);
+
+        mvc.perform(get("/api/spots").param("region", "JEJU"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items[0].name").value("Gallery Beach"))
+                .andExpect(jsonPath("$.items[0].photos", contains("https://img.test/0.jpg", "https://img.test/1.jpg",
+                        "https://img.test/2.jpg", "https://img.test/3.jpg")))
+                .andExpect(jsonPath("$.items[1].photos", hasSize(0)));
+    }
+
+    @Test
+    void mapGroupsRoundedDotsByCategoryAndCountsRegions() throws Exception {
+        spotRepository.save(new Spot("Dot Beach", SpotCategory.BEACH, Region.BUSAN, "a", 35.158712, 129.160384, SpotSource.MANUAL, null));
+        save("Dot Cafe", SpotCategory.CAFE, Region.BUSAN);
+        save("Dot Lake", SpotCategory.LAKE, Region.GANGWON);
+
+        mvc.perform(get("/api/spots/map"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("Cache-Control", containsString("max-age=3600")))
+                .andExpect(jsonPath("$.total").value(3))
+                .andExpect(jsonPath("$.points.BEACH[0][0]").value(35.159))
+                .andExpect(jsonPath("$.points.BEACH[0][1]").value(129.16))
+                .andExpect(jsonPath("$.points.CAFE", hasSize(1)))
+                .andExpect(jsonPath("$.regions.BUSAN").value(2))
+                .andExpect(jsonPath("$.regions.GANGWON").value(1));
     }
 
     @Test

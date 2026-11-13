@@ -120,8 +120,8 @@ class QueryCountTest {
             reviewRepository.save(new Review(spot, author, 4, "good"));
         }
 
-        // page of spots + count + tags for the whole page + ratings for the whole page
-        assertThat(statementsFor("/api/spots?size=" + ROWS)).isEqualTo(4);
+        // page of spots + count + tags, ratings and card photos for the whole page
+        assertThat(statementsFor("/api/spots?size=" + ROWS)).isEqualTo(5);
     }
 
     @Test
@@ -135,7 +135,7 @@ class QueryCountTest {
         }
         String token = "Bearer " + tokenService.issue(me).accessToken();
 
-        // page of bookmarks joined with spots + count + tags for the whole page + ratings for the whole page
-        assertThat(statementsFor(token, "/api/me/bookmarks?size=" + ROWS)).isEqualTo(4);
+        // page of bookmarks joined with spots + count + tags, ratings and card photos for the whole page
+        assertThat(statementsFor(token, "/api/me/bookmarks?size=" + ROWS)).isEqualTo(5);
     }
 }

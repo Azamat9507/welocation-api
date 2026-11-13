@@ -134,7 +134,7 @@ class GuideServiceTest {
 
     static SpotSummary beach(long id, double lng) {
         return new SpotSummary(id, "beach " + id, SpotCategory.BEACH, null, Region.JEJU, "a", 33.3, lng, null, List.of(),
-                0, 0, null);
+                0, 0, null, List.of());
     }
 
     @Test
