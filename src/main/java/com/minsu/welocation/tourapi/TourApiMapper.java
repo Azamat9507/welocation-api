@@ -48,6 +48,16 @@ final class TourApiMapper {
         CATEGORIES = Map.copyOf(m);
     }
 
+    // Things with no lclsSystm3 code of their own, found by searchKeyword2 instead. TourAPI files archery ranges
+    // under 기타육상레저스포츠 and 스포츠경기장, both far too broad to sync whole. Keyword search also matches
+    // inside words (국궁 in 한국궁중꽃박물관), so an item is kept only when its title names the place itself.
+    static final Map<String, Keyword> KEYWORDS = Map.of(
+            "국궁", new Keyword(SpotCategory.LEISURE, "국궁장"),
+            "양궁", new Keyword(SpotCategory.LEISURE, "양궁장"));
+
+    record Keyword(SpotCategory category, String titleMustContain) {
+    }
+
     // 공공누리 type 1 and 3 allow reuse with attribution; anything else (or no type) we don't store
     private static final Set<String> IMAGE_LICENSES = Set.of("Type1", "Type3");
 
@@ -69,11 +79,24 @@ final class TourApiMapper {
     }
 
     static Result map(JsonNode item) {
+        return map(item, CATEGORIES.get(item.path("lclsSystm3").asString("")));
+    }
+
+    // An item found by keyword. If its code is one we sync anyway, that code's category wins, so the two
+    // runs of one night never flip a spot back and forth.
+    static Result mapKeyword(JsonNode item, Keyword keyword) {
+        if (!clean(item.path("title").asString(""), 200).contains(keyword.titleMustContain())) {
+            return Result.skip("keyword title");
+        }
+        SpotCategory byCode = CATEGORIES.get(item.path("lclsSystm3").asString(""));
+        return map(item, byCode != null ? byCode : keyword.category());
+    }
+
+    private static Result map(JsonNode item, SpotCategory category) {
         String contentId = item.path("contentid").asString("").strip();
         if (!contentId.matches("\\d{1,20}")) {
             return Result.skip("bad contentid");
         }
-        SpotCategory category = CATEGORIES.get(item.path("lclsSystm3").asString(""));
         if (category == null) {
             return Result.skip("category");
         }

@@ -119,4 +119,19 @@ class TourApiMapperTest {
         assertThat(cut.codePointCount(0, cut.length())).isEqualTo(200);
         assertThat(cut).endsWith("😀");
     }
+
+    @Test
+    void keywordItemsNeedThePlaceInTheTitle() {
+        TourApiMapper.Keyword archery = TourApiMapper.KEYWORDS.get("양궁");
+
+        ObjectNode range = item().put("title", "예천 진호국제양궁장").put("lclsSystm3", "VE100100");
+        assertThat(TourApiMapper.mapKeyword(range, archery).data().category()).isEqualTo(SpotCategory.LEISURE);
+
+        ObjectNode unrelated = item().put("title", "양궁 체험 카페").put("lclsSystm3", "VE100100");
+        assertThat(TourApiMapper.mapKeyword(unrelated, archery).skipReason()).isEqualTo("keyword title");
+
+        // a code we sync anyway keeps its own category
+        ObjectNode beach = item().put("title", "양궁장 해변");
+        assertThat(TourApiMapper.mapKeyword(beach, archery).data().category()).isEqualTo(SpotCategory.BEACH);
+    }
 }

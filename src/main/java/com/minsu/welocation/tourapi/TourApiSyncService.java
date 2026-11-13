@@ -17,8 +17,10 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
 // Pulls the whitelisted categories from TourAPI and upserts them by contentid. It never deletes or
@@ -78,15 +80,18 @@ public class TourApiSyncService {
                     report.failed.put(code, "not started, shutting down");
                     continue;
                 }
-                try {
-                    syncCategory(code, report);
-                } catch (RuntimeException e) {
-                    // Pages already written stay; the next night picks up the rest. Only our own
-                    // exception's message is known to be safe to log, others get their class name.
-                    String reason = e instanceof TourApiException ? e.getMessage() : e.getClass().getSimpleName();
-                    report.failed.put(code, reason);
-                    log.warn("TourAPI sync of {} stopped: {}", code, reason);
+                run(code, report, () -> syncPages(pageNo -> client.areaBasedList(code, pageNo),
+                        TourApiMapper::map, report));
+            }
+            // keywords last: they are optional extras, and a used-up quota should cost the categories nothing
+            for (Map.Entry<String, TourApiMapper.Keyword> k : new TreeMap<>(TourApiMapper.KEYWORDS).entrySet()) {
+                String label = "keyword " + k.getKey();
+                if (Thread.currentThread().isInterrupted()) {
+                    report.failed.put(label, "not started, shutting down");
+                    continue;
                 }
+                run(label, report, () -> syncPages(pageNo -> client.searchKeyword(k.getKey(), pageNo),
+                        item -> TourApiMapper.mapKeyword(item, k.getValue()), report));
             }
             log.info("TourAPI sync finished: {}", report);
             return report;
@@ -156,15 +161,28 @@ public class TourApiSyncService {
         }
     }
 
-    private void syncCategory(String code, SyncReport report) {
+    private static void run(String label, SyncReport report, Runnable job) {
+        try {
+            job.run();
+        } catch (RuntimeException e) {
+            // Pages already written stay; the next night picks up the rest. Only our own
+            // exception's message is known to be safe to log, others get their class name.
+            String reason = e instanceof TourApiException ? e.getMessage() : e.getClass().getSimpleName();
+            report.failed.put(label, reason);
+            log.warn("TourAPI sync of {} stopped: {}", label, reason);
+        }
+    }
+
+    private void syncPages(IntFunction<TourApiClient.Page> fetch, Function<JsonNode, TourApiMapper.Result> mapper,
+                           SyncReport report) {
         int pageNo = 1;
         int pages;
         do {
-            TourApiClient.Page page = client.areaBasedList(code, pageNo);
+            TourApiClient.Page page = fetch.apply(pageNo);
             if (page.items().isEmpty()) {
                 return;
             }
-            tx.executeWithoutResult(status -> upsert(page.items(), report));
+            tx.executeWithoutResult(status -> upsert(page.items(), mapper, report));
             pages = (page.totalCount() + props.pageSize() - 1) / props.pageSize();
             pageNo++;
         } while (pageNo <= Math.min(pages, MAX_PAGES));
@@ -176,10 +194,10 @@ public class TourApiSyncService {
                 SpotService.boundingBox(d.latitude(), d.longitude(), km)) == 1;
     }
 
-    private void upsert(List<JsonNode> items, SyncReport report) {
+    private void upsert(List<JsonNode> items, Function<JsonNode, TourApiMapper.Result> mapper, SyncReport report) {
         Map<String, SpotData> incoming = new LinkedHashMap<>();
         for (JsonNode item : items) {
-            TourApiMapper.Result result = TourApiMapper.map(item);
+            TourApiMapper.Result result = mapper.apply(item);
             if (result.data() == null) {
                 report.skipped.merge(result.skipReason(), 1, Integer::sum);
             } else if (result.data().category() == SpotCategory.STAY && !nearWater(result.data())) {

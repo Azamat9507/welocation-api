@@ -151,6 +151,11 @@ class TourApiSyncTest {
             String[] kv = pair.split("=", 2);
             q.put(kv[0], URLDecoder.decode(kv.length > 1 ? kv[1] : "", StandardCharsets.UTF_8));
         }
+        // keyword searches are filed in the fixture as "keyword:<word>"; giving them that code here also keeps
+        // the per-test overrides, which look at lclsSystm3, working for them
+        if (q.containsKey("keyword")) {
+            q.putIfAbsent("lclsSystm3", "keyword:" + q.get("keyword"));
+        }
         requests.add(q);
         Function<Map<String, String>, Answer> o = override;
         Answer a = o == null ? null : o.apply(q);
@@ -233,7 +238,8 @@ class TourApiSyncTest {
         assertThat(first.created()).isEqualTo(ITEMS);
         assertThat(spotRepository.count()).isEqualTo(ITEMS);
         // 5 items at 2 per page is 3 pages for every category, plus one empty page for each stay and leisure code
-        assertThat(requests).hasSize(5 * 3 + 4 + leisureCodes());
+        // and each keyword
+        assertThat(requests).hasSize(5 * 3 + 4 + leisureCodes() + keywords());
         assertThat(requests).allSatisfy(q -> assertThat(q.get("serviceKey")).isEqualTo(KEY));
 
         SyncReport second = sync.sync();
@@ -682,6 +688,54 @@ class TourApiSyncTest {
         // the far hotel has a photo too, but it was never stored
         assertThat(requests).noneMatch(q -> "9900103".equals(q.get("contentId")));
         tx.executeWithoutResult(st -> assertThat(byExternalId("9900101").getImages()).hasSize(10));
+    }
+
+    @Test
+    void keywordSearchAddsArcheryRangesAndOnlyThem() {
+        ObjectNode template = fixture.get("FD050100").getFirst();
+        // a 양궁장 filed under 스포츠경기장, a museum whose name merely contains 국궁, and a café that the keyword
+        // also finds: the café keeps its own category
+        ObjectNode range = template.deepCopy().put("contentid", "9900201").put("title", "원주양궁장")
+                .put("lclsSystm1", "VE").put("lclsSystm2", "VE10").put("lclsSystm3", "VE100200");
+        ObjectNode museum = template.deepCopy().put("contentid", "9900202").put("title", "한국궁중꽃박물관")
+                .put("lclsSystm1", "VE").put("lclsSystm2", "VE07").put("lclsSystm3", "VE070100");
+        ObjectNode bow = template.deepCopy().put("contentid", "9900203").put("title", "옥순정 국궁장")
+                .put("lclsSystm1", "LS").put("lclsSystm2", "LS01").put("lclsSystm3", "LS011900");
+        ObjectNode cafe = template.deepCopy().put("contentid", "9900204").put("title", "양궁장 앞 카페");
+        fixture.put("keyword:양궁", new ArrayList<>(List.of(range, cafe)));
+        fixture.put("keyword:국궁", new ArrayList<>(List.of(museum, bow)));
+
+        SyncReport first = sync.sync();
+
+        assertThat(first.failed()).isEmpty();
+        assertThat(first.created()).isEqualTo(ITEMS + 3);
+        assertThat(first.skipped()).containsOnly(entry("keyword title", 1));
+        assertThat(byExternalId("9900201").getCategory()).isEqualTo(SpotCategory.LEISURE);
+        assertThat(byExternalId("9900203").getCategory()).isEqualTo(SpotCategory.LEISURE);
+        assertThat(byExternalId("9900204").getCategory()).isEqualTo(SpotCategory.CAFE);
+        assertThat(spotRepository.findAll()).noneMatch(sp -> "9900202".equals(sp.getExternalId()));
+        assertThat(requests).filteredOn(q -> q.containsKey("keyword")).extracting(q -> q.get("keyword"))
+                .containsExactly("국궁", "양궁");
+
+        SyncReport second = sync.sync();
+
+        assertThat(second.created()).isZero();
+        assertThat(second.updated()).isZero();
+        assertThat(byExternalId("9900204").getCategory()).isEqualTo(SpotCategory.CAFE);
+    }
+
+    @Test
+    void aFailingKeywordDoesNotStopTheCategories() {
+        override = q -> q.containsKey("keyword") ? new Answer(500, "down", 0) : null;
+
+        SyncReport report = sync.sync();
+
+        assertThat(report.created()).isEqualTo(ITEMS);
+        assertThat(report.failed()).containsOnlyKeys("keyword 국궁", "keyword 양궁");
+    }
+
+    private static int keywords() {
+        return TourApiMapper.KEYWORDS.size();
     }
 
     // the fixture has no leisure items: each leisure code costs one empty page, before the stays
