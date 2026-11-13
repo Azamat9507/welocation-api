@@ -4,6 +4,7 @@ import com.minsu.welocation.user.Role;
 import com.minsu.welocation.user.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public final class AuthDtos {
@@ -21,6 +22,20 @@ public final class AuthDtos {
     public record LoginRequest(
             @NotBlank @Size(max = 254) String email,
             @NotBlank @Size(max = 72) String password) {
+    }
+
+    // state and codeChallenge are made by the web server for each attempt and checked there on the way back
+    public record AuthorizeRequest(
+            @NotBlank @Size(min = 16, max = 128) @Pattern(regexp = "[A-Za-z0-9_-]+") String state,
+            @NotBlank @Size(min = 43, max = 128) @Pattern(regexp = "[A-Za-z0-9_-]+") String codeChallenge) {
+    }
+
+    public record AuthorizeResponse(String url) {
+    }
+
+    public record OAuthSignInRequest(
+            @NotBlank @Size(max = 2048) String code,
+            @NotBlank @Size(min = 43, max = 128) @Pattern(regexp = "[A-Za-z0-9._~-]+") String codeVerifier) {
     }
 
     public record TokenResponse(String accessToken, String tokenType, long expiresIn) {

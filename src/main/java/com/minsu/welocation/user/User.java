@@ -26,10 +26,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 254)
+    // null for a Kakao sign-up without an email
+    @Column(length = 254)
     private String email;
 
-    @Column(nullable = false, length = 100)
+    // null for users who only sign in with Google or Kakao; password login then never matches
+    @Column(length = 100)
     private String passwordHash;
 
     @Column(nullable = false, length = 30)
@@ -48,6 +50,15 @@ public class User {
         User user = new User();
         user.email = email;
         user.passwordHash = passwordHash;
+        user.nickname = nickname;
+        user.role = Role.USER;
+        return user;
+    }
+
+    // a user who signed up with Google or Kakao: no password; email only when the provider vouched for it
+    public static User fromProvider(String email, String nickname) {
+        User user = new User();
+        user.email = email;
         user.nickname = nickname;
         user.role = Role.USER;
         return user;
