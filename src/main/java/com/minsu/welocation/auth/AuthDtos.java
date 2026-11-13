@@ -1,5 +1,6 @@
 package com.minsu.welocation.auth;
 
+import com.minsu.welocation.user.Role;
 import com.minsu.welocation.user.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -25,10 +26,11 @@ public final class AuthDtos {
     public record TokenResponse(String accessToken, String tokenType, long expiresIn) {
     }
 
-    public record UserResponse(Long id, String email, String nickname) {
+    // admin only decides which screens the web shows; every admin action is checked again by the API
+    public record UserResponse(Long id, String email, String nickname, boolean admin) {
 
         static UserResponse from(User user) {
-            return new UserResponse(user.getId(), user.getEmail(), user.getNickname());
+            return new UserResponse(user.getId(), user.getEmail(), user.getNickname(), user.getRole() == Role.ADMIN);
         }
     }
 }

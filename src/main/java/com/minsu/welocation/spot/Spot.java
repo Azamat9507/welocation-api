@@ -101,6 +101,12 @@ public class Spot {
     // last TourAPI gallery fetch; null until fetched, and again whenever the main photo changes
     private Instant gallerySyncedAt;
 
+    // YouTube Shorts id chosen by an admin; the TourAPI sync never touches it
+    @Column(length = 11)
+    private String shortsVideoId;
+
+    private Instant shortsAddedAt;
+
     @OneToMany(mappedBy = "spot", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("sortOrder")
     private List<SpotImage> images = new ArrayList<>();
@@ -139,6 +145,12 @@ public class Spot {
         if (thumbnailUrl == null) {
             thumbnailUrl = url;
         }
+    }
+
+    // null removes the video
+    public void setShorts(String videoId, Instant now) {
+        this.shortsVideoId = videoId;
+        this.shortsAddedAt = videoId == null ? null : now;
     }
 
     // For spots owned by an outside source (TourAPI): overwrite with what the source says now.

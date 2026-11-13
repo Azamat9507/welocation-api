@@ -4,6 +4,7 @@ import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -58,15 +59,29 @@ public final class SpotDtos {
 
     public record SpotDetail(Long id, String name, SpotCategory category, Region region, String address,
                              double latitude, double longitude, String description,
-                             List<SpotTag> tags, List<String> images, int likeCount, long reviewCount, Double averageRating) {
+                             List<SpotTag> tags, List<String> images, int likeCount, long reviewCount, Double averageRating,
+                             String shortsVideoId) {
 
         static SpotDetail from(Spot spot, Rating rating) {
             return new SpotDetail(spot.getId(), spot.getName(), spot.getCategory(), spot.getRegion(),
                     spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getDescription(),
                     spot.getTags().stream().sorted().toList(),
                     spot.getImages().stream().map(SpotImage::getUrl).toList(),
-                    spot.getLikeCount(), rating.count(), rating.average());
+                    spot.getLikeCount(), rating.count(), rating.average(), spot.getShortsVideoId());
         }
+    }
+
+    // one card of the /shorts feed
+    public record ShortsItem(Long id, String name, SpotCategory category, Region region, String address,
+                             String thumbnailUrl, String videoId) {
+
+        static ShortsItem from(Spot spot) {
+            return new ShortsItem(spot.getId(), spot.getName(), spot.getCategory(), spot.getRegion(),
+                    spot.getAddress(), spot.getThumbnailUrl(), spot.getShortsVideoId());
+        }
+    }
+
+    public record ShortsRequest(@NotBlank @Size(max = 200) String url) {
     }
 
     public record NearbySearch(
