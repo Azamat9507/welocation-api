@@ -421,8 +421,8 @@ class WeeklyRankingTest {
         statistics.clear();
         try {
             mvc.perform(get("/api/spots/ranking/weekly")).andExpect(jsonPath("$.items.length()").value(10));
-            // spots + tags for all of them + ratings for all of them; the order itself comes from Redis
-            assertThat(statistics.getPrepareStatementCount()).isEqualTo(3);
+            // spots + tags, ratings and card photos for all of them; the order itself comes from Redis
+            assertThat(statistics.getPrepareStatementCount()).isEqualTo(4);
         } finally {
             statistics.setStatisticsEnabled(false);
         }

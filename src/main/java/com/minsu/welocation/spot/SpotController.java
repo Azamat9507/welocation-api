@@ -4,18 +4,22 @@ import com.minsu.welocation.common.PageResponse;
 import com.minsu.welocation.spot.SpotDtos.NearbySearch;
 import com.minsu.welocation.spot.SpotDtos.NearbySpot;
 import com.minsu.welocation.spot.SpotDtos.SpotDetail;
+import com.minsu.welocation.spot.SpotDtos.SpotMap;
 import com.minsu.welocation.spot.SpotDtos.SpotSearch;
 import com.minsu.welocation.spot.SpotDtos.SpotSummary;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.http.CacheControl;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -36,6 +40,13 @@ public class SpotController {
     @GetMapping("/nearby")
     public List<NearbySpot> nearby(@Valid @ParameterObject @ModelAttribute NearbySearch search) {
         return spotService.nearby(search);
+    }
+
+    // public data that changes once a night, so browsers and the web server may keep it for an hour
+    @Operation(summary = "Every spot as a map dot (lat, lng rounded to 3 decimals) grouped by category, and spot counts per region")
+    @GetMapping("/map")
+    public ResponseEntity<SpotMap> map() {
+        return ResponseEntity.ok().cacheControl(CacheControl.maxAge(Duration.ofHours(1)).cachePublic()).body(spotService.map());
     }
 
     @Operation(summary = "Spot detail with tags and images")

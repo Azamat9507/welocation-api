@@ -7,6 +7,7 @@ import com.minsu.welocation.spot.SpotDtos.NearbySearch;
 import com.minsu.welocation.spot.SpotDtos.NearbySpot;
 import com.minsu.welocation.spot.SpotDtos.Rating;
 import com.minsu.welocation.spot.SpotDtos.SpotDetail;
+import com.minsu.welocation.spot.SpotDtos.SpotMap;
 import com.minsu.welocation.spot.SpotDtos.SpotSearch;
 import com.minsu.welocation.spot.SpotDtos.SpotSummary;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -41,17 +44,53 @@ public class SpotService {
         return summaries(spotRepository.findAll(SpotSpecs.matching(search.region(), search.category(), search.activity(), search.tag(), search.q()), pageable));
     }
 
-    // tags come in one batched query (Spot.tags) and ratings in one grouped query for the whole page
+    // tags come in one batched query (Spot.tags), ratings in one grouped query and card photos in one more,
+    // for the whole page
     public PageResponse<SpotSummary> summaries(Page<Spot> page) {
-        Map<Long, Rating> ratings = ratingsOf(page.map(Spot::getId).getContent());
-        return PageResponse.from(page.map(spot -> SpotSummary.from(spot, ratings.getOrDefault(spot.getId(), Rating.NONE))));
+        List<Long> ids = page.map(Spot::getId).getContent();
+        Map<Long, Rating> ratings = ratingsOf(ids);
+        Map<Long, List<String>> photos = photosOf(ids);
+        return PageResponse.from(page.map(spot -> summary(spot, ratings, photos)));
     }
 
     // for lists ordered somewhere else (the weekly ranking): the caller keeps its order and skips missing ids
     public Map<Long, SpotSummary> summariesById(List<Long> ids) {
         Map<Long, Rating> ratings = ratingsOf(ids);
+        Map<Long, List<String>> photos = photosOf(ids);
         return spotRepository.findAllById(ids).stream().collect(Collectors.toMap(
-                Spot::getId, spot -> SpotSummary.from(spot, ratings.getOrDefault(spot.getId(), Rating.NONE))));
+                Spot::getId, spot -> summary(spot, ratings, photos)));
+    }
+
+    private static SpotSummary summary(Spot spot, Map<Long, Rating> ratings, Map<Long, List<String>> photos) {
+        return SpotSummary.from(spot, ratings.getOrDefault(spot.getId(), Rating.NONE),
+                photos.getOrDefault(spot.getId(), List.of()));
+    }
+
+    // A card flips through at most this many photos; more would only add bytes to every list page
+    static final int CARD_PHOTOS = 4;
+
+    private Map<Long, List<String>> photosOf(List<Long> spotIds) {
+        if (spotIds.isEmpty()) {
+            return Map.of();
+        }
+        return spotRepository.findFirstPhotos(spotIds, CARD_PHOTOS).stream().collect(Collectors.groupingBy(
+                SpotRepository.Photo::getSpotId, Collectors.mapping(SpotRepository.Photo::getUrl, Collectors.toList())));
+    }
+
+    public SpotMap map() {
+        Map<SpotCategory, List<double[]>> points = new EnumMap<>(SpotCategory.class);
+        Map<Region, Long> regions = new EnumMap<>(Region.class);
+        List<SpotRepository.MapPoint> rows = spotRepository.findMapPoints();
+        for (SpotRepository.MapPoint row : rows) {
+            points.computeIfAbsent(SpotCategory.valueOf(row.getCategory()), c -> new ArrayList<>())
+                    .add(new double[] {round3(row.getLatitude()), round3(row.getLongitude())});
+            regions.merge(Region.valueOf(row.getRegion()), 1L, Long::sum);
+        }
+        return new SpotMap(rows.size(), points, regions);
+    }
+
+    private static double round3(double v) {
+        return Math.round(v * 1000) / 1000.0;
     }
 
     public SpotDetail get(Long id) {
