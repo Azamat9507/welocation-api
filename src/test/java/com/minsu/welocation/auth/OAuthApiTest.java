@@ -52,6 +52,7 @@ class OAuthApiTest {
     static final AtomicReference<String> lastTokenForm = new AtomicReference<>();
     static final AtomicInteger tokenStatus = new AtomicInteger(200);
     static final AtomicInteger ip = new AtomicInteger(1);
+    static final java.util.concurrent.atomic.AtomicBoolean mangle = new java.util.concurrent.atomic.AtomicBoolean();
 
     static {
         try {
@@ -62,7 +63,7 @@ class OAuthApiTest {
         PROVIDERS.createContext("/google/token", ex -> {
             lastTokenForm.set(new String(ex.getRequestBody().readAllBytes(), StandardCharsets.UTF_8));
             String payload = JsonMapper.builder().build().writeValueAsString(googleClaims);
-            String jwt = b64("{\"alg\":\"RS256\"}") + "." + b64(payload) + ".sig";
+            String jwt = b64("{\"alg\":\"RS256\"}") + "." + (mangle.get() ? "%%%not-base64%%%" : b64(payload)) + ".sig";
             reply(ex, tokenStatus.get(), "{\"access_token\":\"a\",\"id_token\":\"" + jwt + "\"}");
         });
         PROVIDERS.createContext("/kakao/token", ex -> {
@@ -194,7 +195,7 @@ class OAuthApiTest {
 
     @Test
     void googleSignsUpOnceAndSignsInAfterwards() throws Exception {
-        google("g-123", "Traveler@Example.com", true, "Kim Traveler");
+        google("g-123", "Traveler@Gmail.com", true, "Kim Traveler");
         long first = me(signIn("google"));
         assertThat(lastTokenForm.get()).contains("code_verifier=" + VERIFIER)
                 .contains("redirect_uri=https%3A%2F%2Fweb.test%2Fauth%2Fgoogle%2Fcallback");
@@ -202,27 +203,52 @@ class OAuthApiTest {
 
         assertThat(second).isEqualTo(first);
         var user = userRepository.findById(first).orElseThrow();
-        assertThat(user.getEmail()).isEqualTo("traveler@example.com");
+        assertThat(user.getEmail()).isEqualTo("traveler@gmail.com");
         assertThat(user.getNickname()).isEqualTo("Kim Traveler");
         assertThat(user.getPasswordHash()).isNull();
         assertThat(identityRepository.count()).isEqualTo(1);
 
         // no password, so password login can never get in
         mvc.perform(from(post("/api/auth/login")).contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"email\":\"traveler@example.com\",\"password\":\"anything-at-all\"}"))
+                        .content("{\"email\":\"traveler@gmail.com\",\"password\":\"anything-at-all\"}"))
                 .andExpect(status().isUnauthorized());
     }
 
     @Test
-    void aVerifiedEmailLinksToTheExistingAccount() throws Exception {
+    void aPasswordAccountIsNeverLinkedEvenWithAVerifiedEmail() throws Exception {
+        // someone signs up first with the victim's address; password signup never proved they own it
         mvc.perform(from(post("/api/auth/signup")).contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"email\":\"kim@example.com\",\"password\":\"password-123\",\"nickname\":\"kim\"}"))
+                        .content("{\"email\":\"kim@gmail.com\",\"password\":\"password-123\",\"nickname\":\"squatter\"}"))
                 .andExpect(status().isCreated());
-        long existing = userRepository.findByEmail("kim@example.com").orElseThrow().getId();
+        long squatter = userRepository.findByEmail("kim@gmail.com").orElseThrow().getId();
 
-        google("g-kim", "kim@example.com", true, "Kim");
-        assertThat(me(signIn("google"))).isEqualTo(existing);
-        assertThat(userRepository.count()).isEqualTo(1);
+        google("g-kim", "kim@gmail.com", true, "Kim");
+        long real = me(signIn("google"));
+
+        assertThat(real).isNotEqualTo(squatter);
+        assertThat(userRepository.findById(real).orElseThrow().getEmail()).isNull();
+    }
+
+    @Test
+    void googleAndKakaoForOnePersonShareAnAccount() throws Exception {
+        google("g-lee", "lee@gmail.com", true, "Lee");
+        long viaGoogle = me(signIn("google"));
+        kakaoUser.set("""
+                {"id": 5150, "kakao_account": {"email": "lee@gmail.com", "is_email_verified": true,
+                 "is_email_valid": true, "profile": {"nickname": "lee"}}}""");
+        assertThat(me(signIn("kakao"))).isEqualTo(viaGoogle);
+        assertThat(identityRepository.count()).isEqualTo(2);
+    }
+
+    @Test
+    void aGoogleEmailOutsideGmailIsNotTrustedForLinking() throws Exception {
+        kakaoUser.set("""
+                {"id": 6160, "kakao_account": {"email": "park@company.example", "is_email_verified": true,
+                 "is_email_valid": true, "profile": {"nickname": "park"}}}""");
+        long viaKakao = me(signIn("kakao"));
+        // verified by Google once, but not a Gmail or Workspace account: no proof the person still owns it
+        google("g-park", "park@company.example", true, "Park");
+        assertThat(me(signIn("google"))).isNotEqualTo(viaKakao);
     }
 
     @Test
@@ -269,11 +295,26 @@ class OAuthApiTest {
                         .content("{\"code\":\"c\",\"codeVerifier\":\"" + VERIFIER + "\"}"))
                 .andExpect(status().isBadRequest());
 
-        google("g-1", "a@example.com", true, "A");
+        googleClaims.clear();
+        googleClaims.put("iss", "https://accounts.google.com");
         tokenStatus.set(400);
         mvc.perform(from(post("/api/auth/oauth/google")).contentType(MediaType.APPLICATION_JSON)
                         .content("{\"code\":\"c\",\"codeVerifier\":\"" + VERIFIER + "\"}"))
                 .andExpect(status().isBadRequest());
         assertThat(userRepository.count()).isZero();
+    }
+
+    @Test
+    void aMangledIdTokenIsAClientErrorNotACrash() throws Exception {
+        google("g-1", "a@gmail.com", true, "A");
+        // the token endpoint answers, but the ID token's middle part is not base64
+        mangle.set(true);
+        try {
+            mvc.perform(from(post("/api/auth/oauth/google")).contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"code\":\"c\",\"codeVerifier\":\"" + VERIFIER + "\"}"))
+                    .andExpect(status().is(org.hamcrest.Matchers.anyOf(org.hamcrest.Matchers.is(400), org.hamcrest.Matchers.is(503))));
+        } finally {
+            mangle.set(false);
+        }
     }
 }

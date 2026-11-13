@@ -49,8 +49,9 @@ public class OAuthService {
         try {
             user = tx.execute(status -> findOrCreate(provider, profile));
         } catch (DataIntegrityViolationException e) {
-            // the same first sign-in twice at once: the other request created the user, so look it up again
-            if (!Constraints.isViolationOf(e, "uk_identity_provider_subject")) {
+            // the same first sign-in twice at once (or racing a signup with that email): the other request
+            // created the row, so look again; the second pass finds it
+            if (!Constraints.isViolationOf(e, "uk_identity_provider_subject") && !Constraints.isViolationOf(e, "uk_user_email")) {
                 throw e;
             }
             user = tx.execute(status -> findOrCreate(provider, profile));
@@ -59,9 +60,10 @@ public class OAuthService {
     }
 
     // 1. this Google/Kakao account signed in before: the same user
-    // 2. the provider vouches for an email an existing user signed up with: link to that user. An unverified
-    //    email is never matched, or anyone could make a provider account with someone else's address and walk in.
-    // 3. otherwise a new user, with the email only when it is verified and not taken
+    // 2. the provider vouches for the email and a user who also signed up through a provider has it: link them
+    //    (Google and Kakao for one person). A user with a password is never linked: password signup doesn't
+    //    prove the email, so anyone could sign up first with someone else's address and wait for them to arrive.
+    // 3. otherwise a new user; it gets the email only when the provider vouches for it and nobody has it yet
     private User findOrCreate(IdentityProvider provider, Profile profile) {
         var known = identityRepository.findByProviderAndSubject(provider, profile.subject());
         if (known.isPresent()) {
@@ -69,9 +71,12 @@ public class OAuthService {
         }
         String email = profile.emailVerified() && profile.email() != null && profile.email().length() <= 254
                 ? profile.email().toLowerCase(Locale.ROOT) : null;
-        User user = email == null ? null : userRepository.findByEmail(email).orElse(null);
-        if (user == null) {
-            user = userRepository.saveAndFlush(User.fromProvider(email, nickname(profile, email)));
+        User owner = email == null ? null : userRepository.findByEmail(email).orElse(null);
+        User user;
+        if (owner != null && owner.getPasswordHash() == null) {
+            user = owner;
+        } else {
+            user = userRepository.saveAndFlush(User.fromProvider(owner == null ? email : null, nickname(profile, email)));
         }
         identityRepository.saveAndFlush(new UserIdentity(user, provider, profile.subject()));
         return user;

@@ -126,7 +126,7 @@ class OAuthClient {
             // a used, expired or forged code: the visitor just starts again
             log.info("{} sign-in refused the code: {}", provider, e.getStatusCode().value());
             throw new BadRequestException("code: sign-in was not completed, please try again");
-        } catch (RestClientException | JacksonException e) {
+        } catch (RestClientException | JacksonException | IllegalArgumentException e) {
             log.warn("{} sign-in failed: {}", provider, e.getClass().getSimpleName());
             throw new ServiceUnavailableException("sign-in with " + provider.path() + " is not available right now");
         }
@@ -143,8 +143,12 @@ class OAuthClient {
                 || claims.path("exp").asLong(0) < clock.instant().getEpochSecond()) {
             throw new BadRequestException("code: sign-in was not completed, please try again");
         }
-        return new Profile(claims.path("sub").asString(""), text(claims.path("email")),
-                claims.path("email_verified").asBoolean(false), text(claims.path("name")));
+        // Google: email_verified proves ownership for Gmail and for Workspace accounts (hd claim); any other
+        // address was only checked once, when the Google account was made, and may have changed hands since
+        String email = text(claims.path("email"));
+        boolean owned = email != null && (email.toLowerCase(java.util.Locale.ROOT).endsWith("@gmail.com") || claims.hasNonNull("hd"));
+        return new Profile(claims.path("sub").asString(""), email,
+                claims.path("email_verified").asBoolean(false) && owned, text(claims.path("name")));
     }
 
     private Profile kakao(String code, String codeVerifier) {
