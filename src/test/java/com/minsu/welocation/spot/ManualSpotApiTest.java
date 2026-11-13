@@ -281,6 +281,26 @@ class ManualSpotApiTest {
     }
 
     @Test
+    void aFortyEightMegapixelPhotoIsDecodedSmall() throws Exception {
+        long id = create(paintballField(null));
+        // 8000 x 6000 at full size would be 144 MB of pixels; subsampled it stays near 1600 px
+        JsonNode detail = upload(id, jpeg(8000, 6000, false), 200);
+        byte[] bytes = mvc.perform(get("/api/spots" + detail.path("images").get(0).asString()))
+                .andReturn().getResponse().getContentAsByteArray();
+        BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));
+        assertThat(image.getWidth()).isEqualTo(1600);
+        assertThat(image.getHeight()).isEqualTo(1200);
+        upload(id, jpeg(8001, 10, false), 400);
+    }
+
+    @Test
+    void geocodingSendsBracesAndPlusAsText() throws Exception {
+        mvc.perform(get("/api/admin/geocode").param("q", "수원 {x} 1+2").header(HttpHeaders.AUTHORIZATION, admin))
+                .andExpect(status().isOk());
+        assertThat(lastGeocodeQuery.get()).contains("%7Bx%7D").contains("1%2B2");
+    }
+
+    @Test
     void anythingButAJpegOrPngIsRefused() throws Exception {
         long id = create(paintballField(null));
         upload(id, "<svg xmlns='http://www.w3.org/2000/svg'/>".getBytes(StandardCharsets.UTF_8), 400);

@@ -46,12 +46,13 @@ class Geocoder {
 
     List<GeocodeHit> find(String address) {
         URI uri = UriComponentsBuilder.fromUriString(baseUrl).path("/search")
-                .queryParam("q", address)
+                .queryParam("q", "{q}")
                 .queryParam("format", "jsonv2")
                 .queryParam("countrycodes", "kr")
                 .queryParam("accept-language", "ko")
                 .queryParam("limit", MAX_HITS)
-                .encode().build().toUri();
+                // a template variable, so braces and + in the address are encoded as text
+                .encode().buildAndExpand(address).toUri();
         JsonNode body;
         try {
             waitTurn();

@@ -11,6 +11,7 @@ import com.minsu.welocation.spot.SpotDtos.ManualSpotRequest;
 import com.minsu.welocation.spot.SpotDtos.SpotDetail;
 import com.minsu.welocation.spot.SpotDtos.SpotSummary;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.List;
 
 // Places an admin adds by hand (source MANUAL), for things TourAPI doesn't list, like paintball fields.
 // The TourAPI sync only ever touches TOURAPI rows, so nothing here is overwritten at night.
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -155,11 +157,16 @@ public class ManualSpotService {
         return cleaned;
     }
 
+    // the row is already gone; a file that won't delete is logged, not turned into an error for the admin
     private static void afterCommit(Runnable action) {
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
             @Override
             public void afterCommit() {
-                action.run();
+                try {
+                    action.run();
+                } catch (RuntimeException e) {
+                    log.warn("photo file not deleted: {}", e.getClass().getSimpleName());
+                }
             }
         });
     }

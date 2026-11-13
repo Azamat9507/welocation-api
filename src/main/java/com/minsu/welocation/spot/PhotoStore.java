@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
@@ -23,6 +24,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.Semaphore;
 import java.util.regex.Pattern;
 
 // Photos admins upload for the spots they add. Every upload is decoded and written again as a new JPEG, so
@@ -33,10 +35,12 @@ public class PhotoStore {
 
     public static final String URL_PREFIX = "/photos/";
     static final int MAX_BYTES = 5 * 1024 * 1024;
-    // a 1600 px side is plenty for the gallery; checked before decoding, so a tiny file that claims to be
-    // 50,000 px wide is refused before it takes the 256 MB heap
+    // A 1600 px side is plenty for the gallery. The size is read from the header before decoding, and the
+    // decoder then skips pixels so it never holds much more than 1600 px a side: a 48 MP phone photo at full
+    // size would be 144 MB on a 256 MB heap. One decode at a time, for the same reason.
     static final int MAX_SIDE = 1600;
     private static final int MAX_SOURCE_SIDE = 8000;
+    private static final Semaphore DECODING = new Semaphore(1);
     private static final Pattern NAME = Pattern.compile("[0-9a-f]{32}\\.jpg");
 
     private final Path dir;
@@ -50,7 +54,13 @@ public class PhotoStore {
         if (bytes.length == 0 || bytes.length > MAX_BYTES) {
             throw new BadRequestException("photo: empty or larger than 5 MB");
         }
-        BufferedImage image = decode(bytes);
+        BufferedImage image;
+        DECODING.acquireUninterruptibly();
+        try {
+            image = decode(bytes);
+        } finally {
+            DECODING.release();
+        }
         String name = UUID.randomUUID().toString().replace("-", "") + ".jpg";
         try {
             Files.createDirectories(dir);
@@ -112,7 +122,11 @@ public class PhotoStore {
                 if (width < 1 || height < 1 || width > MAX_SOURCE_SIDE || height > MAX_SOURCE_SIDE) {
                     throw new BadRequestException("photo: too large");
                 }
-                return reader.read(0);
+                // rounded down: the decoded image stays at least 1600 px and under 3200 px a side, then gets scaled
+                int step = Math.max(1, Math.max(width, height) / MAX_SIDE);
+                ImageReadParam param = reader.getDefaultReadParam();
+                param.setSourceSubsampling(step, step, 0, 0);
+                return reader.read(0, param);
             } finally {
                 reader.dispose();
             }
