@@ -50,6 +50,11 @@ public class Spot {
     @Column(nullable = false, length = 20)
     private SpotCategory category;
 
+    // LEISURE spots only: karting, rafting, archery...; null when unknown
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private Activity activity;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private Region region;
@@ -136,6 +141,10 @@ public class Spot {
         this.description = description;
     }
 
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
     public void addTag(SpotTag tag) {
         tags.add(tag);
     }
@@ -155,16 +164,18 @@ public class Spot {
 
     // For spots owned by an outside source (TourAPI): overwrite with what the source says now.
     // Returns false when nothing differs, so an unchanged row is not written at all.
-    public boolean updateFromSource(String name, SpotCategory category, Region region, String address,
-                                    double latitude, double longitude, String imageUrl) {
+    public boolean updateFromSource(String name, SpotCategory category, Activity activity, Region region,
+                                    String address, double latitude, double longitude, String imageUrl) {
         boolean imageChanged = !Objects.equals(thumbnailUrl, imageUrl);
-        if (!imageChanged && Objects.equals(this.name, name) && this.category == category && this.region == region
+        if (!imageChanged && Objects.equals(this.name, name) && this.category == category
+                && this.activity == activity && this.region == region
                 && Objects.equals(this.address, address) && this.latitude == latitude && this.longitude == longitude) {
             return false;
         }
         requireValidCoordinates(latitude, longitude);
         this.name = name;
         this.category = category;
+        this.activity = activity;
         this.region = region;
         this.address = address;
         this.latitude = latitude;
@@ -177,6 +188,32 @@ public class Spot {
                 addImage(imageUrl);
             }
         }
+        return true;
+    }
+
+    // For spots an admin added by hand (MANUAL); photos are changed separately
+    public void edit(String name, SpotCategory category, Activity activity, Region region, String address,
+                     double latitude, double longitude, String description) {
+        requireValidCoordinates(latitude, longitude);
+        this.name = name;
+        this.category = category;
+        this.activity = activity;
+        this.region = region;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.description = description;
+    }
+
+    // Drops one photo and closes the gap; the next photo becomes the main one when the first goes
+    public boolean removeImage(String url) {
+        if (!images.removeIf(image -> image.getUrl().equals(url))) {
+            return false;
+        }
+        for (int i = 0; i < images.size(); i++) {
+            images.get(i).moveTo(i);
+        }
+        thumbnailUrl = images.isEmpty() ? null : images.getFirst().getUrl();
         return true;
     }
 

@@ -1,5 +1,6 @@
 package com.minsu.welocation.tourapi;
 
+import com.minsu.welocation.spot.Activity;
 import com.minsu.welocation.spot.Region;
 import com.minsu.welocation.spot.SpotCategory;
 import org.springframework.web.util.HtmlUtils;
@@ -48,19 +49,39 @@ final class TourApiMapper {
         CATEGORIES = Map.copyOf(m);
     }
 
+    // the LEISURE codes above, by what you do there
+    static final Map<String, Activity> ACTIVITIES = Map.ofEntries(
+            Map.entry("LS010300", Activity.KART),
+            Map.entry("LS011200", Activity.SHOOTING),
+            Map.entry("LS011500", Activity.ATV),
+            Map.entry("LS011700", Activity.OFF_ROAD),
+            Map.entry("LS011800", Activity.BUNGEE),
+            Map.entry("LS020100", Activity.JET_SKI),
+            Map.entry("LS020200", Activity.KAYAK),
+            Map.entry("LS020800", Activity.RAFTING),
+            Map.entry("LS030100", Activity.SKYDIVING),
+            Map.entry("LS030300", Activity.PARAGLIDING),
+            Map.entry("LS030400", Activity.BALLOON),
+            Map.entry("VE020100", Activity.THEME_PARK));
+
     // Things with no lclsSystm3 code of their own, found by searchKeyword2 instead. TourAPI files archery ranges
     // under 기타육상레저스포츠 and 스포츠경기장, both far too broad to sync whole. Keyword search also matches
     // inside words (국궁 in 한국궁중꽃박물관), so an item is kept only when its title names the place itself.
+    // 서바이벌게임 (LS011400) is empty as of 2026-11-13; survival games sit under other codes with the word in the name.
     static final Map<String, Keyword> KEYWORDS = Map.of(
-            "국궁", new Keyword(SpotCategory.LEISURE, "국궁장"),
-            "양궁", new Keyword(SpotCategory.LEISURE, "양궁장"));
+            "국궁", new Keyword(SpotCategory.LEISURE, "국궁장", Activity.ARCHERY),
+            "양궁", new Keyword(SpotCategory.LEISURE, "양궁장", Activity.ARCHERY),
+            "서바이벌", new Keyword(SpotCategory.LEISURE, "서바이벌", Activity.SURVIVAL));
 
-    record Keyword(SpotCategory category, String titleMustContain) {
+    record Keyword(SpotCategory category, String titleMustContain, Activity activity) {
     }
 
-    // Single places picked by hand (contentid -> category) whose own code is too broad to sync whole.
+    // Single places picked by hand (contentid -> what we file them as) whose own code is too broad to sync whole.
     // 1064469 연무대(동장대), 수원화성: a 200-year-old 활터 by TourAPI's own description, filed under 고궁.
-    static final Map<String, SpotCategory> PLACES = Map.of("1064469", SpotCategory.LEISURE);
+    static final Map<String, Place> PLACES = Map.of("1064469", new Place(SpotCategory.LEISURE, Activity.ARCHERY));
+
+    record Place(SpotCategory category, Activity activity) {
+    }
 
     // 공공누리 type 1 and 3 allow reuse with attribution; anything else (or no type) we don't store
     private static final Set<String> IMAGE_LICENSES = Set.of("Type1", "Type3");
@@ -69,8 +90,8 @@ final class TourApiMapper {
 
     private static final double MIN_LAT = 33.0, MAX_LAT = 39.0, MIN_LNG = 124.0, MAX_LNG = 132.5;
 
-    record SpotData(String externalId, String name, SpotCategory category, Region region, String address,
-                    double latitude, double longitude, String imageUrl) {
+    record SpotData(String externalId, String name, SpotCategory category, Activity activity, Region region,
+                    String address, double latitude, double longitude, String imageUrl) {
     }
 
     record Result(SpotData data, String skipReason) {
@@ -83,26 +104,31 @@ final class TourApiMapper {
     }
 
     static Result map(JsonNode item) {
-        return map(item, CATEGORIES.get(item.path("lclsSystm3").asString("")));
+        String code = item.path("lclsSystm3").asString("");
+        return map(item, CATEGORIES.get(code), ACTIVITIES.get(code));
     }
 
-    // An item found by keyword. If its code is one we sync anyway, that code's category wins, so the two
-    // runs of one night never flip a spot back and forth.
+    // An item found by keyword. If its code is one we sync anyway, that code's category and activity win, so the
+    // two runs of one night never flip a spot back and forth.
     static Result mapKeyword(JsonNode item, Keyword keyword) {
         if (!clean(item.path("title").asString(""), 200).contains(keyword.titleMustContain())) {
             return Result.skip("keyword title");
         }
-        SpotCategory byCode = CATEGORIES.get(item.path("lclsSystm3").asString(""));
-        return map(item, byCode != null ? byCode : keyword.category());
+        return mapOwn(item, keyword.category(), keyword.activity());
     }
 
-    // A hand-picked place from detailCommon2. As with keywords, a code we sync anyway keeps its category.
-    static Result mapPlace(JsonNode item, SpotCategory category) {
-        SpotCategory byCode = CATEGORIES.get(item.path("lclsSystm3").asString(""));
-        return map(item, byCode != null ? byCode : category);
+    // A hand-picked place from detailCommon2. As with keywords, a code we sync anyway keeps its own filing.
+    static Result mapPlace(JsonNode item, Place place) {
+        return mapOwn(item, place.category(), place.activity());
     }
 
-    private static Result map(JsonNode item, SpotCategory category) {
+    private static Result mapOwn(JsonNode item, SpotCategory category, Activity activity) {
+        String code = item.path("lclsSystm3").asString("");
+        SpotCategory byCode = CATEGORIES.get(code);
+        return byCode != null ? map(item, byCode, ACTIVITIES.get(code)) : map(item, category, activity);
+    }
+
+    private static Result map(JsonNode item, SpotCategory category, Activity activity) {
         String contentId = item.path("contentid").asString("").strip();
         if (!contentId.matches("\\d{1,20}")) {
             return Result.skip("bad contentid");
@@ -127,7 +153,7 @@ final class TourApiMapper {
         if (!(lat >= MIN_LAT && lat <= MAX_LAT && lng >= MIN_LNG && lng <= MAX_LNG)) {
             return Result.skip("coordinates");
         }
-        return new Result(new SpotData(contentId, name, category, region, address, lat, lng, image(item)), null);
+        return new Result(new SpotData(contentId, name, category, activity, region, address, lat, lng, image(item)), null);
     }
 
     // lDongRegnCd is the legal-dong province code. 12 is the merged Jeonnam-Gwangju special city;

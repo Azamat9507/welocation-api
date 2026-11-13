@@ -23,6 +23,11 @@ spring:
       # only StringRedisTemplate is used; this stops Spring Data probing the JPA repositories for Redis
       repositories:
         enabled: false
+  servlet:
+    multipart:
+      # admin photo uploads (PhotoStore.MAX_BYTES); nginx allows 5m per request
+      max-file-size: 5MB
+      max-request-size: 5MB
   ai:
     # Spring AI passes this to RetryPolicy.maxRetries, so 0 means a single attempt. GuideService moves on to the
     # fallback model instead of retrying.
@@ -48,6 +53,11 @@ server:
     include-binding-errors: never
     include-exception: false
 welocation:
+  # admin-uploaded photos; relative to the working directory (/srv/welocation/api on the server)
+  photos:
+    dir: ${PHOTOS_DIR:photos}
+  geocode:
+    base-url: https://nominatim.openstreetmap.org
   jwt:
     # base64, at least 256 bits; without it a random key is made at startup (see JwtConfig)
     secret: ${JWT_SECRET:}

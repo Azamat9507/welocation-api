@@ -38,4 +38,8 @@ public class SpotImage {
         this.url = url;
         this.sortOrder = sortOrder;
     }
+
+    void moveTo(int sortOrder) {
+        this.sortOrder = sortOrder;
+    }
 }

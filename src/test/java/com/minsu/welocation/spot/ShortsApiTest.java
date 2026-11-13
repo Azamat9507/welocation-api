@@ -160,7 +160,7 @@ class ShortsApiTest {
     void sourceUpdatesKeepTheVideo() throws Exception {
         attach(admin, kart, "AAAAAAAAAAA", 200);
         transactions.executeWithoutResult(tx -> spotRepository.findById(kart.getId()).orElseThrow()
-                .updateFromSource("Kart Arena 2", SpotCategory.LEISURE, Region.CHUNGBUK, "new address", 36.85, 127.59, "https://img/x.jpg"));
+                .updateFromSource("Kart Arena 2", SpotCategory.LEISURE, null, Region.CHUNGBUK, "new address", 36.85, 127.59, "https://img/x.jpg"));
         mvc.perform(get("/api/spots/{id}", kart.getId()))
                 .andExpect(jsonPath("$.name").value("Kart Arena 2"))
                 .andExpect(jsonPath("$.shortsVideoId").value("AAAAAAAAAAA"));

@@ -18,6 +18,7 @@ public final class SpotDtos {
     public record SpotSearch(
             Region region,
             SpotCategory category,
+            Activity activity,
             SpotTag tag,
             @Size(max = 50) String q,
             @Min(0) @Max(10_000) Integer page,
@@ -36,12 +37,12 @@ public final class SpotDtos {
         }
     }
 
-    public record SpotSummary(Long id, String name, SpotCategory category, Region region,
+    public record SpotSummary(Long id, String name, SpotCategory category, Activity activity, Region region,
                               String address, double latitude, double longitude, String thumbnailUrl,
                               List<SpotTag> tags, int likeCount, long reviewCount, Double averageRating) {
 
         static SpotSummary from(Spot spot, Rating rating) {
-            return new SpotSummary(spot.getId(), spot.getName(), spot.getCategory(), spot.getRegion(),
+            return new SpotSummary(spot.getId(), spot.getName(), spot.getCategory(), spot.getActivity(), spot.getRegion(),
                     spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getThumbnailUrl(),
                     spot.getTags().stream().sorted().toList(), spot.getLikeCount(), rating.count(), rating.average());
         }
@@ -57,18 +58,36 @@ public final class SpotDtos {
         }
     }
 
-    public record SpotDetail(Long id, String name, SpotCategory category, Region region, String address,
-                             double latitude, double longitude, String description,
+    // manual: added by an admin, not from TourAPI; its photos are ours, not 공공누리, and only such spots can be edited
+    public record SpotDetail(Long id, String name, SpotCategory category, Activity activity, Region region,
+                             String address, double latitude, double longitude, String description,
                              List<SpotTag> tags, List<String> images, int likeCount, long reviewCount, Double averageRating,
-                             String shortsVideoId) {
+                             String shortsVideoId, boolean manual) {
 
         static SpotDetail from(Spot spot, Rating rating) {
-            return new SpotDetail(spot.getId(), spot.getName(), spot.getCategory(), spot.getRegion(),
+            return new SpotDetail(spot.getId(), spot.getName(), spot.getCategory(), spot.getActivity(), spot.getRegion(),
                     spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getDescription(),
                     spot.getTags().stream().sorted().toList(),
                     spot.getImages().stream().map(SpotImage::getUrl).toList(),
-                    spot.getLikeCount(), rating.count(), rating.average(), spot.getShortsVideoId());
+                    spot.getLikeCount(), rating.count(), rating.average(), spot.getShortsVideoId(),
+                    spot.getSource() == SpotSource.MANUAL);
         }
+    }
+
+    // a spot an admin adds or edits by hand; region is worked out from the address when left out
+    public record ManualSpotRequest(
+            @NotBlank @Size(max = 200) String name,
+            @NotNull SpotCategory category,
+            Activity activity,
+            Region region,
+            @NotBlank @Size(max = 300) String address,
+            @NotNull @DecimalMin("33") @DecimalMax("39") Double latitude,
+            @NotNull @DecimalMin("124") @DecimalMax("132.5") Double longitude,
+            @Size(max = 2000) String description) {
+    }
+
+    // one place the geocoder found for an address
+    public record GeocodeHit(double latitude, double longitude, String label) {
     }
 
     // one card of the /shorts feed

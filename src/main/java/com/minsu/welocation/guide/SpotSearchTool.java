@@ -1,5 +1,6 @@
 package com.minsu.welocation.guide;
 
+import com.minsu.welocation.spot.Activity;
 import com.minsu.welocation.spot.Region;
 import com.minsu.welocation.spot.SpotCategory;
 import com.minsu.welocation.spot.SpotDtos.SpotSummary;
@@ -47,6 +48,9 @@ class SpotSearchTool {
     public List<Found> searchSpots(
             @ToolParam(required = false, description = "province or metropolitan city") Region region,
             @ToolParam(required = false, description = "kind of place") SpotCategory category,
+            @ToolParam(required = false, description = "what you do there, for LEISURE spots: KART for karting, "
+                    + "ARCHERY for bows, PAINTBALL for paintball (also try SURVIVAL, the Korean 서바이벌 game, "
+                    + "which can be paintball, BB guns or laser tag)") Activity activity,
             @ToolParam(required = false, description = "text the spot's Korean name must contain, e.g. 오션 or 바다")
             String nameContains,
             @ToolParam(required = false, description = "keep only spots close to a spot of this kind, "
@@ -59,26 +63,27 @@ class SpotSearchTool {
             throw new IllegalStateException("search limit reached; answer with the spots already found");
         }
         try {
-            return search(region, category, nameContains, nearCategory, withinKm);
+            return search(region, category, activity, nameContains, nearCategory, withinKm);
         } catch (RuntimeException e) {
             log.warn("guide search failed: {}", e.getClass().getSimpleName());
             throw new IllegalStateException("search failed; answer with the spots already found");
         }
     }
 
-    private List<Found> search(Region region, SpotCategory category, String nameContains, SpotCategory nearCategory,
-                               Double withinKm) {
+    private List<Found> search(Region region, SpotCategory category, Activity activity, String nameContains,
+                               SpotCategory nearCategory, Double withinKm) {
         String regionName = region == null ? null : region.name();
         String categoryName = category == null ? null : category.name();
+        String activityName = activity == null ? null : activity.name();
         String nameLike = likePattern(nameContains);
         Map<Long, Double> nearMeters = new LinkedHashMap<>();
         if (nearCategory == null) {
-            spotRepository.findCandidates(regionName, categoryName, nameLike, LIMIT)
+            spotRepository.findCandidates(regionName, categoryName, activityName, nameLike, LIMIT)
                     .forEach(candidate -> nearMeters.put(candidate.getId(), null));
         } else {
             double meters = 1000 * (withinKm == null ? 1 : Math.clamp(withinKm, 0.1, 3));
-            nearest(spotRepository.findLocated(regionName, categoryName, nameLike),
-                    spotRepository.findLocated(null, nearCategory.name(), null), meters)
+            nearest(spotRepository.findLocated(regionName, categoryName, activityName, nameLike),
+                    spotRepository.findLocated(null, nearCategory.name(), null, null), meters)
                     .forEach(nearMeters::put);
         }
         Map<Long, SpotSummary> spots = spotService.summariesById(List.copyOf(nearMeters.keySet()));
@@ -155,11 +160,12 @@ class SpotSearchTool {
     }
 
     // what the model sees: no address or coordinates, so it has nothing to quote that the page doesn't show itself
-    record Found(long id, String name, SpotCategory category, Region region, List<SpotTag> tags, int likeCount,
-                 long reviewCount, Double averageRating, boolean hasPhoto, Integer metersToNearCategory) {
+    record Found(long id, String name, SpotCategory category, Activity activity, Region region, List<SpotTag> tags,
+                 int likeCount, long reviewCount, Double averageRating, boolean hasPhoto, Integer metersToNearCategory) {
 
         static Found of(SpotSummary spot, Double nearMeters) {
-            return new Found(spot.id(), spot.name(), spot.category(), spot.region(), spot.tags(), spot.likeCount(),
+            return new Found(spot.id(), spot.name(), spot.category(), spot.activity(), spot.region(), spot.tags(),
+                    spot.likeCount(),
                     spot.reviewCount(), spot.averageRating(), spot.thumbnailUrl() != null,
                     nearMeters == null ? null : (int) Math.round(nearMeters));
         }
