@@ -1,5 +1,7 @@
 package com.minsu.welocation.spot;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,6 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SpotRepository extends JpaRepository<Spot, Long>, JpaSpecificationExecutor<Spot> {
+
+    // the /shorts feed; idx_spots_shorts_added_at covers the filter and the order
+    Page<Spot> findByShortsAddedAtIsNotNull(Pageable pageable);
 
     // MBRContains is the part that can use idx_spot_location; the distance check then trims the
     // box corners down to the actual circle.
