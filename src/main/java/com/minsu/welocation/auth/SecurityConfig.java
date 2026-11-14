@@ -32,6 +32,8 @@ public class SecurityConfig {
             PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/api/auth/login"),
             PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/api/auth/oauth/**"),
             PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/api/auth/oauth/*"),
+            // Kakao's unlink webhook; it proves itself with the admin key, checked in KakaoUnlinkService
+            PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/api/auth/oauth/kakao/unlink"),
             PathPatternRequestMatcher.withDefaults().matcher("/swagger-ui.html"),
             PathPatternRequestMatcher.withDefaults().matcher("/swagger-ui/**"),
             PathPatternRequestMatcher.withDefaults().matcher("/v3/api-docs/**"),

@@ -19,6 +19,16 @@ public interface SpotLikeRepository extends JpaRepository<SpotLike, Long> {
     @Query("select l.createdAt from SpotLike l where l.user.id = :userId and l.spot.id = :spotId")
     Optional<Instant> findCreatedAt(long userId, long spotId);
 
+    // every like of one user, in spot order so that deleting them locks spots in a fixed order
+    @Query("select l.spot.id as spotId, l.createdAt as createdAt from SpotLike l where l.user.id = :userId order by l.spot.id")
+    List<UserLike> findByUser(long userId);
+
+    interface UserLike {
+        Long getSpotId();
+
+        Instant getCreatedAt();
+    }
+
     // Ties are broken by the spot id as text, descending: the order Redis gives equal scores in a sorted set,
     // so the weekly ranking reads the same from either.
     @Query(value = """

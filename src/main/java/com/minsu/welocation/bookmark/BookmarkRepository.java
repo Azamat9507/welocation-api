@@ -18,4 +18,8 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
     @Modifying
     @Query("delete from Bookmark b where b.user.id = :userId and b.spot.id = :spotId")
     int deleteByUserAndSpot(long userId, long spotId);
+
+    @Modifying
+    @Query("delete from Bookmark b where b.user.id = :userId")
+    int deleteAllByUser(long userId);
 }
