@@ -7,10 +7,10 @@
   "image": "https://tong.visitkorea.or.kr/cms/resource/24/3543324_image2_1.jpg",
   "scenes": [{"work": "겨울연가", "kind": "DRAMA", "scene": "마지막 20화"},
              {"work": "올드보이", "kind": "MOVIE", "scene": null}]},
- {"source": "MANUAL", "externalId": "scene-1012", "name": "서강대교", "region": "SEOUL",
+ {"source": "SCENE", "externalId": "scene-1012", "name": "서강대교", "region": "SEOUL",
   "address": "서울특별시 영등포구 여의도동 서강대교", "latitude": 37.536911, "longitude": 126.92495, "image": null,
   "scenes": [{"work": "겨울연가", "kind": "DRAMA", "scene": "15화에서 이 다리를 건넌다"}]},
- {"source": "MANUAL", "externalId": "scene-broken", "name": "no region", "region": null,
+ {"source": "SCENE", "externalId": "scene-broken", "name": "no region", "region": null,
   "address": "somewhere", "latitude": 37.5, "longitude": 127.0, "image": null,
   "scenes": [{"work": "겨울연가", "kind": "DRAMA", "scene": null}]}
 ]

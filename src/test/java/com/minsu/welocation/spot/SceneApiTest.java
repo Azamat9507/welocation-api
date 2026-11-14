@@ -1,7 +1,10 @@
 package com.minsu.welocation.spot;
 
 import com.minsu.welocation.TestcontainersConfig;
+import com.minsu.welocation.auth.TokenService;
 import com.minsu.welocation.spot.SceneImporter.Report;
+import com.minsu.welocation.user.User;
+import com.minsu.welocation.user.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpHeaders;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -16,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -40,6 +45,12 @@ class SceneApiTest {
     @Autowired
     JdbcTemplate jdbc;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    TokenService tokenService;
+
     long nami;
 
     @BeforeEach
@@ -52,6 +63,7 @@ class SceneApiTest {
     @AfterEach
     void cleanUp() {
         spotRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     private long idOf(SpotSource source, String externalId) {
@@ -127,7 +139,9 @@ class SceneApiTest {
         importer.importAll();
 
         mvc.perform(get("/api/scenes").param("work", "없는 드라마")).andExpect(status().isNotFound());
-        mvc.perform(get("/api/scenes").param("work", " ")).andExpect(status().isBadRequest());
+        mvc.perform(get("/api/scenes").param("work", " "))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.detail").value("work must be 1 to 100 characters"));
         mvc.perform(get("/api/scenes").param("work", "가".repeat(101))).andExpect(status().isBadRequest());
         mvc.perform(get("/api/scenes")).andExpect(status().isBadRequest());
     }
@@ -139,5 +153,23 @@ class SceneApiTest {
         spotRepository.deleteById(idOf(SpotSource.TOURAPI, "900002"));
         assertThat(jdbc.queryForObject("SELECT COUNT(*) FROM spot_scenes", Integer.class)).isEqualTo(2);
         mvc.perform(get("/api/scenes").param("work", "올드보이")).andExpect(status().isNotFound());
+    }
+
+    // the next start would import a deleted one again, so these change only in scenes.json
+    @Test
+    void anAdminCannotEditOrDeleteAFilmLocation() throws Exception {
+        importer.importAll();
+        User admin = userRepository.save(User.signUp("admin@example.com", "$2a$10$unused", "admin"));
+        jdbc.update("UPDATE users SET role = 'ADMIN' WHERE id = ?", admin.getId());
+        String token = "Bearer " + tokenService.issue(userRepository.findById(admin.getId()).orElseThrow()).accessToken();
+
+        long bridge = idOf(SpotSource.SCENE, "scene-1012");
+        mvc.perform(delete("/api/admin/spots/{id}", bridge).header(HttpHeaders.AUTHORIZATION, token))
+                .andExpect(status().isConflict());
+        assertThat(spotRepository.existsById(bridge)).isTrue();
+        mvc.perform(get("/api/admin/spots").header(HttpHeaders.AUTHORIZATION, token))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items", hasSize(0)));
+        mvc.perform(get("/api/spots/{id}", bridge)).andExpect(jsonPath("$.manual").value(false));
     }
 }

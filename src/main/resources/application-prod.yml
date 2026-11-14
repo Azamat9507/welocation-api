@@ -15,7 +15,7 @@ welocation:
     secret: ${JWT_SECRET}
     require-secret: true
   scenes:
-    import: true
+    import: ${SCENES_IMPORT:true}
 # The API map stays private in production; both paths answer 404. With api-docs off springdoc 3.0.3
 # doesn't load the UI either; swagger-ui is switched off too so that doesn't depend on springdoc internals.
 springdoc:

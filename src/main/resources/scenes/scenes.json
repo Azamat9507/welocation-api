@@ -51,7 +51,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1012",
   "name": "서강대교",
   "region": "SEOUL",
@@ -73,7 +73,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1013",
   "name": "후암동성당",
   "region": "SEOUL",
@@ -124,7 +124,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1009",
   "name": "춘천 기와집골 마을",
   "region": "GANGWON",
@@ -141,7 +141,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1016",
   "name": "더플라자",
   "region": "SEOUL",
@@ -197,7 +197,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-10037",
   "name": "연세대학교 신촌캠퍼스",
   "region": "SEOUL",
@@ -236,7 +236,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-10039",
   "name": "중림동약현성당",
   "region": "SEOUL",
@@ -253,7 +253,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-10040",
   "name": "컨벤시아대로",
   "region": "INCHEON",
@@ -270,7 +270,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-10041",
   "name": "표선 등대",
   "region": "JEJU",
@@ -287,7 +287,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-10035",
   "name": "생각속의 집",
   "region": "GYEONGGI",
@@ -304,7 +304,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-10042",
   "name": "해비치호텔앤드리조트",
   "region": "JEJU",
@@ -370,7 +370,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-2955",
   "name": "용인 대장금 파크",
   "region": "GYEONGGI",
@@ -553,7 +553,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11038",
   "name": "뽀꼬팡 창동점",
   "region": "SEOUL",
@@ -570,7 +570,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11039",
   "name": "팔도건어물",
   "region": "SEOUL",
@@ -587,7 +587,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11040",
   "name": "백운시장",
   "region": "SEOUL",
@@ -604,7 +604,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11045",
   "name": "신한금융투자빌딩",
   "region": "SEOUL",
@@ -621,7 +621,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6063",
   "name": "한강 공원 여의도 지구",
   "region": "SEOUL",
@@ -643,7 +643,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11048",
   "name": "남산 산책로",
   "region": "SEOUL",
@@ -660,7 +660,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11051",
   "name": "선갑도",
   "region": "INCHEON",
@@ -750,7 +750,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3082",
   "name": "모나파크 용평리조트 발왕산 관광케이블카",
   "region": "GANGWON",
@@ -767,7 +767,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3083",
   "name": "월정사 전나무 숲길",
   "region": "GANGWON",
@@ -801,7 +801,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3085",
   "name": "안성 석남사",
   "region": "GYEONGGI",
@@ -818,7 +818,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3086",
   "name": "안양 동편마을",
   "region": "GYEONGGI",
@@ -835,7 +835,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3088",
   "name": "스페이스청담",
   "region": "SEOUL",
@@ -869,7 +869,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3091",
   "name": "덕성여자대학교",
   "region": "SEOUL",
@@ -903,7 +903,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6712",
   "name": "홍삼스파 참숯가마 사우나",
   "region": "GYEONGGI",
@@ -937,7 +937,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6714",
   "name": "한탄강 하늘다리",
   "region": "GYEONGGI",
@@ -954,7 +954,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6715",
   "name": "코모도호텔 부산",
   "region": "BUSAN",
@@ -971,7 +971,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6719",
   "name": "동아디지털미디어센터",
   "region": "SEOUL",
@@ -988,7 +988,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6722",
   "name": "부암동 7번지",
   "region": "SEOUL",
@@ -1005,7 +1005,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6723",
   "name": "신제물포구락부",
   "region": "INCHEON",
@@ -1039,7 +1039,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6727",
   "name": "담양레이나CC",
   "region": "JEONNAM",
@@ -1090,7 +1090,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12983",
   "name": "태양의후예 태백세트장",
   "region": "GANGWON",
@@ -1139,7 +1139,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12987",
   "name": "비플러스엠",
   "region": "SEOUL",
@@ -1156,7 +1156,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11524",
   "name": "열우물 벽화마을",
   "region": "INCHEON",
@@ -1195,7 +1195,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12997",
   "name": "오크우드프리미어 인천",
   "region": "INCHEON",
@@ -1212,7 +1212,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12984",
   "name": "달콤커피 분당정자점",
   "region": "GYEONGGI",
@@ -1229,7 +1229,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12985",
   "name": "로스가든카페앤비노",
   "region": "GYEONGGI",
@@ -1268,7 +1268,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6047",
   "name": "일산 비버리 힐스",
   "region": "GYEONGGI",
@@ -1334,7 +1334,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6053",
   "name": "장암저수지",
   "region": "GYEONGGI",
@@ -1351,7 +1351,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6055",
   "name": "통도환타지아",
   "region": "GYEONGNAM",
@@ -1368,7 +1368,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6056",
   "name": "장사도 해상공원 까멜리아",
   "region": "GYEONGNAM",
@@ -1385,7 +1385,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6061",
   "name": "GT타워",
   "region": "SEOUL",
@@ -1402,7 +1402,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6064",
   "name": "N서울타워",
   "region": "SEOUL",
@@ -1419,7 +1419,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1868",
   "name": "설악해변",
   "region": "GANGWON",
@@ -1436,7 +1436,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1870",
   "name": "닥밭공원",
   "region": "GYEONGGI",
@@ -1453,7 +1453,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1871",
   "name": "국제전시장보도육교",
   "region": "GYEONGGI",
@@ -1470,7 +1470,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1872",
   "name": "일산서구청사거리",
   "region": "GYEONGGI",
@@ -1509,7 +1509,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1874",
   "name": "베르아델승마클럽",
   "region": "GYEONGGI",
@@ -1526,7 +1526,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1875",
   "name": "체인지업캠퍼스 양평캠프",
   "region": "GYEONGGI",
@@ -1543,7 +1543,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1876",
   "name": "드림스튜디오",
   "region": "GYEONGGI",
@@ -1560,7 +1560,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1880",
   "name": "계명대학교 대명캠퍼스",
   "region": "DAEGU",
@@ -1582,7 +1582,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1882",
   "name": "어울마당로",
   "region": "SEOUL",
@@ -1633,7 +1633,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11657",
   "name": "수원 팔달산 산책로",
   "region": "GYEONGGI",
@@ -1650,7 +1650,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6885",
   "name": "동탄국제고등학교",
   "region": "GYEONGGI",
@@ -1689,7 +1689,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11663",
   "name": "한옥카페 선운각",
   "region": "SEOUL",
@@ -1723,7 +1723,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11665",
   "name": "가온문화공원",
   "region": "SEOUL",
@@ -1774,7 +1774,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-13876",
   "name": "구)양수철교",
   "region": "GYEONGGI",
@@ -1791,7 +1791,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-13878",
   "name": "한양대학교 에리카캠퍼스",
   "region": "GYEONGGI",
@@ -1808,7 +1808,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12934",
   "name": "로케이션 이음 (구 로얄퀘스트)",
   "region": "GYEONGGI",
@@ -1891,7 +1891,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-5031",
   "name": "화왕산성",
   "region": "GYEONGNAM",
@@ -1908,7 +1908,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-5032",
   "name": "합천 영상 테마파크",
   "region": "GYEONGNAM",
@@ -1986,7 +1986,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-5037",
   "name": "계명대학교 성서캠퍼스",
   "region": "DAEGU",
@@ -2003,7 +2003,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-5038",
   "name": "계명한학촌",
   "region": "DAEGU",
@@ -2020,7 +2020,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-5039",
   "name": "문화공감수정",
   "region": "BUSAN",
@@ -2037,7 +2037,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12935",
   "name": "비둘기낭폭포",
   "region": "GYEONGGI",
@@ -2071,7 +2071,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12938",
   "name": "내연산 12폭포",
   "region": "GYEONGBUK",
@@ -2127,7 +2127,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-8828",
   "name": "원당종마목장",
   "region": "GYEONGGI",
@@ -2144,7 +2144,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-8829",
   "name": "청아공원기독교전용관",
   "region": "GYEONGGI",
@@ -2178,7 +2178,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6571",
   "name": "마임비전빌리지",
   "region": "GYEONGGI",
@@ -2200,7 +2200,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-8832",
   "name": "여주경찰서",
   "region": "GYEONGGI",
@@ -2217,7 +2217,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6884",
   "name": "경기영어마을 파주캠퍼스",
   "region": "GYEONGGI",
@@ -2273,7 +2273,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-8837",
   "name": "주한앙골라대사관저",
   "region": "SEOUL",
@@ -2290,7 +2290,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11509",
   "name": "동두천 문화극장",
   "region": "GYEONGGI",
@@ -2324,7 +2324,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11512",
   "name": "경주신문왕릉",
   "region": "GYEONGBUK",
@@ -2341,7 +2341,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11513",
   "name": "동궁과 월지",
   "region": "GYEONGBUK",
@@ -2375,7 +2375,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11517",
   "name": "서교동 최규하 대통령 가옥",
   "region": "SEOUL",
@@ -2409,7 +2409,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11523",
   "name": "신명여자고등학교",
   "region": "INCHEON",
@@ -2426,7 +2426,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11525",
   "name": "인천보건고등학교",
   "region": "INCHEON",
@@ -2443,7 +2443,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11625",
   "name": "약천사",
   "region": "GYEONGGI",
@@ -2460,7 +2460,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11626",
   "name": "동부마을",
   "region": "GYEONGNAM",
@@ -2477,7 +2477,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11627",
   "name": "서울중앙지방법원",
   "region": "SEOUL",
@@ -2494,7 +2494,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11629",
   "name": "파크원",
   "region": "SEOUL",
@@ -2511,7 +2511,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-871",
   "name": "더리버",
   "region": "SEOUL",
@@ -2567,7 +2567,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11633",
   "name": "실미도 해수욕장",
   "region": "INCHEON",
@@ -2584,7 +2584,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3252",
   "name": "오이도수산물직판장",
   "region": "GYEONGGI",
@@ -2601,7 +2601,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3253",
   "name": "구룡포 북방파제",
   "region": "GYEONGBUK",
@@ -2618,7 +2618,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3254",
   "name": "문화마실",
   "region": "GYEONGBUK",
@@ -2635,7 +2635,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3257",
   "name": "구룡포공원계단",
   "region": "GYEONGBUK",
@@ -2669,7 +2669,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3260",
   "name": "구룡포 삼정섬",
   "region": "GYEONGBUK",
@@ -2703,7 +2703,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3263",
   "name": "해방촌 신흥시장",
   "region": "SEOUL",
@@ -2720,7 +2720,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3264",
   "name": "역사책방",
   "region": "SEOUL",
@@ -2754,7 +2754,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-865",
   "name": "서원밸리CC",
   "region": "GYEONGGI",
@@ -2771,7 +2771,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-866",
   "name": "석병1리방파제",
   "region": "GYEONGBUK",
@@ -2788,7 +2788,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-867",
   "name": "청하5일장",
   "region": "GYEONGBUK",
@@ -2822,7 +2822,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-870",
   "name": "동호대교",
   "region": "SEOUL",
@@ -2839,7 +2839,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-872",
   "name": "서울드래곤시티",
   "region": "SEOUL",
@@ -2856,7 +2856,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3004",
   "name": "강촌레일파크",
   "region": "GANGWON",
@@ -2878,7 +2878,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6566",
   "name": "아난티 클럽 서울",
   "region": "GYEONGGI",
@@ -2900,7 +2900,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6568",
   "name": "백현동카페거리",
   "region": "GYEONGGI",
@@ -2917,7 +2917,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6569",
   "name": "두리랜드",
   "region": "GYEONGGI",
@@ -2934,7 +2934,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6577",
   "name": "카메라타아트스페이스",
   "region": "GYEONGGI",
@@ -2951,7 +2951,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6578",
   "name": "김천 한국보건대 (폐교)",
   "region": "GYEONGBUK",
@@ -2985,7 +2985,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6583",
   "name": "삼성리",
   "region": "SEOUL",
@@ -3019,7 +3019,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6880",
   "name": "일산문화광장",
   "region": "GYEONGGI",
@@ -3036,7 +3036,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6883",
   "name": "아시아나 컨트리클럽",
   "region": "GYEONGGI",
@@ -3053,7 +3053,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6886",
   "name": "최재훈스튜디오",
   "region": "SEOUL",
@@ -3070,7 +3070,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6888",
   "name": "모노빌딩",
   "region": "SEOUL",
@@ -3087,7 +3087,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-6892",
   "name": "왕자만화방",
   "region": "SEOUL",
@@ -3104,7 +3104,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12831",
   "name": "북악팔각정",
   "region": "SEOUL",
@@ -3121,7 +3121,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12832",
   "name": "율곡로3길",
   "region": "SEOUL",
@@ -3138,7 +3138,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12833",
   "name": "영풍문고 종로본점",
   "region": "SEOUL",
@@ -3155,7 +3155,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12834",
   "name": "IDEA VILL",
   "region": "SEOUL",
@@ -3172,7 +3172,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12835",
   "name": "서울애니메이션센터",
   "region": "SEOUL",
@@ -3223,7 +3223,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1281",
   "name": "고성장산숲",
   "region": "GYEONGNAM",
@@ -3257,7 +3257,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1283",
   "name": "영주소수서원",
   "region": "GYEONGBUK",
@@ -3296,7 +3296,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1287",
   "name": "부안영상테마파크",
   "region": "JEONBUK",
@@ -3330,7 +3330,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3005",
   "name": "교원 가평비전센터",
   "region": "GYEONGGI",
@@ -3347,7 +3347,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3006",
   "name": "수원시립한림도서관",
   "region": "GYEONGGI",
@@ -3364,7 +3364,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3010",
   "name": "미사호수공원",
   "region": "GYEONGGI",
@@ -3381,7 +3381,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3011",
   "name": "미사리조정경기장",
   "region": "GYEONGGI",
@@ -3415,7 +3415,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3013",
   "name": "중리체육공원",
   "region": "DAEGU",
@@ -3432,7 +3432,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-3014",
   "name": "계산성당",
   "region": "DAEGU",
@@ -3449,7 +3449,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11074",
   "name": "합천댐 (물 문화관)",
   "region": "GYEONGNAM",
@@ -3466,7 +3466,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11075",
   "name": "향파문학거리",
   "region": "BUSAN",
@@ -3483,7 +3483,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-11078",
   "name": "온천천 산책로",
   "region": "BUSAN",
@@ -3517,7 +3517,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12955",
   "name": "사북석탄역사체험관",
   "region": "GANGWON",
@@ -3534,7 +3534,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12957",
   "name": "합천 황매산",
   "region": "GYEONGNAM",
@@ -3551,7 +3551,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-12959",
   "name": "왕산마을 벚꽃터널",
   "region": "GYEONGBUK",
@@ -3619,7 +3619,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-4594",
   "name": "고양아쿠아특수촬영스튜디오",
   "region": "GYEONGGI",
@@ -3636,7 +3636,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1178",
   "name": "남양주 종합촬영소",
   "region": "GYEONGGI",
@@ -3658,7 +3658,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-4596",
   "name": "발포항 공원",
   "region": "JEONNAM",
@@ -3675,7 +3675,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-4597",
   "name": "광양항 해양공원",
   "region": "JEONNAM",
@@ -3753,7 +3753,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-4601",
   "name": "우수영국민관광지",
   "region": "JEONNAM",
@@ -3770,7 +3770,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-4602",
   "name": "궁항 전라좌수영",
   "region": "JEONBUK",
@@ -3787,7 +3787,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-13000",
   "name": "금강산 화암사 앞",
   "region": "GANGWON",
@@ -3804,7 +3804,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-13002",
   "name": "성주 버스 정류장",
   "region": "GYEONGBUK",
@@ -3838,7 +3838,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-13008",
   "name": "청소면 행정복지센터 앞 거리",
   "region": "CHUNGNAM",
@@ -3855,7 +3855,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-13009",
   "name": "청소역 장항선",
   "region": "CHUNGNAM",
@@ -3872,7 +3872,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1179",
   "name": "영남대학교 본관",
   "region": "GYEONGBUK",
@@ -3889,7 +3889,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1180",
   "name": "서울과학기술대학교 다산관",
   "region": "SEOUL",
@@ -3906,7 +3906,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1181",
   "name": "고창 청보리밭",
   "region": "JEONBUK",
@@ -3923,7 +3923,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-1182",
   "name": "금강하굿독",
   "region": "CHUNGNAM",
@@ -4076,7 +4076,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-9908",
   "name": "국민의숲길",
   "region": "GANGWON",
@@ -4093,7 +4093,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-9909",
   "name": "남양주 금선사",
   "region": "GYEONGGI",
@@ -4110,7 +4110,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-9910",
   "name": "풍산개마을 입구",
   "region": "GYEONGGI",
@@ -4127,7 +4127,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-9913",
   "name": "형도",
   "region": "GYEONGGI",
@@ -4144,7 +4144,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-9915",
   "name": "문화역서울284",
   "region": "SEOUL",
@@ -4161,7 +4161,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-9916",
   "name": "소록도 중앙공원",
   "region": "JEONNAM",
@@ -4178,7 +4178,7 @@
   ]
  },
  {
-  "source": "MANUAL",
+  "source": "SCENE",
   "externalId": "scene-9917",
   "name": "변산반도 국립공원",
   "region": "JEONBUK",

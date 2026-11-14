@@ -126,8 +126,9 @@ public class SpotService {
                 .sorted(Comparator.comparing((WorkSpot spot) -> spot.spot().thumbnailUrl() == null))
                 .toList();
         SpotScene first = scenes.getFirst();
+        // the same pick as findWorks (MAX), so the card and the page show the same cover
         String cover = found.stream().map(spot -> spot.spot().thumbnailUrl()).filter(Objects::nonNull)
-                .findFirst().orElse(null);
+                .max(Comparator.naturalOrder()).orElse(null);
         return new WorkSpots(new Work(title, first.getKind(), found.size(), cover), found);
     }
 

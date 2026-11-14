@@ -15,7 +15,8 @@ import java.util.Optional;
 
 // Loads the curated drama and film locations (scenes.json, built from 한국문화정보원's 미디어콘텐츠 영상 촬영지 data)
 // into spots and spot_scenes. Safe to run on every start: a spot is found by source and external id, a scene by
-// spot and work, and only what is missing is added. Nothing is updated or removed, so an admin's edit stays.
+// spot and work, and only what is missing is added. Nothing is updated or removed: a spot
+// that is already there (synced from TourAPI earlier) is kept as it is.
 // TourAPI places come in as TOURAPI spots with the list photo, and the nightly gallery sync adds the rest.
 @Slf4j
 @Component

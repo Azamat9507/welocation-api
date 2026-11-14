@@ -22,7 +22,7 @@ class SceneImportRunner implements ApplicationRunner {
         try {
             importer.importAll();
         } catch (Exception e) {
-            log.error("scene import failed: {}", e.getClass().getSimpleName());
+            log.error("scene import failed", e);
         }
     }
 }

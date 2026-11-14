@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -30,7 +32,7 @@ class ScenesFileTest {
         Set<String> keys = new HashSet<>();
         for (Place p : places) {
             assertThat(keys.add(p.source() + " " + p.externalId())).as("duplicate %s", p.externalId()).isTrue();
-            assertThat(p.source()).isNotNull();
+            assertThat(p.source()).isIn(SpotSource.TOURAPI, SpotSource.SCENE);
             assertThat(p.externalId()).isNotBlank().hasSizeLessThanOrEqualTo(50);
             assertThat(p.name()).isNotBlank().hasSizeLessThanOrEqualTo(200);
             assertThat(p.address()).isNotBlank().hasSizeLessThanOrEqualTo(300);
@@ -51,6 +53,15 @@ class ScenesFileTest {
                 }
             }
         }
+    }
+
+    // /works groups by title and kind, so one title with two kinds would show up as two works
+    @Test
+    void aTitleHasOneKind() throws Exception {
+        Map<String, Set<SceneKind>> kinds = new HashMap<>();
+        Stream.of(places()).flatMap(p -> p.scenes().stream())
+                .forEach(s -> kinds.computeIfAbsent(s.work(), w -> new HashSet<>()).add(s.kind()));
+        assertThat(kinds).allSatisfy((work, k) -> assertThat(k).as(work).hasSize(1));
     }
 
     @Test
