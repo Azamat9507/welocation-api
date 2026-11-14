@@ -159,6 +159,33 @@
  },
  {
   "source": "TOURAPI",
+  "externalId": "2037306",
+  "name": "완도 청해포구촬영장",
+  "region": "JEONNAM",
+  "address": "전라남도 완도군 완도읍 청해진서로 1161-8",
+  "latitude": 34.3232774,
+  "longitude": 126.6703886,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/63/3354463_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "주몽",
+    "kind": "DRAMA",
+    "scene": "MBC 드라마 '주몽'도 이 세트장에서 촬영했다"
+   },
+   {
+    "work": "해신",
+    "kind": "DRAMA",
+    "scene": "2004년 KBS 드라마 '해신'을 찍으려고 지은 세트장"
+   },
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "명량 저잣거리, 선착장 전투 장면 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
   "externalId": "130152",
   "name": "서대문형무소역사관",
   "region": "SEOUL",
@@ -3705,33 +3732,6 @@
     "work": "명량",
     "kind": "MOVIE",
     "scene": "명량에서 왜구를 피해 피신하는 동백 숲 전경"
-   }
-  ]
- },
- {
-  "source": "TOURAPI",
-  "externalId": "2037306",
-  "name": "완도 청해포구촬영장",
-  "region": "JEONNAM",
-  "address": "전라남도 완도군 완도읍 청해진서로 1161-8",
-  "latitude": 34.3232774,
-  "longitude": 126.6703886,
-  "image": "https://tong.visitkorea.or.kr/cms/resource/63/3354463_image2_1.jpg",
-  "scenes": [
-   {
-    "work": "명량",
-    "kind": "MOVIE",
-    "scene": "명량 저잣거리, 선착장 전투 장면 촬영지"
-   },
-   {
-    "work": "해신",
-    "kind": "DRAMA",
-    "scene": "2004년 KBS 드라마 '해신'을 찍으려고 지은 세트장"
-   },
-   {
-    "work": "주몽",
-    "kind": "DRAMA",
-    "scene": "MBC 드라마 '주몽'도 이 세트장에서 촬영했다"
    }
   ]
  },
