@@ -22,6 +22,9 @@ public final class SpotDtos {
             Activity activity,
             SpotTag tag,
             @Size(max = 50) String q,
+            // false leaves out drama and film locations: the home page's "newest" row is for places the
+            // nightly sync found, and 229 imported at once would fill it for weeks
+            Boolean scenes,
             @Min(0) @Max(10_000) Integer page,
             @Min(1) @Max(50) Integer size) {
 

@@ -48,7 +48,8 @@ public class SpotService {
         // spots with a photo first, newest first within each group
         PageRequest pageable = PageRequest.of(search.pageOrDefault(), search.sizeOrDefault(),
                 Sort.by(Sort.Direction.DESC, "hasImage", "id"));
-        return summaries(spotRepository.findAll(SpotSpecs.matching(search.region(), search.category(), search.activity(), search.tag(), search.q()), pageable));
+        return summaries(spotRepository.findAll(SpotSpecs.matching(search.region(), search.category(), search.activity(),
+                search.tag(), search.q(), Boolean.FALSE.equals(search.scenes())), pageable));
     }
 
     // tags come in one batched query (Spot.tags), ratings in one grouped query and card photos in one more,

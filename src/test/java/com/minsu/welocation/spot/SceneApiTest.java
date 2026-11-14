@@ -172,4 +172,17 @@ class SceneApiTest {
                 .andExpect(jsonPath("$.items", hasSize(0)));
         mvc.perform(get("/api/spots/{id}", bridge)).andExpect(jsonPath("$.manual").value(false));
     }
+
+    @Test
+    void theNewestListCanLeaveFilmLocationsOut() throws Exception {
+        importer.importAll();
+        spotRepository.save(new Spot("광안리해수욕장", SpotCategory.BEACH, Region.BUSAN, "부산광역시 수영구",
+                35.1532, 129.1186, SpotSource.TOURAPI, "900003"));
+
+        mvc.perform(get("/api/spots").param("scenes", "false"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items", hasSize(1)))
+                .andExpect(jsonPath("$.items[0].name").value("광안리해수욕장"));
+        mvc.perform(get("/api/spots")).andExpect(jsonPath("$.items", hasSize(4)));
+    }
 }

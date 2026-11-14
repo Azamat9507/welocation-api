@@ -1,6 +1,8 @@
 package com.minsu.welocation.spot;
 
 import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
@@ -13,8 +15,15 @@ final class SpotSpecs {
     }
 
     static Specification<Spot> matching(Region region, SpotCategory category, Activity activity, SpotTag tag,
-                                        String text) {
+                                        String text, boolean withoutScenes) {
         List<Specification<Spot>> specs = new ArrayList<>();
+        if (withoutScenes) {
+            specs.add((root, query, cb) -> {
+                Subquery<Long> scene = query.subquery(Long.class);
+                Root<SpotScene> s = scene.from(SpotScene.class);
+                return cb.not(cb.exists(scene.select(s.get("id")).where(cb.equal(s.get("spot"), root))));
+            });
+        }
         if (region != null) {
             specs.add((root, query, cb) -> cb.equal(root.get("region"), region));
         }
