@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 class SpotServiceNearbyTest {
 
     SpotRepository repository = mock(SpotRepository.class);
-    SpotService service = new SpotService(repository, mock(ReviewRepository.class));
+    SpotService service = new SpotService(repository, mock(ReviewRepository.class), mock(SpotSceneRepository.class));
 
     private void radius(double km, List<SpotRepository.NearbyRow> rows) {
         when(repository.findNearby(anyDouble(), anyDouble(), eq(km * 1000), any(), any(), anyInt())).thenReturn(rows);

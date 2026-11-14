@@ -1,0 +1,16 @@
+[
+ {"source": "TOURAPI", "externalId": "900001", "name": "Nami Island (from the file)", "region": "GANGWON",
+  "address": "강원도 춘천시 남산면 남이섬길 1", "latitude": 37.7962651, "longitude": 127.5254892, "image": null,
+  "scenes": [{"work": "겨울연가", "kind": "DRAMA", "scene": "1화에서 처음 손을 잡는다"}]},
+ {"source": "TOURAPI", "externalId": "900002", "name": "외도 보타니아", "region": "GYEONGNAM",
+  "address": "경상남도 거제시 일운면 외도길 17", "latitude": 34.7694723, "longitude": 128.7113921,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/24/3543324_image2_1.jpg",
+  "scenes": [{"work": "겨울연가", "kind": "DRAMA", "scene": "마지막 20화"},
+             {"work": "올드보이", "kind": "MOVIE", "scene": null}]},
+ {"source": "MANUAL", "externalId": "scene-1012", "name": "서강대교", "region": "SEOUL",
+  "address": "서울특별시 영등포구 여의도동 서강대교", "latitude": 37.536911, "longitude": 126.92495, "image": null,
+  "scenes": [{"work": "겨울연가", "kind": "DRAMA", "scene": "15화에서 이 다리를 건넌다"}]},
+ {"source": "MANUAL", "externalId": "scene-broken", "name": "no region", "region": null,
+  "address": "somewhere", "latitude": 37.5, "longitude": 127.0, "image": null,
+  "scenes": [{"work": "겨울연가", "kind": "DRAMA", "scene": null}]}
+]

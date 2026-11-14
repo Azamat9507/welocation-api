@@ -97,6 +97,9 @@ welocation:
     gallery-max-images: 10
     # stays (숙박) are stored only within this distance of a beach, lake or river spot
     stay-waterside-km: 1.0
+  scenes:
+    # load resources/scenes/scenes.json at startup (adds only what is missing); true in the prod profile
+    import: ${SCENES_IMPORT:false}
   ranking:
     # every hour at :05, rebuild this week's ranking from MySQL
     rebuild-cron: "0 5 * * * *"

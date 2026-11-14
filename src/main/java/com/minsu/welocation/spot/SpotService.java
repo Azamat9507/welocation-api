@@ -6,10 +6,14 @@ import com.minsu.welocation.review.ReviewRepository;
 import com.minsu.welocation.spot.SpotDtos.NearbySearch;
 import com.minsu.welocation.spot.SpotDtos.NearbySpot;
 import com.minsu.welocation.spot.SpotDtos.Rating;
+import com.minsu.welocation.spot.SpotDtos.SceneView;
 import com.minsu.welocation.spot.SpotDtos.SpotDetail;
 import com.minsu.welocation.spot.SpotDtos.SpotMap;
 import com.minsu.welocation.spot.SpotDtos.SpotSearch;
 import com.minsu.welocation.spot.SpotDtos.SpotSummary;
+import com.minsu.welocation.spot.SpotDtos.Work;
+import com.minsu.welocation.spot.SpotDtos.WorkSpot;
+import com.minsu.welocation.spot.SpotDtos.WorkSpots;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,10 +22,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +42,7 @@ public class SpotService {
 
     private final SpotRepository spotRepository;
     private final ReviewRepository reviewRepository;
+    private final SpotSceneRepository sceneRepository;
 
     public PageResponse<SpotSummary> search(SpotSearch search) {
         // spots with a photo first, newest first within each group
@@ -96,7 +103,32 @@ public class SpotService {
     public SpotDetail get(Long id) {
         Spot spot = spotRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("spot " + id + " not found"));
-        return SpotDetail.from(spot, ratingsOf(List.of(id)).getOrDefault(id, Rating.NONE));
+        List<SceneView> scenes = sceneRepository.findBySpotIdOrderByIdAsc(id).stream().map(SceneView::from).toList();
+        return SpotDetail.from(spot, ratingsOf(List.of(id)).getOrDefault(id, Rating.NONE), scenes);
+    }
+
+    public List<Work> works() {
+        return sceneRepository.findWorks().stream()
+                .map(row -> new Work(row.getWork(), row.getKind(), row.getSpots(), row.getCover()))
+                .toList();
+    }
+
+    // the work's spots in the order the source lists them, photo first so the page opens on pictures
+    public WorkSpots work(String title) {
+        List<SpotScene> scenes = sceneRepository.findByWorkOrderByIdAsc(title);
+        if (scenes.isEmpty()) {
+            throw new NotFoundException("no spots for this work");
+        }
+        Map<Long, SpotSummary> spots = summariesById(scenes.stream().map(scene -> scene.getSpot().getId()).toList());
+        List<WorkSpot> found = scenes.stream()
+                .filter(scene -> spots.containsKey(scene.getSpot().getId()))
+                .map(scene -> new WorkSpot(spots.get(scene.getSpot().getId()), scene.getScene()))
+                .sorted(Comparator.comparing((WorkSpot spot) -> spot.spot().thumbnailUrl() == null))
+                .toList();
+        SpotScene first = scenes.getFirst();
+        String cover = found.stream().map(spot -> spot.spot().thumbnailUrl()).filter(Objects::nonNull)
+                .findFirst().orElse(null);
+        return new WorkSpots(new Work(title, first.getKind(), found.size(), cover), found);
     }
 
     private Map<Long, Rating> ratingsOf(List<Long> spotIds) {

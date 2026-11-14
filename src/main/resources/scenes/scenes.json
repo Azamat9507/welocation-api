@@ -1,0 +1,4214 @@
+[
+ {
+  "source": "TOURAPI",
+  "externalId": "127713",
+  "name": "추암해변",
+  "region": "GANGWON",
+  "address": "강원도 동해시 촛대바위길 2",
+  "latitude": 37.47941,
+  "longitude": 129.1602074,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/84/4127984_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "겨울연가",
+    "kind": "DRAMA",
+    "scene": "18회에서 데이트 장소로 나온다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "128019",
+  "name": "남이섬",
+  "region": "GANGWON",
+  "address": "강원도 춘천시 남산면 남이섬길 1",
+  "latitude": 37.7962651,
+  "longitude": 127.5254892,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/96/4153696_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "겨울연가",
+    "kind": "DRAMA",
+    "scene": "강준상, 정유진 동상 앞에서 셀카를 찍는다. 이 섬은 강준상(배용준)과 정유진(최지우)의 비밀장소다. 1화에서 처음으로 손을 잡고 첫 키스하고, 2화에서 눈사람을 만든다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126581",
+  "name": "외도 보타니아",
+  "region": "GYEONGNAM",
+  "address": "경상남도 거제시 일운면 외도길 17",
+  "latitude": 34.7694723,
+  "longitude": 128.7113921,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/24/3543324_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "겨울연가",
+    "kind": "DRAMA",
+    "scene": "이민형(배용준)이 실명한 뒤 리하우스에서 은둔 생활을 하고 있는 곳이다. 정유진(최지우)은 마지막 20화에서 그를 찾아 키스로 재회한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1012",
+  "name": "서강대교",
+  "region": "SEOUL",
+  "address": "서울특별시 영등포구 여의도동 서강대교",
+  "latitude": 37.536911,
+  "longitude": 126.92495,
+  "image": null,
+  "scenes": [
+   {
+    "work": "겨울연가",
+    "kind": "DRAMA",
+    "scene": "강준상/이민형(배용준)은 15화에서 어머니와 전화통화를 할 때 이 다리를 건너 운전을 한다."
+   },
+   {
+    "work": "커피프린스 1호점",
+    "kind": "DRAMA",
+    "scene": "2회에서 컨버터블을 타고 이 다리를 건너는 고은찬(윤은혜)과 최한결(공유)이 나온다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1013",
+  "name": "후암동성당",
+  "region": "SEOUL",
+  "address": "서울특별시 용산구 후암로34길 21-8",
+  "latitude": 37.552069,
+  "longitude": 126.97821,
+  "image": null,
+  "scenes": [
+   {
+    "work": "겨울연가",
+    "kind": "DRAMA",
+    "scene": "16회에서 이민형(배용준)이 정유진(최지우)에게 별목걸이로 프러포즈한 곳. 그리고 그들은 제단 앞에서 입맞춤을 한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126487",
+  "name": "마로니에공원",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 대학로 104",
+  "latitude": 37.5801874,
+  "longitude": 127.0027076,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/35/3506735_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "겨울연가",
+    "kind": "DRAMA",
+    "scene": "3회에서 정유진(최지우)이 약혼식장에 가는 길에 이민형(배용준)이 죽은 줄 알았던 곳이기도 하다. 약혼 파티는 까맣게 잊고, 그녀는 미친 듯이 그의 뒤를 쫓아가서 그를 찾으려고 한다. 헛수고다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "252529",
+  "name": "중앙고등학교",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 창덕궁길 164",
+  "latitude": 37.5840894,
+  "longitude": 126.986834,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/11/3573511_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "겨울연가",
+    "kind": "DRAMA",
+    "scene": "정유진(최지우), 김상혁(박용하), 오채린(박솔미) 등이 모두 이 고등학교에 다닌다. 강준상(배용준)은 1화에서 신입생으로 합류한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1009",
+  "name": "춘천 기와집골 마을",
+  "region": "GANGWON",
+  "address": "강원도 춘천시 기와집길31번길 2",
+  "latitude": 37.886993,
+  "longitude": 127.72725,
+  "image": null,
+  "scenes": [
+   {
+    "work": "겨울연가",
+    "kind": "DRAMA",
+    "scene": "첫 두 에피소드에서 고등학생 강준상(배용준)의 어머니가 그를 미국으로 데려오기 전에 사는 곳이다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1016",
+  "name": "더플라자",
+  "region": "SEOUL",
+  "address": "서울특별시 중구 소공로 119",
+  "latitude": 37.564704,
+  "longitude": 126.97816,
+  "image": null,
+  "scenes": [
+   {
+    "work": "겨울연가",
+    "kind": "DRAMA",
+    "scene": "이민형/강준상(배용준)은 잠시 이 호텔에 거주한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "130152",
+  "name": "서대문형무소역사관",
+  "region": "SEOUL",
+  "address": "서울특별시 서대문구 통일로 251",
+  "latitude": 37.5743039,
+  "longitude": 126.9555346,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/29/3520329_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "올인",
+    "kind": "DRAMA",
+    "scene": "김인하(이병헌)가 이 감옥에 수감되어 있다."
+   },
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "영화 아가씨에서 정신병원 씬으로 나왔던 곳"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "822384",
+  "name": "북서울꿈의숲",
+  "region": "SEOUL",
+  "address": "서울특별시 강북구 월계로 173",
+  "latitude": 37.6196701,
+  "longitude": 127.0445293,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/44/3540144_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "아이리스",
+    "kind": "DRAMA",
+    "scene": "14회에서는 이 전망대에서 이병헌) 대통령 조명호(이정길)와 비밀 회담을 가졌다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-10037",
+  "name": "연세대학교 신촌캠퍼스",
+  "region": "SEOUL",
+  "address": "서울특별시 서대문구 연세로 50",
+  "latitude": 37.5637563,
+  "longitude": 126.937546,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아이리스",
+    "kind": "DRAMA",
+    "scene": "1회에서 김현준(이병헌)과 최승희(김태희)가 학생 시절 처음 이곳에서 만났고 그는 그녀에게 커피를 마시자고 한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "775394",
+  "name": "광화문광장",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 세종대로 175",
+  "latitude": 37.5726489,
+  "longitude": 126.9769548,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/02/4080502_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "아이리스",
+    "kind": "DRAMA",
+    "scene": "김현준(이병헌)과 김선화(김소연)는 17회에서 테러범들이 이곳에 설치한 폭탄을 찾기 위해 광화문 광장으로 온다."
+   },
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "첫 티저에서 효명세자(박보검)가 붐바스틱 댄스를 추는 모습으로 이곳에서 촬영됐다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-10039",
+  "name": "중림동약현성당",
+  "region": "SEOUL",
+  "address": "서울특별시 중구 청파로 447-1",
+  "latitude": 37.559115,
+  "longitude": 126.96744,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아이리스",
+    "kind": "DRAMA",
+    "scene": "3화에서 기억을 되찾기 위해 김현준(이병헌)이 찾아온다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-10040",
+  "name": "컨벤시아대로",
+  "region": "INCHEON",
+  "address": "인천광역시 연수구 컨벤시아대로",
+  "latitude": 37.392001,
+  "longitude": 126.64628,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아이리스",
+    "kind": "DRAMA",
+    "scene": "14회에서 김현준(이병헌)이 이 거리를 운전하고 있다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-10041",
+  "name": "표선 등대",
+  "region": "JEJU",
+  "address": "제주특별자치도 서귀포시 표선면 민속해안로 532",
+  "latitude": 33.3209829,
+  "longitude": 126.846909,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아이리스",
+    "kind": "DRAMA",
+    "scene": "마지막 20회에서 김현준(이병헌)과의 만남의 장소에 최승희(김태희)는 이 등대에 온다. 그녀가 이곳에서 그들의 낭만적인 순간을 회상하는 동안, 그는 그녀를 만나러 가던 길에 도착하기 직전에 그의 차에서 총에 맞았습니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-10035",
+  "name": "생각속의 집",
+  "region": "GYEONGGI",
+  "address": "경기도 양평군 단월면 대부록길 37",
+  "latitude": 37.580403,
+  "longitude": 127.68146,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아이리스",
+    "kind": "DRAMA",
+    "scene": "개인 병실에서 치료를 받는 조명호(이정길)의 피난처다. 13~14회에서 김현준(이병헌)과 김선화(김소연)가 부지에 도착하기 직전 백산(김영철)과 진사우(정준호)에게 위협을 받아 모두 살해당한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-10042",
+  "name": "해비치호텔앤드리조트",
+  "region": "JEJU",
+  "address": "제주특별자치도 서귀포시 표선면 민속해안로 537",
+  "latitude": 33.3235675,
+  "longitude": 126.844477,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아이리스",
+    "kind": "DRAMA",
+    "scene": "최종회 20회에서 김현준(이병헌)이 이 장소 로비에서 프러포즈를 했을 때의 사랑스러운 시간을 회상한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "129437",
+  "name": "화성행궁",
+  "region": "GYEONGGI",
+  "address": "경기도 수원시 팔달구 정조로 825",
+  "latitude": 37.2818163,
+  "longitude": 127.0163732,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/62/4078262_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "대장금' 속 수원화성문화제를 즐길 수 있는 곳"
+   },
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "구르미 그린 달빛 티저영상 장소"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2912454",
+  "name": "한국민속촌",
+  "region": "GYEONGGI",
+  "address": "경기도 용인시 기흥구 민속촌로 90",
+  "latitude": 37.2591319,
+  "longitude": 127.1225431,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/22/4018722_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "장금(이영애)은 51회에서 이 마을에서 천연두 환자들을 돌본다. 54화에서는 민정호(지진희)의 아이를 이곳에서 낳는다."
+   },
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "대표적인 전통문화 테마파크이자 킹덤의 촬영지"
+   },
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "극중에서 이병헌이 곤장 맞는 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-2955",
+  "name": "용인 대장금 파크",
+  "region": "GYEONGGI",
+  "address": "경기도 용인시 처인구 백암면 용천드라마길 25",
+  "latitude": 37.1209396,
+  "longitude": 127.337296,
+  "image": null,
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "우리나라 최대 규모의 오픈 세트장"
+   },
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "이 공원의 일부는 15회에서 조선시대 '만월당 여관'이나 '만월 여관'으로 등장한다."
+   },
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "킹덤의 촬영지이자 한복 입고 사진 찍기 좋은 장소"
+   },
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "1화(전체 1화)의 일부 장면이 촬영된 장소로, 대한제국의 정궁을 보여준다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "1605908",
+  "name": "창덕궁 향나무",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 율곡로 99",
+  "latitude": 37.5792317,
+  "longitude": 126.9894478,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/26/4112926_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "1화에서 연산군 행진이 거행됩니다. 인정전 앞에 있고, 3화에서 중종(임호)의 행렬이 여기서도 일어난다"
+   },
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "이창(주지훈) 세자가 킹덤(킹덤/킹덤)의 이 정자에 서 있는 모습. 섭정의 제의를 마친 후 정자에서 조학주(류승룡)와 그의 딸 섭정(김혜준)이 사적인 대화를 나눈다. 이 정자의 일부인 연못은 왕국에서 좀비 감염 인원의 궁전의 처리 구역이기도 하다."
+   },
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "2회에서 (박보검) 왕과 내시가 나누는 대화를 엿듣습니다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "127931",
+  "name": "순천 낙안읍성",
+  "region": "JEONNAM",
+  "address": "전라남도 순천시 낙안면 충민길 30",
+  "latitude": 34.9060616,
+  "longitude": 127.3417276,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/81/4099881_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "여러가지 체험이 간능한 '대장금' 촬영지"
+   },
+   {
+    "work": "태극기 휘날리며",
+    "kind": "MOVIE",
+    "scene": "시체가 산을 이루고 우물에서 폭탄 터진 곳"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126236",
+  "name": "선운산 (전북 서해안 국가지질공원)",
+  "region": "JEONBUK",
+  "address": "전라북도 고창군 심원면 연화리",
+  "latitude": 35.5026335,
+  "longitude": 126.586548,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/64/2678864_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "대장금 어머니의 돌무덤, 용문굴이 있는 산"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126352",
+  "name": "내소사(부안)",
+  "region": "JEONBUK",
+  "address": "전라북도 부안군 진서면 내소사로 243",
+  "latitude": 35.617659,
+  "longitude": 126.587642,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/87/4090587_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "대장금이 앉았던 연못이 있는 곳"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126672",
+  "name": "송악산",
+  "region": "JEJU",
+  "address": "제주특별자치도 서귀포시 대정읍 송악관광로 421-1",
+  "latitude": 33.1989,
+  "longitude": 126.2903,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/55/3400255_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "검은색 모래가 인상적인 '대장금' 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126470",
+  "name": "외돌개(제주)",
+  "region": "JEJU",
+  "address": "제주특별자치도 서귀포시 서홍동 791",
+  "latitude": 33.2402622,
+  "longitude": 126.5462159,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/75/3552175_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "27회에서 최상궁은 궁궐의 모든 부엌을 총괄하는 감독이 되기 위해 음모를 꾸미고, 먹고 병에 걸린 중종을 위해 한상궁(양미경)과 장금(이영애)이 준비한 오리밥을 독살한다. 반역죄로 기소된 두 여인은 구타를 당하고 제주도로 유배되지만 여행 중 한씨는 병에 걸린다. 장금은 그녀를 업고 갈대밭과 낭떠러지 위의 오솔길을 따라가지만 슬프게도 그녀의 스승은 세상을 떠난다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "130474",
+  "name": "제주민속촌",
+  "region": "JEJU",
+  "address": "제주특별자치도 서귀포시 표선면 민속해안로 631-34",
+  "latitude": 33.3212872,
+  "longitude": 126.8430883,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/43/3534943_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "대장금",
+    "kind": "DRAMA",
+    "scene": "대장금' 소품 전시관이 있는 민속촌"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "250465",
+  "name": "킨텍스",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 일산서구 킨텍스로 217-60",
+  "latitude": 37.6689358,
+  "longitude": 126.7455635,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/46/4092846_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "마지막 9화에서 로스앤젤레스로 가는 장면에서 공항으로 나온다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11038",
+  "name": "뽀꼬팡 창동점",
+  "region": "SEOUL",
+  "address": "서울특별시 도봉구 덕릉로60가길 59",
+  "latitude": 37.63714,
+  "longitude": 127.0387,
+  "image": null,
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "성기훈(이준재)은 딸을 치료하기 위해 경마로 거액의 돈을 벌게 된다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11039",
+  "name": "팔도건어물",
+  "region": "SEOUL",
+  "address": "서울특별시 도봉구 삼양로154길 36",
+  "latitude": 37.6555216,
+  "longitude": 127.0130601,
+  "image": null,
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "상우 어머니가 운영하던 생선 가게"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11040",
+  "name": "백운시장",
+  "region": "SEOUL",
+  "address": "서울특별시 도봉구 우이천로 481 1층 백운시장 상인회 사무실",
+  "latitude": 37.65547,
+  "longitude": 127.015,
+  "image": null,
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "1-2화에서 조상우의 어머니(박혜진)는 '쌍문의 자존심'인 성공한 아들의 사진을 자랑스럽게 걸어둔 '상우의 생선가게'라는 생선가게를 이 시장에서 운영하고 있다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11045",
+  "name": "신한금융투자빌딩",
+  "region": "SEOUL",
+  "address": "서울특별시 영등포구 여의대로 70",
+  "latitude": 37.524832,
+  "longitude": 126.92418,
+  "image": null,
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "1화의 이 건물 옆 입구에서, 게임이 진행되는 장소로 향합니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6063",
+  "name": "한강 공원 여의도 지구",
+  "region": "SEOUL",
+  "address": "서울특별시 영등포구 여의동로 290",
+  "latitude": 37.5290674,
+  "longitude": 126.936218,
+  "image": null,
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "2화에서 조상우(박해수)와 알리 압둘(트리파티 아누팜)이 게임이 도중에 종료된 후.이 곳에 풀려난다."
+   },
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "4회에서 도민준(김수현)이 자전거를 타고 119구조대 여의도 구조대와 가까운 이 공원을 지나는 모습이 그려졌다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11048",
+  "name": "남산 산책로",
+  "region": "SEOUL",
+  "address": "서울특별시 중구 예장동 산5-6",
+  "latitude": 37.5518838,
+  "longitude": 126.988065,
+  "image": null,
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "투표로 오징어 게임이 중단되고 헤어지는 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11051",
+  "name": "선갑도",
+  "region": "INCHEON",
+  "address": "인천광역시 옹진군 자월면 승봉리 산240",
+  "latitude": 37.09755,
+  "longitude": 126.0772,
+  "image": null,
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "8회에서 오징어게임의 최전선(이병헌)과 그의 부하들이 해변에서 서쪽 바다가 내려다보이는 절벽 끝까지 서울경찰과 게임 잠입자 황준호(위하준)를 쫓는다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2783003",
+  "name": "마이랜드",
+  "region": "INCHEON",
+  "address": "인천광역시 중구 월미로234번길 7",
+  "latitude": 37.4748538,
+  "longitude": 126.5987932,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/88/3422888_image2_1.png",
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "경기가 중단된 후, 조폭 장덕수(허성태)는 이 놀이동산 밖에서 지인을 만난다. 2화에서 상금을 훔치기 위해 갱단과 함께 섬으로 돌아갈 것을 제안한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2750341",
+  "name": "도비도항",
+  "region": "CHUNGNAM",
+  "address": "충청남도 당진시 석문면 난지3길 13",
+  "latitude": 37.0211763,
+  "longitude": 126.4623605,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/50/3567550_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "오징어게임",
+    "kind": "DRAMA",
+    "scene": "성기훈(이정재)이 자신을 실종된 형에게로 인도할 수 있다고 의심한 경찰 황준호(위하준)는 2화에서 그를 태운 밴을 따라 이 항구로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "128728",
+  "name": "영진해변",
+  "region": "GANGWON",
+  "address": "강원도 강릉시 주문진읍 해안로 1609",
+  "latitude": 37.8695,
+  "longitude": 128.8449,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/60/4120460_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "SNS에서 유명한 도깨비 방파제 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2640123",
+  "name": "삼양라운드힐",
+  "region": "GANGWON",
+  "address": "강원도 평창군 대관령면 꽃밭양지길 708-9",
+  "latitude": 37.7239205,
+  "longitude": 128.7196633,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/94/3477094_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "공유가 중천의 허무를 걷는 장면 촬영지"
+   },
+   {
+    "work": "태극기 휘날리며",
+    "kind": "MOVIE",
+    "scene": "퇴각명령을 받고 후퇴를 준비하는 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3082",
+  "name": "모나파크 용평리조트 발왕산 관광케이블카",
+  "region": "GANGWON",
+  "address": "강원도 평창군 대관령면 올림픽로 715",
+  "latitude": 37.642873,
+  "longitude": 128.680066,
+  "image": null,
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "김고은이 집 나와서 일하러 간 스키장"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3083",
+  "name": "월정사 전나무 숲길",
+  "region": "GANGWON",
+  "address": "강원도 평창군 진부면 오대산로 350-1",
+  "latitude": 37.731998,
+  "longitude": 128.599855,
+  "image": null,
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "공유가 집 나온 김고은을 따라가던 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "125772",
+  "name": "월정사·월정사 전나무숲",
+  "region": "GANGWON",
+  "address": "강원도 평창군 진부면 오대산로 374-8",
+  "latitude": 37.731571,
+  "longitude": 128.5925237,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/54/3304054_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "9화에서 이 사찰로 가는 길과 전나무길은 지은탁(김고은)의 아르바이트 마치고 집으로 가는 길로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3085",
+  "name": "안성 석남사",
+  "region": "GYEONGGI",
+  "address": "경기도 안성시 금광면 상촌새말길 3-120",
+  "latitude": 36.939541,
+  "longitude": 127.306754,
+  "image": null,
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "공유가 풍등을 날리던 그 절"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3086",
+  "name": "안양 동편마을",
+  "region": "GYEONGGI",
+  "address": "경기도 안양시 동안구 동편로27번길 37",
+  "latitude": 37.407881,
+  "longitude": 126.971295,
+  "image": null,
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "수능보러 갈 때 데려다준 장면 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3088",
+  "name": "스페이스청담",
+  "region": "SEOUL",
+  "address": "서울특별시 강남구 선릉로152길 30",
+  "latitude": 37.524199,
+  "longitude": 127.04193,
+  "image": null,
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "12화에서 유덕화(육성재)가 김신(공유)과 저승사자(이동욱)를 라운지 바에서 만난다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "129818",
+  "name": "건국대학교 박물관",
+  "region": "SEOUL",
+  "address": "서울특별시 광진구 능동로 120",
+  "latitude": 37.5428238,
+  "longitude": 127.0762904,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/80/4069180_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "지은탁(김고은)이 7화에서 여기서 통신전공 논술전형을 치른다. 일이 끝났을 때, 그녀는 우연히 대학 야구팀의 일원인 그녀의 짝사랑하는 태희(정해인)와 마주친다. 은탁을 데리러 이곳에 와서 건국대학교 박물관 앞에서 기다리는 김신(공유)은 그들의 재회를 마지못해 목격하게 된다. 12화 후반부에서, 우리는 그녀가 학생일 때 캠퍼스를 걷는 것을 본다. 13화에서 저승사자(이동욱)는 은탁(학생회 건물 옥상 카페일 가능성이 높다)을 만나기 위해 이곳에 와서 신정아가 가슴에 품고 있는 칼을 뽑아준다. 조금 후, 그리고 그들의 여행이 끝난 후, "
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3091",
+  "name": "덕성여자대학교",
+  "region": "SEOUL",
+  "address": "서울특별시 도봉구 삼양로144길 39",
+  "latitude": 37.65247,
+  "longitude": 127.01583,
+  "image": null,
+  "scenes": [
+   {
+    "work": "도깨비",
+    "kind": "DRAMA",
+    "scene": "1화에서 지은탁(김고은)은 이곳에서 촛불을 불어주는 앱으로 김신(공유)을 부를 수 있다는 자신의 이론을 시도한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "127740",
+  "name": "별마로천문대",
+  "region": "GANGWON",
+  "address": "강원도 영월군 영월읍 천문대길 397",
+  "latitude": 37.198366,
+  "longitude": 128.486777,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/41/3499341_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "둘리커플 만남의 시작이 된 패러글라이딩 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6712",
+  "name": "홍삼스파 참숯가마 사우나",
+  "region": "GYEONGGI",
+  "address": "경기 파주시 탄현면 갈현리 654-7",
+  "latitude": 37.773824,
+  "longitude": 126.717309,
+  "image": null,
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "11-12회에서 이 사우나는 리정혁(현빈)의 4남 표치수(양경원), 박광범(이신영), 김주묵(유수빈), 금은동(탕준상)과 정만복(김영민)이 서울에 머무는 동안 그들의 숙소가 된다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "127556",
+  "name": "미리내성지",
+  "region": "GYEONGGI",
+  "address": "경기도 안성시 양성면 미리내성지로 420",
+  "latitude": 37.1484308,
+  "longitude": 127.259142,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/77/3558777_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "시누이 도혜지(황우슬혜)는 남편이 가문의 회사를 상속받을 수 있도록 바라는 한편, 세리의 비서 홍씨(고규필)과 동시에 그녀가 가능한 한 빨리 발견되기를 기도합니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6714",
+  "name": "한탄강 하늘다리",
+  "region": "GYEONGGI",
+  "address": "경기도 포천시 영북면 비둘기낭길 207",
+  "latitude": 38.084174,
+  "longitude": 127.219169,
+  "image": null,
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "둘리커플이 대화를 나눈 아찔한 높이의 하늘다리"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6715",
+  "name": "코모도호텔 부산",
+  "region": "BUSAN",
+  "address": "부산광역시 중구 중구로 151",
+  "latitude": 35.109159,
+  "longitude": 129.035447,
+  "image": null,
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "둘리커플이 함께 다녀간 평양의 고급 호텔"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6719",
+  "name": "동아디지털미디어센터",
+  "region": "SEOUL",
+  "address": "서울특별시 마포구 매봉산로 75",
+  "latitude": 37.57832,
+  "longitude": 126.89285,
+  "image": null,
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "이 건물은 '세리의 선택' 사옥 중 하나로 등장"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6722",
+  "name": "부암동 7번지",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 북악산로 147",
+  "latitude": 37.598022,
+  "longitude": 126.97348,
+  "image": null,
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "3화에서 구승정(김정현)이 북한에서 임대하는 집으로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6723",
+  "name": "신제물포구락부",
+  "region": "INCHEON",
+  "address": "인천광역시 미추홀구 석정로 200 지하1층",
+  "latitude": 37.467645,
+  "longitude": 126.65749,
+  "image": null,
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "북한의 고위층 여성만 가는 비밀스러운 양장점"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "129255",
+  "name": "선녀바위해변",
+  "region": "INCHEON",
+  "address": "인천광역시 중구 선녀바위로 70",
+  "latitude": 37.4396,
+  "longitude": 126.3779,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/92/3518392_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "탈북 성공한 리정혁이 처음 만난 남한 바닷가"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6727",
+  "name": "담양레이나CC",
+  "region": "JEONNAM",
+  "address": "전라남도 담양군 담양읍 깊은실길 169",
+  "latitude": 35.310369,
+  "longitude": 127.01734,
+  "image": null,
+  "scenes": [
+   {
+    "work": "사랑의 불시착",
+    "kind": "DRAMA",
+    "scene": "이 곳은 등장인물 윤세리(손예진)의 할아버지의 저택으로 나오는 장소이다. 1화에서 윤회장(남경업)이 자녀들을 모두 이곳에 불러 가족 만찬을 하는 장면의 저택으로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2470392",
+  "name": "삼탄아트마인",
+  "region": "GANGWON",
+  "address": "강원도 정선군 고한읍 함백산로 1445-44",
+  "latitude": 37.1850515,
+  "longitude": 128.8835217,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/15/3364115_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "6, 7화에서 가상의 마을 '우르크'에서 지진이 발생하는 곳이다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2720995",
+  "name": "통리탄탄파크",
+  "region": "GANGWON",
+  "address": "강원도 태백시 통골길 116-44",
+  "latitude": 37.1608476,
+  "longitude": 129.0432606,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/41/4094841_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "우르크 장면들을 다수 촬영한 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12983",
+  "name": "태양의후예 태백세트장",
+  "region": "GANGWON",
+  "address": "강원도 태백시 통동 산 67-38",
+  "latitude": 37.154824,
+  "longitude": 129.04035,
+  "image": null,
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "상상의 나라 우르크의 일부를 촬영한 곳입니다. 6회에서 서대영(진구)이 신병을 훈련시키고 유시진(송중기)이 아주 멋진 모습으로 그를 찾아오는 한국의 군사 훈련장 촬영 장소이기도 했다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "128626",
+  "name": "벽초지수목원",
+  "region": "GYEONGGI",
+  "address": "경기도 파주시 광탄면 부흥로 242",
+  "latitude": 37.8014264,
+  "longitude": 126.8740554,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/16/3527116_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "6회에서 유시진(송중기)은 낚시를 간다"
+   },
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "왕회장이 손녀인 설리의 꿈에서 만난 장소"
+   },
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "빈센조 카사노/박주형(송중기), 홍차영(전여빈), 빈센조의 어머니 오경자(윤복인)는 16회에서 함께 사진을 찍고 잠시 차영이 엄마와 아들이 함께 시간을 보낼 수 있도록 자신을 변명한 후 이 정원을 산책한다."
+   },
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "백작과 숙희가 은밀한 거래를 두고 다투는 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12987",
+  "name": "비플러스엠",
+  "region": "SEOUL",
+  "address": "서울특별시 마포구 마포대로16길 7-14",
+  "latitude": 37.551801,
+  "longitude": 126.956743,
+  "image": null,
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "강모연의 집으로 나왔던 가구점"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11524",
+  "name": "열우물 벽화마을",
+  "region": "INCHEON",
+  "address": "인천광역시 부평구 열우물로102번길 35-2",
+  "latitude": 37.477439,
+  "longitude": 126.69753,
+  "image": null,
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "6회에서 유시진(송중기)과 서대영(진구)은 전 연습생들로부터 도망치며 이 식당 뒤에 숨었다."
+   },
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "2회에서는 덕선(걸스데이 혜리)이 학교에서 집으로 돌아오는 길에 이 거리를 질주하는 모습이 그려졌다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2994418",
+  "name": "G타워 전망대",
+  "region": "INCHEON",
+  "address": "인천광역시 연수구 아트센터대로 175",
+  "latitude": 37.3963643,
+  "longitude": 126.6335412,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/41/3393341_image2_1.JPG",
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "13~14화에서 유시진(송중기)은 두 번째 특별한 '남북회담' 장소를 지키던 중 북한 적수가 '서울호텔'로 등장하는 이 건물에서 총에 맞는다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12997",
+  "name": "오크우드프리미어 인천",
+  "region": "INCHEON",
+  "address": "인천광역시 연수구 컨벤시아대로 165",
+  "latitude": 37.389269,
+  "longitude": 126.64424,
+  "image": null,
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "2화 회상 장면에서, 강모연(송혜교)은 자신이 근무하던 병원 부원장 한석원(태인호)의 의심스러운 제안에 응한 호텔방을 떠올린다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12984",
+  "name": "달콤커피 분당정자점",
+  "region": "GYEONGGI",
+  "address": "경기도 성남시 분당구 정자일로 135",
+  "latitude": 37.362204,
+  "longitude": 127.10574,
+  "image": null,
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "1, 13화에서 유시진(송중기 분)과 서대영(진구 분)의 데이트 장소이며 유씨의 휴대폰이 도난당하는곳."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12985",
+  "name": "로스가든카페앤비노",
+  "region": "GYEONGGI",
+  "address": "경기도 안성시 양성면 미리내성지로 299-8",
+  "latitude": 37.130904,
+  "longitude": 127.25867,
+  "image": null,
+  "scenes": [
+   {
+    "work": "태양의 후예",
+    "kind": "DRAMA",
+    "scene": "16회에서 유시진(송중기)과 강모연(송혜교)이 낚시여행을 떠나는 도중에 들리는 카페이다"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "604009",
+  "name": "쁘띠프랑스",
+  "region": "GYEONGGI",
+  "address": "경기도 가평군 청평면 호반로 1063",
+  "latitude": 37.715,
+  "longitude": 127.4906,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/15/3423715_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "전지현과 김수현이 촬영지에서 키스를 한 장소"
+   },
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "김주원(현빈)과 길라임(하지원)이 처음으로 만난다"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6047",
+  "name": "일산 비버리 힐스",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 일산동구 강송로218번길 40",
+  "latitude": 37.658382,
+  "longitude": 126.78377,
+  "image": null,
+  "scenes": [
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "21화 마지막 장면에서 도민준(김수현)과 천송이(전지현)의 새 보금자리로 등장한다. 8회에서 유세미(유인나 분)를 찾아가 12년 전 도민준(김현수 분)이 어떻게 구했는지 목격했다고 이야기한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "127197",
+  "name": "일산호수공원",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 일산동구 호수로 731",
+  "latitude": 37.657058,
+  "longitude": 126.763855,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/83/3553283_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "17회에서 천송이(전지현)와 도민준(김수현)은 이곳에서 논쟁을 벌인다. 21회에서는 천송이(전지현)가 이 공원 폭포 광장에서 드라마 촬영을 하고 있다."
+   },
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "오수아(권나라)는 방과 후 이 편의점에서 일하고 있으며, 박새로이(박서준)의 아버지 박성열(손현주)이 직장을 그만둔 후 1화에서 자신을 찾아가는 곳이다. 그는 그럼에도 불구하고 그녀에게 대학 학비를 계속 지원할 것이라는 것을 알려주고 오수아는 그에게 세 번 보답하겠다고 약속한다. 최종회 16회 에필로그에서는 조각 '휴먼타임스' 바로 뒤 호수에서 일몰을 보며 데이트를 하고 키스를 하는 박세로와 조이서(김다미)의 모습이 그려진다."
+   },
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "구찬성(여진구)은 이곳에서 결혼 주문과 함께 빨간 주머니를 찾고, 장만월(이지은)은 그를 붙잡기 위해 모든 것을 다하다가 마침내 그의 친구 산체스(조현철)에게 발견된다."
+   },
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "11회에서 차은상(박신혜)과 김탄(이민호)은 캠핑을 마치고 아침 이 공원 메타세콰이어 골목길 단풍 나무 사이를 산책한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "128918",
+  "name": "양평 두물머리",
+  "region": "GYEONGGI",
+  "address": "경기도 양평군 양서면 양수리",
+  "latitude": 37.5336226,
+  "longitude": 127.3174715,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/60/4122260_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "21회에서 별들이 UFO처럼 날아가는 유성우를 보기 위해 많은 인파가 이 공원에 모였다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6053",
+  "name": "장암저수지",
+  "region": "GYEONGGI",
+  "address": "경기도 포천시 이동면 장암리",
+  "latitude": 38.028088,
+  "longitude": 127.395624,
+  "image": null,
+  "scenes": [
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "김수현과 전지현이 캠핑을 간 눈덮힌 저수지"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6055",
+  "name": "통도환타지아",
+  "region": "GYEONGNAM",
+  "address": "경상남도 양산시 하북면 통도7길 68",
+  "latitude": 35.499991,
+  "longitude": 129.08314,
+  "image": null,
+  "scenes": [
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "도민준 (김수현)은 천송이(전지현)를 따라갑니다. 6,7회에서 이희경(박해진)과 데이트를 하기 위해 이 놀이동산으로 갔다. 희경과 송이가 관람차를 타고 송이가 희경의 고백에 답하려 하는 동안, 민준은 시간을 멈추고 모든 것이 다시 작동하자 그녀는 그녀의 반응을 부정으로 변경했습니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6056",
+  "name": "장사도 해상공원 까멜리아",
+  "region": "GYEONGNAM",
+  "address": "경상남도 통영시 한산면 장사도길 55",
+  "latitude": 34.713673,
+  "longitude": 128.55885,
+  "image": null,
+  "scenes": [
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "김수현과 전지현이 기자들에게서 도망친 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6061",
+  "name": "GT타워",
+  "region": "SEOUL",
+  "address": "서울특별시 서초구 서초대로 411",
+  "latitude": 37.498034,
+  "longitude": 127.02599,
+  "image": null,
+  "scenes": [
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "5회에서 천송이(전지현)가 도민준(김수현)에 대해 설명하면서 현재 살고 있는 아파트로 이사한 곳이 바로 이 건물이다. 그녀의 아파트 발코니에서 그와 합류. 천송이에 따르면 이곳은 빌보드를 위한 가장 비싼 장소이며 이 나라에서 가장 핫한 스타가 여기에 삽니다(현재 그녀입니다)."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6064",
+  "name": "N서울타워",
+  "region": "SEOUL",
+  "address": "서울특별시 용산구 남산공원길 105",
+  "latitude": 37.551168,
+  "longitude": 126.98824,
+  "image": null,
+  "scenes": [
+   {
+    "work": "별에서 온 그대",
+    "kind": "DRAMA",
+    "scene": "김수현과 전지현이 자물쇠를 걸며 사랑을 다짐한 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1868",
+  "name": "설악해변",
+  "region": "GANGWON",
+  "address": "강원도 양양군 강현면 뒷나루2길 5-8",
+  "latitude": 38.131216,
+  "longitude": 128.62292,
+  "image": null,
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "금잔디(구혜선)와 윤지후(김현중)는 지후의 할아버지가 함께 시간을 보내기 위해 계획하고 만난다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1870",
+  "name": "닥밭공원",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 일산동구 무궁화로93번길 32",
+  "latitude": 37.667733,
+  "longitude": 126.7724,
+  "image": null,
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "금잔디(구혜선) 집 앞의 근린공원으로 등장한다. 금잔디(구혜선)의 퇴학 여부를 놓고 경쟁이 벌어지던 중, 구준표(이민호)가 그녀의 집 앞에 뜻밖에 도착한다. 그리고 그들은 이 놀이터에 와서 이야기하고 그는 그녀를 끌어안는다. 9회에서는 준표가 놀이터 전체를 장식하며 이벤트를 준비한 곳 이다. 그렇게 두 사람은 가까워지고 마침내 첫키스를 나눴다. 12화에서 잔디는 여기서 아버지와 마음의 대화를 나눴다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1871",
+  "name": "국제전시장보도육교",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 일산서구 대화동 2607-4",
+  "latitude": 37.666929,
+  "longitude": 126.74945,
+  "image": null,
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "10회에서 구준표(이민호)의 엄마 강희수(이혜영)가 금잔디(구혜선) 집안의 드라이클리닝 사업을 접은 후, 그들은 이 고가 아래에서 떡을 팔았다. 같은 에피소드에서 준표의 어머니가 자신의 회사에 있는 준표가 가족과 함께 이곳에서 일하는 금잔디(구혜선)를 볼 수 있도록 그녀의 운전사를 지나게 하는 곳이기도 하다. 준표는 잔디와 합류하기 위해 차에서 내려 키스를 한다. 잠시 후 두 사람은 이 고가도로를 건너며 어머니 때문에 절대 헤어지지 않겠다고 약속한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1872",
+  "name": "일산서구청사거리",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 일산서구 중앙로 1547",
+  "latitude": 37.67543,
+  "longitude": 126.74932,
+  "image": null,
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "15회에서 금잔디(구혜선)는 이 사거리를 지나 구준표(이민호)를 본다. 이 갈림길 한쪽에 있는 가게의 텔레비전 화면에서 그들의 최근 이별이 진정으로 스며든다. 여기에서 준표의 여동생이 차를 몰고 잔디를 알아보고 멈춰 서서 그녀를 자기 집으로 초대한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126712",
+  "name": "서울대공원",
+  "region": "GYEONGGI",
+  "address": "경기도 과천시 대공원광장로 102",
+  "latitude": 37.4364523,
+  "longitude": 127.0138976,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/23/3539123_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "22,23회에서 금잔디(구혜선)는 이웃 소년 찬의 돌보기를 수락하고 구준표(이민호)에게 동물원에서 데이트를 하자고 한다."
+   },
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "1회에서 찬성의 아버지(오지호 특별출연)가 건물을 탐방하던 호텔 정원의 일부로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1874",
+  "name": "베르아델승마클럽",
+  "region": "GYEONGGI",
+  "address": "경기도 안산시 단원구 부흥로 376",
+  "latitude": 37.212744,
+  "longitude": 126.608469,
+  "image": null,
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "잔디(구혜선)가 퇴학을 당하는것을 막기 위한 1부 대결이 펼쳐진다. 구준표(이민호)는 자신의 말 쥬피터를 조건으로 이 대회에서 이기더라도 강제로 말을 잃는다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1875",
+  "name": "체인지업캠퍼스 양평캠프",
+  "region": "GYEONGGI",
+  "address": "경기도 양평군 용문면 연수로 209",
+  "latitude": 37.4999032,
+  "longitude": 127.575543,
+  "image": null,
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "신화고의 배경으로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1876",
+  "name": "드림스튜디오",
+  "region": "GYEONGGI",
+  "address": "경기도 파주시 광탄면 보광로 877",
+  "latitude": 37.772493,
+  "longitude": 126.88404,
+  "image": null,
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "소이정(김범) 도예공방으로 등장하며, F4 멤버들과 추가을(김소은)이 러브콜을 받고 있다. 추가을(김소은)이 자주 방문한다. 23화에서는 이정과 가을의 키스신 같은 장면이 나온다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1880",
+  "name": "계명대학교 대명캠퍼스",
+  "region": "DAEGU",
+  "address": "대구광역시 남구 명덕로 104",
+  "latitude": 35.85427,
+  "longitude": 128.580543,
+  "image": null,
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "동서문화회관(계명대학교 대명캠퍼스) 신화고등학교 건물 계단이 금잔디(구혜선)의 은신처 역할을 한다. 구준표(이민호)는 본관에서 공부하고 있다."
+   },
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "16회에서 이 캠퍼스의 본관이 등장했습니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1882",
+  "name": "어울마당로",
+  "region": "SEOUL",
+  "address": "서울특별시 마포구 어울마당로",
+  "latitude": 37.55003,
+  "longitude": 126.92113,
+  "image": null,
+  "scenes": [
+   {
+    "work": "꽃보다 남자",
+    "kind": "DRAMA",
+    "scene": "9회에서 추가을(김소은)과 금잔디(구혜선)는 우연히 이 거리에서 가을의 남친을 보게 된다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "129550",
+  "name": "장자호수공원",
+  "region": "GYEONGGI",
+  "address": "경기도 구리시 장자호수길 125",
+  "latitude": 37.5859,
+  "longitude": 127.1412,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/88/4066088_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "15회에서 병원에서 혼수상태에 빠진 박새로이(박서준)가 공원의 나무다리에서 일종의 백일몽으로 아버지 박성열(손현주)을 만난다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "4067984",
+  "name": "수원화성 성곽길",
+  "region": "GYEONGGI",
+  "address": "경기도 수원시 장안구 영화동 320-2",
+  "latitude": 37.2773511,
+  "longitude": 127.0172606,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/57/3478557_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "1회에서 아침에 박새로이(박서준)가 있는 동안 대학 수시 면접을 위해 달려가던 오수아(권나라)가 이 거리를 따라 조깅한다. 그녀는 버스에 타면서 집에서 아이디를 잊어버리고 달리는 수밖에 없었다는 것을 알아차렸다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11657",
+  "name": "수원 팔달산 산책로",
+  "region": "GYEONGGI",
+  "address": "경기도 수원시 팔달구 우만1동 팔달산",
+  "latitude": 37.279418,
+  "longitude": 127.009647,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "박새로이 아버지 교통사고 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6885",
+  "name": "동탄국제고등학교",
+  "region": "GYEONGGI",
+  "address": "경기도 화성시 동탄나루로 27",
+  "latitude": 37.1891856,
+  "longitude": 127.078496,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "드라마 주인공중 하나인 조이서(김다미)가 다녔던 학교로 드라마 안에서 '용각고등학교'로 설정되어있다. 3화 참조"
+   },
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "드라마 등장인물들의 이야기가 그려지는 '제국고등학교'로 설정되어 등장한다. 드라마의 메인 촬영지 중 하나이다"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "3448840",
+  "name": "성신여자대학교 운정그린캠퍼스",
+  "region": "SEOUL",
+  "address": "서울특별시 강북구 도봉로76가길 55",
+  "latitude": 37.6320696,
+  "longitude": 127.0274027,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/54/3448754_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "15회에 이 병원에서 깨어난 박새로이(박서준 분)는 조이서(김다미 분)를 구하기 위해 최승권(류경수 분)의 차에 오른다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11663",
+  "name": "한옥카페 선운각",
+  "region": "SEOUL",
+  "address": "서울특별시 강북구 우이동 265-16",
+  "latitude": 37.6549982,
+  "longitude": 126.999365,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "1화에서 이 장소의 외관은 장가펍 대표 장대희(유재명)의 자택으로 나타난다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "129828",
+  "name": "서울시립대학교 박물관",
+  "region": "SEOUL",
+  "address": "서울특별시 동대문구 서울시립대로 163",
+  "latitude": 37.5831618,
+  "longitude": 127.0569382,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/17/3540417_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "이 대학은 박새로이(박서준)가 밖에서 기다리는 동안 오수아(권나라)가 법학부 건물에서 입학시험을 치르는 '광진대학교'로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11665",
+  "name": "가온문화공원",
+  "region": "SEOUL",
+  "address": "서울특별시 마포구 상암동 1594",
+  "latitude": 37.58181,
+  "longitude": 126.88765,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "장근원(안보현)은 아버지의 비서 김씨(홍서준)가 이태원 클래스10회에서 형을 선고받기 위해 자신을 법정으로 몰고 가는 것을 이해하고 정류장 신호등에서 황급히 차에서 내려 이 광장을 가로질러 달려간다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2900390",
+  "name": "무대륙",
+  "region": "SEOUL",
+  "address": "서울특별시 마포구 토정로5길 12",
+  "latitude": 37.5459671,
+  "longitude": 126.9183698,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/36/4082636_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "이태원 클라쓰",
+    "kind": "DRAMA",
+    "scene": "4회에서 박세로(박서준), 조이서(김다미), 오수아(권나라)가 이 카페에서 단밤 홍보에 대해 논의하지만, 사실 관계자 모두에게 불편하고 긴장된 상황이다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "125713",
+  "name": "망상해변",
+  "region": "GANGWON",
+  "address": "강원도 동해시 동해대로 6270-10",
+  "latitude": 37.5922144,
+  "longitude": 129.0896412,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/20/3544320_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "호텔델루나 내부에 있는 해수욕장"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-13876",
+  "name": "구)양수철교",
+  "region": "GYEONGGI",
+  "address": "경기도 남양주시 조안면 진중리 328-4",
+  "latitude": 37.552264,
+  "longitude": 127.313475,
+  "image": null,
+  "scenes": [
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "호텔 델루나의 삼도천 다리 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-13878",
+  "name": "한양대학교 에리카캠퍼스",
+  "region": "GYEONGGI",
+  "address": "경기도 안산시 상록구 한양대학로 55",
+  "latitude": 37.297706,
+  "longitude": 126.833783,
+  "image": null,
+  "scenes": [
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "2화에서 깊은 원한을 품은 귀신이 구찬성(여진구)을 습격하자 그는 호텔을 뛰쳐나와 이 캠퍼스의 호수로 향한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12934",
+  "name": "로케이션 이음 (구 로얄퀘스트)",
+  "region": "GYEONGGI",
+  "address": "경기도 파주시 탄현면 새오리로286번길 48-70",
+  "latitude": 37.713531,
+  "longitude": 126.74641,
+  "image": null,
+  "scenes": [
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "11화에서 호텔 델루나의 404호실로 등장하는 장소이다. 이곳을 나와 도착하는 인간 부부의 모습을 볼 수있다"
+   },
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "백민갑(김권) 안태규(백철민)이 술을 마시는 모습에서 나온다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2609320",
+  "name": "지혜의 숲",
+  "region": "GYEONGGI",
+  "address": "경기도 파주시 회동길 145",
+  "latitude": 37.7085969,
+  "longitude": 126.6872199,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/23/3039023_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "16회에서 구찬성(여진구)는 김유나(강미나)를 이 도서관에서 만난다."
+   },
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "이곤(이민호)과 정태을(김고은)은 15화에서 이 도서관에서 평행세계를 조사하고, 마침내 평행세계가 존재할 수 있다는 그의 이야기를 믿었던 때를 회상한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2514428",
+  "name": "전곡항",
+  "region": "GYEONGGI",
+  "address": "경기도 화성시 서신면 전곡리",
+  "latitude": 37.1876,
+  "longitude": 126.6507,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/54/4059254_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "호텔 델루나",
+    "kind": "DRAMA",
+    "scene": "아이유가 박유나와 처음 만난 곳"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126041",
+  "name": "황매산(산청)",
+  "region": "GYEONGNAM",
+  "address": "경상남도 산청군 차황면 법평리 산 1",
+  "latitude": 35.4953,
+  "longitude": 127.9747,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/96/4095596_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "6화 황매산성 근처. 이 산에서 부모님의 묘를 찾기 위해 노력하는 유진 최(이병헌). 그와 함께 슬퍼하기 위해 찾아온 장승구(최무성)를 알게 된다."
+   },
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "이창(주지훈)과 무영(김상호)이 이 산을 넘습니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-5031",
+  "name": "화왕산성",
+  "region": "GYEONGNAM",
+  "address": "경상남도 창녕군 창녕읍 옥천리 산322",
+  "latitude": 35.546106,
+  "longitude": 128.537389,
+  "image": null,
+  "scenes": [
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "고애신이 총포술을 연습하던 갈대숲"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-5032",
+  "name": "합천 영상 테마파크",
+  "region": "GYEONGNAM",
+  "address": "경상남도 합천군 용주면 합천호수로 757",
+  "latitude": 35.5489346,
+  "longitude": 128.072475,
+  "image": null,
+  "scenes": [
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "고애신이 열차 안에서 일본군에게 총을 겨눴던 곳"
+   },
+   {
+    "work": "태극기 휘날리며",
+    "kind": "MOVIE",
+    "scene": "영화 태극기 휘날리며 전투 세트장"
+   },
+   {
+    "work": "택시운전사",
+    "kind": "MOVIE",
+    "scene": "서울에서 집회 때문에 길이 막히는 장면"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2742072",
+  "name": "삼릉숲",
+  "region": "GYEONGBUK",
+  "address": "경상북도 경주시 배동",
+  "latitude": 35.7967457,
+  "longitude": 129.2095031,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/99/3542499_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "어린 유진이 추노꾼들을 피해 달아나는 장면의 숲"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126998",
+  "name": "만휴정",
+  "region": "GYEONGBUK",
+  "address": "경상북도 안동시 길안면 묵계하리길 42",
+  "latitude": 36.4104197,
+  "longitude": 128.909833,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/80/3095780_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "6회에서 유진은 도예가 은산의 집에서 기다리며 새로운 적 희성을 생각한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126991",
+  "name": "고산정",
+  "region": "GYEONGBUK",
+  "address": "경상북도 안동시 도산면 가송길 177-42",
+  "latitude": 36.7676637,
+  "longitude": 128.892153,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/64/3096264_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "2화에서 최유진(이병헌)은 이 정자 맞은편 강둑에 찾아와 어린 시절 인도교에서 배를 타고 숨었던 모습을 회상한다. 그리고는 가까운 식당에 앉아 백숙을 대접받는다. 10화에서는 고애신(김태리)과 유진 최(이병헌)가 이곳 앞의 얼어붙은 강을 산책하며 조선시대의 기원과 그가 북아메리카로 도피한 이유를 이야기한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-5037",
+  "name": "계명대학교 성서캠퍼스",
+  "region": "DAEGU",
+  "address": "대구광역시 달서구 달구벌대로 1095",
+  "latitude": 35.8555794,
+  "longitude": 128.484165,
+  "image": null,
+  "scenes": [
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "화와 11화에 등장하는 여러 건물 성서캠퍼스의 전통마을 '한학촌'이다. 그 중 하나가 경천당(경천당/敬天堂)이다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-5038",
+  "name": "계명한학촌",
+  "region": "DAEGU",
+  "address": "대구광역시 달서구 달구벌대로 1095",
+  "latitude": 35.8555794,
+  "longitude": 128.484165,
+  "image": null,
+  "scenes": [
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "고애신이 '잉글리시'를 배우겠다 찾아갔던 목화학당"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-5039",
+  "name": "문화공감수정",
+  "region": "BUSAN",
+  "address": "부산광역시 동구 홍곡로 75",
+  "latitude": 35.125713,
+  "longitude": 129.042622,
+  "image": null,
+  "scenes": [
+   {
+    "work": "미스터 션샤인",
+    "kind": "DRAMA",
+    "scene": "미국인 '로건 테일러'가 암살당한 기생집 화월루"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12935",
+  "name": "비둘기낭폭포",
+  "region": "GYEONGGI",
+  "address": "경기도 포천시 영북면 대회산리 415-2",
+  "latitude": 38.079827,
+  "longitude": 127.217505,
+  "image": null,
+  "scenes": [
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "독특하고 예쁜 포천 여행 명소이자 킹덤의 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126017",
+  "name": "문경새재도립공원",
+  "region": "GYEONGBUK",
+  "address": "경상북도 문경시 문경읍 새재로 932",
+  "latitude": 36.7616035,
+  "longitude": 128.0769891,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/82/3317582_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "킹덤 시즌1과 시즌2 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12938",
+  "name": "내연산 12폭포",
+  "region": "GYEONGBUK",
+  "address": "경상북도 포항시 북구 송라면 보경로 53",
+  "latitude": 36.252974,
+  "longitude": 129.311379,
+  "image": null,
+  "scenes": [
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "킹덤의 촬영지며 내연산에 있는 12개의 자연폭포"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126508",
+  "name": "경복궁",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 사직로 161",
+  "latitude": 37.5760307,
+  "longitude": 126.9767219,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/98/3487598_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "처음에는 고종의 후궁 이씨의 은신처로, 다음은 건청궁(건청궁, 고종, 명성황후의 은신처)으로 사용되었다."
+   },
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "이병헌이 중전 한효주의 손을 잡고 탈출하는 장소"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126511",
+  "name": "창경궁",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 창경궁로 185",
+  "latitude": 37.5788809,
+  "longitude": 126.9964488,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/94/3536794_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "킹덤",
+    "kind": "DRAMA",
+    "scene": "왕비의 사택으로 등장합니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-8828",
+  "name": "원당종마목장",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 덕양구 서삼릉길 233-112",
+  "latitude": 37.664249,
+  "longitude": 126.87342,
+  "image": null,
+  "scenes": [
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "7회에서 김주원(현빈) 그리고 길라임(하지원)은 어머니를 만나러 이 길을 드라이브한다"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-8829",
+  "name": "청아공원기독교전용관",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 일산동구 은마길 129",
+  "latitude": 37.719031,
+  "longitude": 126.80572,
+  "image": null,
+  "scenes": [
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "2회에서 이 장소로 이동합니다. 액션스쿨 원장에게 경의를 표하기 위해 신입생들을 데려온 곳."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "129764",
+  "name": "국립현대미술관 과천",
+  "region": "GYEONGGI",
+  "address": "경기도 과천시 광명로 313",
+  "latitude": 37.4309747,
+  "longitude": 127.019974,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/86/4123586_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "김주원(현빈)은 1회에서 윤슬(김사랑)과 데이트 하는 장소이다"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6571",
+  "name": "마임비전빌리지",
+  "region": "GYEONGGI",
+  "address": "경기도 여주시 능서면 용은리 443",
+  "latitude": 37.2925249,
+  "longitude": 127.539781,
+  "image": null,
+  "scenes": [
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "드라마 남자주인공인 김주원(현빈)의 서재 겸 도서관으로 등장한다."
+   },
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "빈센조 카사노/박주형(송중기)은 어머니를 살해한 범인의 뒤를 바짝 쫓으며 이곳으로 향하는 돌담길을 질주한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-8832",
+  "name": "여주경찰서",
+  "region": "GYEONGGI",
+  "address": "경기도 여주시 세종로 50",
+  "latitude": 37.29364,
+  "longitude": 127.6347,
+  "image": null,
+  "scenes": [
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "8회에 등장하는 경찰서입니다. 김주원(현빈)의 몸에 들어간 길라임(하지원)은 오스카(윤상현)를 구출한다. 경찰서에서 나올 때, 우연히 둘은 키스를 하게 되는데 길라임은 부끄러워하고 오스카는 역겨워한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6884",
+  "name": "경기영어마을 파주캠퍼스",
+  "region": "GYEONGGI",
+  "address": "경기도 파주시 탄현면 얼음실로 40",
+  "latitude": 37.7852355,
+  "longitude": 126.703739,
+  "image": null,
+  "scenes": [
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "최종회 20회에서 길라임(하지원)이 출연한 촬영장."
+   },
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "16화에서 김씨 가족이 '가족 나들이'를 하는 식당으로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "749895",
+  "name": "서울액션스쿨 (마샬아트센터)",
+  "region": "GYEONGGI",
+  "address": "경기도 파주시 탄현면 헤이리마을길 18-61",
+  "latitude": 37.7873315,
+  "longitude": 126.6946985,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/73/737673_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "길라임(하지원)이 일하는곳으로 나온다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "729167",
+  "name": "반포대교 달빛무지개분수",
+  "region": "SEOUL",
+  "address": "서울특별시 서초구 반포동 반포대교",
+  "latitude": 37.5126,
+  "longitude": 126.9985,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/46/3515046_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "최종회 20회에서 김비서(김성오)와 민아영(유인나)은 눈 내리는 겨울날 이 다리의 발치에 오다가 우연히 김비서가 아영에게 보낸 편지가 담긴 병을 발견한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-8837",
+  "name": "주한앙골라대사관저",
+  "region": "SEOUL",
+  "address": "서울특별시 성북구 선잠로2길 211",
+  "latitude": 37.59926,
+  "longitude": 127.0012,
+  "image": null,
+  "scenes": [
+   {
+    "work": "시크릿 가든",
+    "kind": "DRAMA",
+    "scene": "김주원(현빈) 어머니의 집으로 등장"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11509",
+  "name": "동두천 문화극장",
+  "region": "GYEONGGI",
+  "address": "경기도 동두천시 동광로 66",
+  "latitude": 37.908291,
+  "longitude": 127.055827,
+  "image": null,
+  "scenes": [
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "선우-정환-동룡이 몰래 방문한 미아리 삼양극장"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "130409",
+  "name": "의정부예술의전당",
+  "region": "GYEONGGI",
+  "address": "경기도 의정부시 의정로 1",
+  "latitude": 37.7332318,
+  "longitude": 127.0345014,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/00/3072800_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "18회에서 데이트에 차인 성덕선(이혜리)과 함께 이곳에서 콘서트를 보고 싶었지만 김정환(류준열)이 빌어먹을 신호등 탓에 몇 초 늦었다. 최택(박보검)이 더 빨랐다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11512",
+  "name": "경주신문왕릉",
+  "region": "GYEONGBUK",
+  "address": "경상북도 경주시 배반동 453-1",
+  "latitude": 35.817958,
+  "longitude": 129.24609,
+  "image": null,
+  "scenes": [
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "3회에서 야간 학교 수련회는 모든 사람들을 이 역사적인 장소로 데려간다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11513",
+  "name": "동궁과 월지",
+  "region": "GYEONGBUK",
+  "address": "경상북도 경주시 원화로 102",
+  "latitude": 35.83429,
+  "longitude": 129.226584,
+  "image": null,
+  "scenes": [
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "3회에서 학교 수련회에 들르는 곳 중 하나다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "319572",
+  "name": "경주 동부 사적지대",
+  "region": "GYEONGBUK",
+  "address": "경상북도 경주시 황남동 111-2",
+  "latitude": 35.835367,
+  "longitude": 129.2179334,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/21/3582421_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "3화에서 영원은 모두를 이곳으로 데려옵니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11517",
+  "name": "서교동 최규하 대통령 가옥",
+  "region": "SEOUL",
+  "address": "서울특별시 마포구 동교로15길 10",
+  "latitude": 37.555303,
+  "longitude": 126.914893,
+  "image": null,
+  "scenes": [
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "쌍문동의 도룡뇽 동룡이네 집으로 등장한 장소"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "1093200",
+  "name": "서울종합운동장(잠실종합운동장)",
+  "region": "SEOUL",
+  "address": "서울특별시 송파구 올림픽로 25",
+  "latitude": 37.5147994,
+  "longitude": 127.0736248,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/13/4136413_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "1회 성덕선(이혜리)이 마다가스카르의 사인홀더로 1988년 올림픽 개막식을 위해 이 단지의 경기장에서 훈련을 하고 있다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11523",
+  "name": "신명여자고등학교",
+  "region": "INCHEON",
+  "address": "인천광역시 남동구 용천로205번길 42",
+  "latitude": 37.46947,
+  "longitude": 126.71324,
+  "image": null,
+  "scenes": [
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "성덕선(이혜리)이 다니는 학교"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11525",
+  "name": "인천보건고등학교",
+  "region": "INCHEON",
+  "address": "인천광역시 서구 서달로 58-16",
+  "latitude": 37.50473,
+  "longitude": 126.681,
+  "image": null,
+  "scenes": [
+   {
+    "work": "응답하라 1988",
+    "kind": "DRAMA",
+    "scene": "모든 남자 아이들이 다녔던 고등학교로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11625",
+  "name": "약천사",
+  "region": "GYEONGGI",
+  "address": "경기도 파주시 교하로681번길 118",
+  "latitude": 37.7057376,
+  "longitude": 126.701279,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이상한 변호사 우영우",
+    "kind": "DRAMA",
+    "scene": "13회에서 한바다 변호사팀이 대수도원장 피고인의 초청으로 이 절을 찾았다. 기독교 신자인 권민우(주종혁)는 혹독한 158배 기도를 건너뛰고 다른 팀원들은 의식을 따른다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11626",
+  "name": "동부마을",
+  "region": "GYEONGNAM",
+  "address": "경상남도 창원시 의창구 대산면 북부리",
+  "latitude": 35.3526969,
+  "longitude": 128.7249767,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이상한 변호사 우영우",
+    "kind": "DRAMA",
+    "scene": "소덕동 팽나무가 있는 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11627",
+  "name": "서울중앙지방법원",
+  "region": "SEOUL",
+  "address": "서울특별시 서초구 서초중앙로 157",
+  "latitude": 37.496068,
+  "longitude": 127.01148,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이상한 변호사 우영우",
+    "kind": "DRAMA",
+    "scene": "태수미(진경 분)가 이 건물 앞에서 기자회견을 열고 최종회에서 장관 후보직에서 물러나 엄마 노릇에 전념하겠다고 선언한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11629",
+  "name": "파크원",
+  "region": "SEOUL",
+  "address": "서울특별시 영등포구 여의대로 108",
+  "latitude": 37.525144,
+  "longitude": 126.92923,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이상한 변호사 우영우",
+    "kind": "DRAMA",
+    "scene": "2회에서 이준호(강태오)와 함께 웨딩드레스 사건을 조사하면서, 변호인 최수연(하윤경)은 여자화장실을 이용하기 위해 이 호텔에 들른다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-871",
+  "name": "더리버",
+  "region": "SEOUL",
+  "address": "서울특별시 용산구 용산동6가 451",
+  "latitude": 37.507108,
+  "longitude": 126.98472,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이상한 변호사 우영우",
+    "kind": "DRAMA",
+    "scene": "11화에서 수연(하윤경)은 맞선 상대인 종권(정욱진)과 이 식당에서 저녁 데이트를 한다. 전 여자친구(정가희)가 화장실에 다녀오겠다고 양해를 구한 뒤 나타나 수연에게 자신의 진짜 성격과 동기를 공개한다. 화가 난 수연은 가장 비싼 술을 들고 식당을 나선다."
+   },
+   {
+    "work": "갯마을 차차차",
+    "kind": "DRAMA",
+    "scene": "10회에서 서울 여행길에 오른 윤혜진(신민아)과 절친 표미선(공민정)이 이곳에서 저녁을 먹는다. 혜진은 공진 바다에서 살다 보니 한강이 예전보다 좁아진 것 같다고 말한다. 이들이 식당을 나서자 갑자기 비가 내리기 시작하자 혜진은 홍두식(김선호)과의 달콤한 순간을 떠올리고 미선을 뒤로 한 채 자신의 차로 달려간다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "129186",
+  "name": "덕수궁 돌담길",
+  "region": "SEOUL",
+  "address": "서울특별시 중구 세종대로 99",
+  "latitude": 37.5677154,
+  "longitude": 126.9744616,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/54/4126554_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "이상한 변호사 우영우",
+    "kind": "DRAMA",
+    "scene": "제10화 저녁 데이트에서 우영우(박은빈)와 이준호(강태오)가 이 골목길을 걷다가 그에게 \"덕수궁 돌담길을 함께 걷는 연인들이 헤어질 거라는 말 들어봤어 과거 서울가정법원과 대법원은 덕수궁 돌담길 북쪽 끝에 있었다. 이 말은 이혼을 하기 위해 이 길을 따라 내려가야 했던 데서 유래되었습니다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2768079",
+  "name": "장화리일몰조망지",
+  "region": "INCHEON",
+  "address": "인천광역시 강화군 화도면 장화리 1408",
+  "latitude": 37.6179827,
+  "longitude": 126.3783759,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/23/3522923_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "이상한 변호사 우영우",
+    "kind": "DRAMA",
+    "scene": "4화에서 영우와 준호가 노을 보러간 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11633",
+  "name": "실미도 해수욕장",
+  "region": "INCHEON",
+  "address": "인천광역시 중구 무의동 136-49",
+  "latitude": 37.4030081,
+  "longitude": 126.4029471,
+  "image": null,
+  "scenes": [
+   {
+    "work": "이상한 변호사 우영우",
+    "kind": "DRAMA",
+    "scene": "4회 낙조마을 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3252",
+  "name": "오이도수산물직판장",
+  "region": "GYEONGGI",
+  "address": "경기도 시흥시 오이도로 167",
+  "latitude": 37.345856,
+  "longitude": 126.688201,
+  "image": null,
+  "scenes": [
+   {
+    "work": "동백꽃 필 무렵",
+    "kind": "DRAMA",
+    "scene": "동백♥용식 커플이 새벽마다 데이트했던 시장"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3253",
+  "name": "구룡포 북방파제",
+  "region": "GYEONGBUK",
+  "address": "경상북도 포항시 남구 구룡포읍 구룡포6리",
+  "latitude": 35.988495,
+  "longitude": 129.559689,
+  "image": null,
+  "scenes": [
+   {
+    "work": "동백꽃 필 무렵",
+    "kind": "DRAMA",
+    "scene": "티저 영상에서 용식이가 달리던 바닷가길"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3254",
+  "name": "문화마실",
+  "region": "GYEONGBUK",
+  "address": "경상북도 포항시 남구 구룡포읍 구룡포길 133-1",
+  "latitude": 35.991405,
+  "longitude": 129.559824,
+  "image": null,
+  "scenes": [
+   {
+    "work": "동백꽃 필 무렵",
+    "kind": "DRAMA",
+    "scene": "옹산의 하마 동백이가 운영했던 까멜리아가 있는 곳 / 이 공간의 외관은 동백꽃 필 무렵에서 동백(공효진)이 운영하는 '동백'으로 나타난다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3257",
+  "name": "구룡포공원계단",
+  "region": "GYEONGBUK",
+  "address": "경상북도 포항시 남구 구룡포읍 구룡포길 145",
+  "latitude": 35.990856,
+  "longitude": 129.56064,
+  "image": null,
+  "scenes": [
+   {
+    "work": "동백꽃 필 무렵",
+    "kind": "DRAMA",
+    "scene": "8화에서 황용식(강하)과 오동백(공효진)이 꼭대기 계단에 함께 앉아 있다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "1909659",
+  "name": "구룡포 일본인 가옥거리",
+  "region": "GYEONGBUK",
+  "address": "경상북도 포항시 남구 구룡포읍 구룡포길 153-1",
+  "latitude": 35.990621,
+  "longitude": 129.560455,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/11/4060811_image2_1.png",
+  "scenes": [
+   {
+    "work": "동백꽃 필 무렵",
+    "kind": "DRAMA",
+    "scene": "드라마의 중요한 배경인 옹산게장거리로 등장한 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3260",
+  "name": "구룡포 삼정섬",
+  "region": "GYEONGBUK",
+  "address": "경상북도 포항시 남구 구룡포읍 삼정리",
+  "latitude": 36.003588,
+  "longitude": 129.576251,
+  "image": null,
+  "scenes": [
+   {
+    "work": "동백꽃 필 무렵",
+    "kind": "DRAMA",
+    "scene": "필구-종렬이 대화를 나누던 다리가 있는 작은 섬"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "3351700",
+  "name": "서초문화예술공원",
+  "region": "SEOUL",
+  "address": "서울특별시 서초구 바우뫼로12길 40",
+  "latitude": 37.4701356,
+  "longitude": 127.0320867,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/16/3515016_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "동백꽃 필 무렵",
+    "kind": "DRAMA",
+    "scene": "마지막회 동백♥용식 커플이 뽀뽀하던 공원"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3263",
+  "name": "해방촌 신흥시장",
+  "region": "SEOUL",
+  "address": "서울특별시 용산구 신흥로 95-9",
+  "latitude": 37.545443,
+  "longitude": 126.98494,
+  "image": null,
+  "scenes": [
+   {
+    "work": "동백꽃 필 무렵",
+    "kind": "DRAMA",
+    "scene": "동백꽃 필 무렵의 3~4화(전체 2화)에서 어머니 오동백(공효진)이 아들을 데리러 올 때까지 아들이 이 시장에서 머무른다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3264",
+  "name": "역사책방",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 자하문로10길 24",
+  "latitude": 37.579291,
+  "longitude": 126.97281,
+  "image": null,
+  "scenes": [
+   {
+    "work": "동백꽃 필 무렵",
+    "kind": "DRAMA",
+    "scene": "이 서점은 2회(전체 1회)에 '옹산북스'로 등장한다. 여기에 황용식(강하늘)이 동백(공효진)에게 첫눈에 반해 동백의 'sorry! 대답은 \"that's ok\"(해리포터에서 그녀가 방금 읽은 표현)라고 말한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2790984",
+  "name": "장흥조각공원(양주시립장욱진미술관)",
+  "region": "GYEONGGI",
+  "address": "경기도 양주시 장흥면 권율로 193",
+  "latitude": 37.732815,
+  "longitude": 126.9492501,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/67/3331967_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "갯마을 차차차",
+    "kind": "DRAMA",
+    "scene": "신민아와 김선호가 미술관 데이트를 즐긴 미술관"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-865",
+  "name": "서원밸리CC",
+  "region": "GYEONGGI",
+  "address": "경기도 파주시 광탄면 서원길 333",
+  "latitude": 37.821049,
+  "longitude": 126.888979,
+  "image": null,
+  "scenes": [
+   {
+    "work": "갯마을 차차차",
+    "kind": "DRAMA",
+    "scene": "신민아와 김선호가 골프 데이트를 즐긴 골프장"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-866",
+  "name": "석병1리방파제",
+  "region": "GYEONGBUK",
+  "address": "경상북도 포항시 남구 구룡포읍 석병리 745-2",
+  "latitude": 36.0123413,
+  "longitude": 129.5789926,
+  "image": null,
+  "scenes": [
+   {
+    "work": "갯마을 차차차",
+    "kind": "DRAMA",
+    "scene": "신민아가 김선호에게 사랑 고백했던 방파제"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-867",
+  "name": "청하5일장",
+  "region": "GYEONGBUK",
+  "address": "경상북도 포항시 북구 청하면 청하로200번길 6",
+  "latitude": 36.1969393,
+  "longitude": 129.3398209,
+  "image": null,
+  "scenes": [
+   {
+    "work": "갯마을 차차차",
+    "kind": "DRAMA",
+    "scene": "갯마을 차차차의 슈퍼, 철물점, 카페가 있는 5일장"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2406101",
+  "name": "사방기념공원",
+  "region": "GYEONGBUK",
+  "address": "경상북도 포항시 북구 흥해읍 해안로 1801",
+  "latitude": 36.164753,
+  "longitude": 129.3956373,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/17/3586617_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "갯마을 차차차",
+    "kind": "DRAMA",
+    "scene": "신민아와 김선호가 갔던 언덕 위에 배가 있는 공원"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-870",
+  "name": "동호대교",
+  "region": "SEOUL",
+  "address": "서울특별시 성동구 옥수동",
+  "latitude": 37.535804,
+  "longitude": 127.02145,
+  "image": null,
+  "scenes": [
+   {
+    "work": "갯마을 차차차",
+    "kind": "DRAMA",
+    "scene": "3화에서 윤혜진(신민아)과 홍두식(김선호)이 서울을 떠나 이 다리를 건너는 장면이 나온다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-872",
+  "name": "서울드래곤시티",
+  "region": "SEOUL",
+  "address": "서울특별시 용산구 청파로20길 95",
+  "latitude": 37.531844,
+  "longitude": 126.96306,
+  "image": null,
+  "scenes": [
+   {
+    "work": "갯마을 차차차",
+    "kind": "DRAMA",
+    "scene": "3화에서 서울로 당일치기 여행을 갔을 때 윤혜진(신민아)과 홍두식(김선호)이 이 건물을 지나가다 누군가 건물 안에서 몰래 사진을 찍는다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3004",
+  "name": "강촌레일파크",
+  "region": "GANGWON",
+  "address": "강원도 춘천시 남산면 서백길 57",
+  "latitude": 37.8428025,
+  "longitude": 127.550584,
+  "image": null,
+  "scenes": [
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "10화에서 바벨제약 피해자 가족의 차가 이 터널('양동지하차도'라고 함)에서 쫓기는 모습이 포착됐다. 또 이곳에서 빈센조 카사노(송중기 분) 자신도 네 사람의 목숨을 앗아간 같은 히트남녀와 마주하게 된다."
+   },
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "여기는 이림(이정진)이 더 킹에 숨어있는 장소 중 하나로, 10화에서 유경무 (이해영)와 만나는 장면도 촬영되었다"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6566",
+  "name": "아난티 클럽 서울",
+  "region": "GYEONGGI",
+  "address": "경기도 가평군 설악면 유명로 961-34",
+  "latitude": 37.619609,
+  "longitude": 127.48216,
+  "image": null,
+  "scenes": [
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "12회에서 장준우/장한석의 아버지의 별장입니다."
+   },
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "수학여행의 장소이며 유레이첼(김지원)이 머무는 장소입니다. 이곳은 또한 11회에서 수영장 사건이 일어나는 장소입니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6568",
+  "name": "백현동카페거리",
+  "region": "GYEONGGI",
+  "address": "경기도 성남시 분당구 백현동 567-1",
+  "latitude": 37.385271,
+  "longitude": 127.11082,
+  "image": null,
+  "scenes": [
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "16회에서 박주형(송중기)은 길을 가다가 이 가게 바로 밖에 있는 붕어빵 노점으로 향한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6569",
+  "name": "두리랜드",
+  "region": "GYEONGGI",
+  "address": "경기도 양주시 장흥면 권율로 120",
+  "latitude": 37.724732,
+  "longitude": 126.950441,
+  "image": null,
+  "scenes": [
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "8회에서 황민성(김성철)과 빈첸조 카사노/박주형(송중기)은 이 놀이동산(이하 '무무랜드')에서 하루를 보낸다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6577",
+  "name": "카메라타아트스페이스",
+  "region": "GYEONGGI",
+  "address": "경기도 파주시 탄현면 헤이리마을길 83",
+  "latitude": 37.790019,
+  "longitude": 126.69965,
+  "image": null,
+  "scenes": [
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "18회에서 장준우/장한석(2PM 옥택연)의 급한 조립 메시지를 받은 바벨탑 주주들"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6578",
+  "name": "김천 한국보건대 (폐교)",
+  "region": "GYEONGBUK",
+  "address": "경상북도 김천시 어모면 옥율1길 94",
+  "latitude": 36.174427,
+  "longitude": 128.10956,
+  "image": null,
+  "scenes": [
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "형(송중기)은 부패한 형사들을 이 버려진 건물에서 인질로 잡고 그의 요구를 따르지 않으면 가장자리에서 밀어내겠다고 위협한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "130665",
+  "name": "대구오페라하우스",
+  "region": "DAEGU",
+  "address": "대구광역시 북구 호암로 15",
+  "latitude": 35.8834293,
+  "longitude": 128.5922254,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/73/3376273_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "8화에서 바벨그룹과 신광은행의 협약식이 열리는 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6583",
+  "name": "삼성리",
+  "region": "SEOUL",
+  "address": "서울특별시 강남구 봉은사로86길 28",
+  "latitude": 37.511571,
+  "longitude": 127.05676,
+  "image": null,
+  "scenes": [
+   {
+    "work": "빈센조",
+    "kind": "DRAMA",
+    "scene": "6화에서 홍차영(전여빈)과 빈센조 카사노/박주형(송중기)이 이 술집에서 술을 마신다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "1223212",
+  "name": "동해 논골담길",
+  "region": "GANGWON",
+  "address": "강원도 동해시 논골1길 2",
+  "latitude": 37.552167,
+  "longitude": 129.1183091,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/75/4127875_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "16~18회에서 차은상(박신혜)은 어머니와 함께 이 거리의 집으로 이사한다. 김탄(이민호)과 최영도(김우빈)가 찾아온다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6880",
+  "name": "일산문화광장",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 일산동구 중앙로 1271-4",
+  "latitude": 37.65839,
+  "longitude": 126.7704,
+  "image": null,
+  "scenes": [
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "차은상(박신혜)과 김탄(이민호)은 이 공원에서 눈 오는 길을 걷습니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6883",
+  "name": "아시아나 컨트리클럽",
+  "region": "GYEONGGI",
+  "address": "경기도 용인시 처인구 양지면 양대로 290",
+  "latitude": 37.25445,
+  "longitude": 127.2891,
+  "image": null,
+  "scenes": [
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "12회에서 이 골프장에서 여느 때와 같이 업무 회의가 있습니다. 김탄(이민호)은 동생 김원(최진혁)과 함께 제국그룹을 경영하고, 최영도(김우빈)는 아버지와 함께 제우스호텔그룹의 후계자로 나섭니다. 그러나 김원과 영도의 아버지가 골프를 치는 동안 김탄과 영도는 구두 대결을 합니다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6886",
+  "name": "최재훈스튜디오",
+  "region": "SEOUL",
+  "address": "서울특별시 강남구 논현로 612",
+  "latitude": 37.508379,
+  "longitude": 127.03371,
+  "image": null,
+  "scenes": [
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "2013년 SBS '상속자들' 18회 김탄의 생일 회견에 가기 직전"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6888",
+  "name": "모노빌딩",
+  "region": "SEOUL",
+  "address": "서울특별시 마포구 독막로7길 40",
+  "latitude": 37.549465,
+  "longitude": 126.91958,
+  "image": null,
+  "scenes": [
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "17회에서 김탄의 동생 김원(최진혁)이 소개팅을 하는 장면이 나온다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-6892",
+  "name": "왕자만화방",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 윤보선길 31",
+  "latitude": 37.57737,
+  "longitude": 126.9837,
+  "image": null,
+  "scenes": [
+   {
+    "work": "상속자들",
+    "kind": "DRAMA",
+    "scene": "드림캐쳐샵으로 등장한다. 18회에서 차은상(박신혜)과 김탄(이민호)은 서로가 그리워 개별적으로 찾아오지만 말 한마디 없이 스쳐 지나간다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12831",
+  "name": "북악팔각정",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 북악산로 267",
+  "latitude": 37.601612,
+  "longitude": 126.98065,
+  "image": null,
+  "scenes": [
+   {
+    "work": "커피프린스 1호점",
+    "kind": "DRAMA",
+    "scene": "7화에서 고은찬(윤은혜)은 최한결(공유)에게 점심을 먹자고 한다"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12832",
+  "name": "율곡로3길",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 율곡로3길",
+  "latitude": 37.577811,
+  "longitude": 126.98239,
+  "image": null,
+  "scenes": [
+   {
+    "work": "커피프린스 1호점",
+    "kind": "DRAMA",
+    "scene": "3화에서 고은찬(윤은혜)과 최한결(공유)은 덕성여중 입구를 지나 이 거리를 달린다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12833",
+  "name": "영풍문고 종로본점",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 청계천로 41",
+  "latitude": 37.569735,
+  "longitude": 126.98225,
+  "image": null,
+  "scenes": [
+   {
+    "work": "커피프린스 1호점",
+    "kind": "DRAMA",
+    "scene": "7회에서 최한결(공유)은 이 서점에서 고은찬(윤은혜)에게 커피에 관한 책을 사준다"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12834",
+  "name": "IDEA VILL",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 평창16길 27",
+  "latitude": 37.611473,
+  "longitude": 126.9652,
+  "image": null,
+  "scenes": [
+   {
+    "work": "커피프린스 1호점",
+    "kind": "DRAMA",
+    "scene": "드라마 서브 주인공인 한유주(채정안)가 살고 있는 집으로 나온다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12835",
+  "name": "서울애니메이션센터",
+  "region": "SEOUL",
+  "address": "서울특별시 중구 소파로 130",
+  "latitude": 37.559163,
+  "longitude": 126.98783,
+  "image": null,
+  "scenes": [
+   {
+    "work": "커피프린스 1호점",
+    "kind": "DRAMA",
+    "scene": "최한결(공유)은 이 단지의 일부인 서울만화박물관 옥상에 산다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2836148",
+  "name": "산모퉁이",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 백석동길 153",
+  "latitude": 37.5954757,
+  "longitude": 126.9679823,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/43/2836143_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "커피프린스 1호점",
+    "kind": "DRAMA",
+    "scene": "커피프린스에서 최한성(이선균)이 사는 곳으로 나온다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126668",
+  "name": "아침고요수목원",
+  "region": "GYEONGGI",
+  "address": "경기도 가평군 상면 수목원로 432",
+  "latitude": 37.743958,
+  "longitude": 127.3525385,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/38/4079238_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "이 정원은 왕궁의 일부입니다. 1회에서 이영(박보검)은 자신의 옆에서 즐겁게 식사를 하고 있는 여동생 명은공주에게서 러브레터를 가로챈다. 그리고 3화에서 홍라온(김유정)은 영은공주(허정은)와 함께 이곳에서 정원 가꾸기를 하고 있다. 이영이 다가오고 라온과 라온은 한동안 티격태격하다가 라온에게 \"친구라고\" 부른다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1281",
+  "name": "고성장산숲",
+  "region": "GYEONGNAM",
+  "address": "경상남도 고성군 마암면 장산리 230-2",
+  "latitude": 35.058982,
+  "longitude": 128.32671,
+  "image": null,
+  "scenes": [
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "구르미 그린 달빛에서 흙구덩이 함정에 빠진 장소"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2704119",
+  "name": "반곡지",
+  "region": "GYEONGBUK",
+  "address": "경상북도 경산시 남산면 반곡리 246",
+  "latitude": 35.7804706,
+  "longitude": 128.8066359,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/05/4079405_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "차태현과 조여정이 특별 출연한 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1283",
+  "name": "영주소수서원",
+  "region": "GYEONGBUK",
+  "address": "경상북도 영주시 순흥면 소백로 2740",
+  "latitude": 36.925493,
+  "longitude": 128.58029,
+  "image": null,
+  "scenes": [
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "김윤성(정진영)이 가장 좋아하는 은신처는 이 장소의 고대 편백나무 아래입니다. 3화에서 홍라온(김유정)에게 보여주고 이후 7화에서 윤성이 그녀를 찾아 선물을 주는 것처럼 고민이 필요할 때 찾아오는 곳이기도 하다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126397",
+  "name": "광한루원",
+  "region": "JEONBUK",
+  "address": "전라북도 남원시 요천로 1447",
+  "latitude": 35.403321,
+  "longitude": 127.379445,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/15/4060015_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "1화에서 효명세자(박보검)는 아버지 왕이 지나갈 때 이 정원의 봉래섬에 있는 영주각에서 공부하는 척한다. 5화에서 명은공주(정혜성 분)는 홍라온(김유정 분)에게 정원의 호수 위에서 배를 타자고 부탁한다. 세자 효명은 옆을 지나 그 광경을 관찰하고 라온이 호수에 빠지자 곧바로 물에 뛰어들어 그녀를 구한다."
+   },
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "이병헌이 한효주에게 시 읽어주는 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1287",
+  "name": "부안영상테마파크",
+  "region": "JEONBUK",
+  "address": "전라북도 부안군 반석면 격포로 309-64",
+  "latitude": 35.620633,
+  "longitude": 126.48247,
+  "image": null,
+  "scenes": [
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "왕의 생일 축제는 4화에서 열린다. 솔리스트 리드댄서 애심(차주영 분)이 실종되자 홍라온(김유정 분)이 대신 나서 축하연을 살리고 결국 이영/효명세자(박보검 분)를 마법에 걸리게 된다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "147656",
+  "name": "전주 경기전",
+  "region": "JEONBUK",
+  "address": "전라북도 전주시 완산구 태조로 44",
+  "latitude": 35.8141718,
+  "longitude": 127.1500212,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/45/3365745_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "구르미 그린 달빛",
+    "kind": "DRAMA",
+    "scene": "드라마 배경의 일부로 등장한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3005",
+  "name": "교원 가평비전센터",
+  "region": "GYEONGGI",
+  "address": "경기도 가평군 설악면 유명로 2182",
+  "latitude": 37.701456,
+  "longitude": 127.45808,
+  "image": null,
+  "scenes": [
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "그녀의 딸 안민서(장혜진)는 신경외과 원장으로, 정희주(고현정)의 동생 정선우(신동욱)는 물리치료사로 일한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3006",
+  "name": "수원시립한림도서관",
+  "region": "GYEONGGI",
+  "address": "경기도 수원시 권선구 동수원로25번길 32-52",
+  "latitude": 37.237556,
+  "longitude": 127.02488,
+  "image": null,
+  "scenes": [
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "2회에서 킹 이곤(이민호)이 3일 동안 대한민국의 역사를 공부한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3010",
+  "name": "미사호수공원",
+  "region": "GYEONGGI",
+  "address": "경기도 하남시 망월동 739-1",
+  "latitude": 37.563057,
+  "longitude": 127.1883,
+  "image": null,
+  "scenes": [
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "9회에서 이곤(이민호)과 태을(김고은)이 육교 옆 광장에서 치맥 데이트를 하는 모습이 그려졌다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3011",
+  "name": "미사리조정경기장",
+  "region": "GYEONGGI",
+  "address": "경기도 하남시 미사대로 505",
+  "latitude": 37.553606,
+  "longitude": 127.21324,
+  "image": null,
+  "scenes": [
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "2화(전체 1화)에서 이곤(이민호)이 해군사관학교 88기수와 함께 참가하는 조정대회에서 우승을 한다."
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2603509",
+  "name": "월정교",
+  "region": "GYEONGBUK",
+  "address": "경상북도 경주시 교동 274",
+  "latitude": 35.8293,
+  "longitude": 129.2181,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/94/3052894_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "13회에서 이곤(이민호)이 이림(이정진)의 대나무 숲 조사를 마치고 돌아오는 태을(김고은)을 기다리는 곳이다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3013",
+  "name": "중리체육공원",
+  "region": "DAEGU",
+  "address": "대구광역시 서구 중리동 1136-112",
+  "latitude": 35.861432,
+  "longitude": 128.54568,
+  "image": null,
+  "scenes": [
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "3회에서 정태을(김고은)과 이곤(이민호)가 정비공을 기다리면서 그들은 공원으로 들어가 단풍 아래를 산책한다."
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-3014",
+  "name": "계산성당",
+  "region": "DAEGU",
+  "address": "대구광역시 중구 서성로 10",
+  "latitude": 35.867913,
+  "longitude": 128.587829,
+  "image": null,
+  "scenes": [
+   {
+    "work": "더 킹 : 영원의 군주",
+    "kind": "DRAMA",
+    "scene": "이곤과 조영이 조문을 위해 찾았던 성당"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11074",
+  "name": "합천댐 (물 문화관)",
+  "region": "GYEONGNAM",
+  "address": "경상남도 합천군 대병면 합천호수로 197",
+  "latitude": 35.531559,
+  "longitude": 128.029495,
+  "image": null,
+  "scenes": [
+   {
+    "work": "올드보이",
+    "kind": "MOVIE",
+    "scene": "유지태의 누나가 자살하는 장면이 촬영된 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11075",
+  "name": "향파문학거리",
+  "region": "BUSAN",
+  "address": "부산광역시 남구 용소로21번길 15",
+  "latitude": 35.1356125,
+  "longitude": 129.101766,
+  "image": null,
+  "scenes": [
+   {
+    "work": "올드보이",
+    "kind": "MOVIE",
+    "scene": "최민식과 유지태가 만나는 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-11078",
+  "name": "온천천 산책로",
+  "region": "BUSAN",
+  "address": "부산광역시 연제구 온천천남로 39",
+  "latitude": 35.192545,
+  "longitude": 129.095072,
+  "image": null,
+  "scenes": [
+   {
+    "work": "올드보이",
+    "kind": "MOVIE",
+    "scene": "최민식이 동네 양아치들한테 상상훈련 테스트 한 곳"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2594360",
+  "name": "익산교도소세트장",
+  "region": "JEONBUK",
+  "address": "전라북도 익산시 성당면 함낭로 207",
+  "latitude": 36.0694771,
+  "longitude": 126.9306672,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/35/4003835_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "올드보이",
+    "kind": "MOVIE",
+    "scene": "국내 유일한 익산에 있는 교도소 세트장"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12955",
+  "name": "사북석탄역사체험관",
+  "region": "GANGWON",
+  "address": "강원도 정선군 사북읍 하이원길 57-3",
+  "latitude": 37.220385,
+  "longitude": 128.816079,
+  "image": null,
+  "scenes": [
+   {
+    "work": "태극기 휘날리며",
+    "kind": "MOVIE",
+    "scene": "탄광에 숨어 있는 인민군을 포로로 잡는 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12957",
+  "name": "합천 황매산",
+  "region": "GYEONGNAM",
+  "address": "경상남도 합천군 가회면 둔내리",
+  "latitude": 35.495825,
+  "longitude": 127.974289,
+  "image": null,
+  "scenes": [
+   {
+    "work": "태극기 휘날리며",
+    "kind": "MOVIE",
+    "scene": "낙동강 방어선 전투와 두밀령 고지 전투 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-12959",
+  "name": "왕산마을 벚꽃터널",
+  "region": "GYEONGBUK",
+  "address": "경상북도 경주시 암곡동 746",
+  "latitude": 35.859291,
+  "longitude": 129.312979,
+  "image": null,
+  "scenes": [
+   {
+    "work": "태극기 휘날리며",
+    "kind": "MOVIE",
+    "scene": "벚꽃이 아름다운 태극기 휘날리며 촬영지"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "128578",
+  "name": "섬진강기차마을",
+  "region": "JEONNAM",
+  "address": "전라남도 곡성군 오곡면 기차마을로 232",
+  "latitude": 35.277531,
+  "longitude": 127.3082798,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/47/3532347_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "태극기 휘날리며",
+    "kind": "MOVIE",
+    "scene": "장동건의 훈장 씬, 피난열차 장면 등을 찍은 곳"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126001",
+  "name": "외암민속마을",
+  "region": "CHUNGNAM",
+  "address": "충청남도 아산시 송악면 외암민속길 5",
+  "latitude": 36.730992,
+  "longitude": 127.0144302,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/59/4071759_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "태극기 휘날리며",
+    "kind": "MOVIE",
+    "scene": "제사를 지내고 피난 떠나는 장면의 배경지"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "128127",
+  "name": "아산 공세리성당",
+  "region": "CHUNGNAM",
+  "address": "충청남도 아산시 인주면 공세리성당길 10",
+  "latitude": 36.8832871,
+  "longitude": 126.9133914,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/72/3558572_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "태극기 휘날리며",
+    "kind": "MOVIE",
+    "scene": "태극기 휘날리며에서 원빈이 일을 도왔던 성당"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-4594",
+  "name": "고양아쿠아특수촬영스튜디오",
+  "region": "GYEONGGI",
+  "address": "경기도 고양시 덕양구 통일로396번길 250",
+  "latitude": 37.674218,
+  "longitude": 126.900457,
+  "image": null,
+  "scenes": [
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "명량에서 이순신과 일본 적장의 대결이 펼쳐진 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1178",
+  "name": "남양주 종합촬영소",
+  "region": "GYEONGGI",
+  "address": "경기도 남양주시 조안면 북한강로855번길 138",
+  "latitude": 37.60466,
+  "longitude": 127.320173,
+  "image": null,
+  "scenes": [
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "명량의 촬영지이자 한국을 대표하는 영상지원센터"
+   },
+   {
+    "work": "공동경비구역JSA",
+    "kind": "MOVIE",
+    "scene": "공동경비구역 JSA의 세트장으로 유명한 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-4596",
+  "name": "발포항 공원",
+  "region": "JEONNAM",
+  "address": "전라남도 고흥군 도화면 발포리 547-45",
+  "latitude": 34.484151,
+  "longitude": 127.339904,
+  "image": null,
+  "scenes": [
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "명량에서 거북선에 불을 지르는 장면을 촬영한 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-4597",
+  "name": "광양항 해양공원",
+  "region": "JEONNAM",
+  "address": "전라남도 광양시 중동 1894",
+  "latitude": 34.92067,
+  "longitude": 127.693677,
+  "image": null,
+  "scenes": [
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "명량의 촬영지이자 이순신대교가 보이는 곳"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "127498",
+  "name": "완도수목원",
+  "region": "JEONNAM",
+  "address": "전라남도 완도군 군외면 초평1길 156",
+  "latitude": 34.3606526,
+  "longitude": 126.6635321,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/23/3553923_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "명량에서 왜구를 피해 피신하는 동백 숲 전경"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2037306",
+  "name": "완도 청해포구촬영장",
+  "region": "JEONNAM",
+  "address": "전라남도 완도군 완도읍 청해진서로 1161-8",
+  "latitude": 34.3232774,
+  "longitude": 126.6703886,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/63/3354463_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "명량 저잣거리, 선착장 전투 장면 촬영지"
+   },
+   {
+    "work": "해신",
+    "kind": "DRAMA",
+    "scene": "2004년 KBS 드라마 '해신'을 찍으려고 지은 세트장"
+   },
+   {
+    "work": "주몽",
+    "kind": "DRAMA",
+    "scene": "MBC 드라마 '주몽'도 이 세트장에서 촬영했다"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "3007811",
+  "name": "울돌목 스카이워크",
+  "region": "JEONNAM",
+  "address": "전라남도 진도군 군내면 녹진리",
+  "latitude": 34.5727013,
+  "longitude": 126.3094147,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/09/3007809_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "이순신이 명량대첩을 승리로 이끈 역사적 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-4601",
+  "name": "우수영국민관광지",
+  "region": "JEONNAM",
+  "address": "전라남도 해남군 문내면 학동리 1021",
+  "latitude": 34.572493,
+  "longitude": 126.309503,
+  "image": null,
+  "scenes": [
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "영화 명량 촬영지이자 명량대첩 기념지"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-4602",
+  "name": "궁항 전라좌수영",
+  "region": "JEONBUK",
+  "address": "전라북도 부안군 변산면 궁항영상길 91",
+  "latitude": 35.609973,
+  "longitude": 126.465986,
+  "image": null,
+  "scenes": [
+   {
+    "work": "명량",
+    "kind": "MOVIE",
+    "scene": "영화 명량과 KBS 드라마 이순신의 세트장"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-13000",
+  "name": "금강산 화암사 앞",
+  "region": "GANGWON",
+  "address": "강원도 고성군 토성면 화암사길 100",
+  "latitude": 38.226413,
+  "longitude": 128.472543,
+  "image": null,
+  "scenes": [
+   {
+    "work": "택시운전사",
+    "kind": "MOVIE",
+    "scene": "독일 기자와 송강호가 군인들에게 제지당한 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-13002",
+  "name": "성주 버스 정류장",
+  "region": "GYEONGBUK",
+  "address": "경상북도 성주군 성주읍 경산길 15-4",
+  "latitude": 35.917017,
+  "longitude": 128.285318,
+  "image": null,
+  "scenes": [
+   {
+    "work": "택시운전사",
+    "kind": "MOVIE",
+    "scene": "영화 속에서 순천 버스터미널로 나오는 곳"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2381553",
+  "name": "부산영화촬영스튜디오",
+  "region": "BUSAN",
+  "address": "부산광역시 해운대구 해운대해변로 52",
+  "latitude": 35.1624777,
+  "longitude": 129.1380667,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/73/3337973_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "택시운전사",
+    "kind": "MOVIE",
+    "scene": "송강호가 택시 운전하면서 창밖의 배경 CG로 촬영"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-13008",
+  "name": "청소면 행정복지센터 앞 거리",
+  "region": "CHUNGNAM",
+  "address": "충청남도 보령시 청소면 청소큰길 167",
+  "latitude": 36.445337,
+  "longitude": 126.589933,
+  "image": null,
+  "scenes": [
+   {
+    "work": "택시운전사",
+    "kind": "MOVIE",
+    "scene": "이 거리는 80년대 광주민주화운동 배경이 된 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-13009",
+  "name": "청소역 장항선",
+  "region": "CHUNGNAM",
+  "address": "충청남도 보령시 청소면 청소큰길 176",
+  "latitude": 36.446021,
+  "longitude": 126.590797,
+  "image": null,
+  "scenes": [
+   {
+    "work": "택시운전사",
+    "kind": "MOVIE",
+    "scene": "청소역 인근 거리에서 촬영과 포스터를 찍었던 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1179",
+  "name": "영남대학교 본관",
+  "region": "GYEONGBUK",
+  "address": "경상북도 경산시 대학로 280",
+  "latitude": 35.830065,
+  "longitude": 128.761367,
+  "image": null,
+  "scenes": [
+   {
+    "work": "공동경비구역JSA",
+    "kind": "MOVIE",
+    "scene": "송강호가 입원한 북한의 개성병원"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1180",
+  "name": "서울과학기술대학교 다산관",
+  "region": "SEOUL",
+  "address": "서울특별시 노원구 공릉로 232",
+  "latitude": 37.63239,
+  "longitude": 127.078024,
+  "image": null,
+  "scenes": [
+   {
+    "work": "공동경비구역JSA",
+    "kind": "MOVIE",
+    "scene": "공동경비구역 JSA 촬영지이자 시대극 전문 촬영장"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1181",
+  "name": "고창 청보리밭",
+  "region": "JEONBUK",
+  "address": "전라북도 고창군 공음면 학원농장길 158-6",
+  "latitude": 35.375406,
+  "longitude": 126.542835,
+  "image": null,
+  "scenes": [
+   {
+    "work": "공동경비구역JSA",
+    "kind": "MOVIE",
+    "scene": "공동경비구역 JSA 등 다양한 영화의 촬영 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-1182",
+  "name": "금강하굿독",
+  "region": "CHUNGNAM",
+  "address": "충청남도 서천군 마서면 장산로855번길 13",
+  "latitude": 36.020244,
+  "longitude": 126.736216,
+  "image": null,
+  "scenes": [
+   {
+    "work": "공동경비구역JSA",
+    "kind": "MOVIE",
+    "scene": "공동경비구역 JSA 촬영지인 금강 하구"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "129457",
+  "name": "신성리 갈대밭",
+  "region": "CHUNGNAM",
+  "address": "충청남도 서천군 한산면 신성리 125-1",
+  "latitude": 36.0677456,
+  "longitude": 126.8610183,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/64/3533664_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "공동경비구역JSA",
+    "kind": "MOVIE",
+    "scene": "동료를 잃고 이병헌이 헤매던 갈대 숲"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "2721915",
+  "name": "밀양 월연정",
+  "region": "GYEONGNAM",
+  "address": "경상남도 밀양시 용평로 330-7",
+  "latitude": 35.4986202,
+  "longitude": 128.7799269,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/16/3536316_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "광해가 몸이 아파 치료를 받으며 머물렀던 장소"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "1883135",
+  "name": "안동고택 이상루",
+  "region": "GYEONGBUK",
+  "address": "경상북도 안동시 서후면 풍산태사로 3193-6",
+  "latitude": 36.6347485,
+  "longitude": 128.6784947,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/94/2993094_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "이병헌씨가 탈을 쓰고 노는 모습을 촬영한 장소"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "128558",
+  "name": "안동 군자마을(오천유적지)",
+  "region": "GYEONGBUK",
+  "address": "경상북도 안동시 와룡면 군자리길 29",
+  "latitude": 36.6735705,
+  "longitude": 128.8017246,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/09/3414809_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "광해가 위독해져 급하게 움직이는 장소"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "1883590",
+  "name": "옥연정사",
+  "region": "GYEONGBUK",
+  "address": "경상북도 안동시 풍천면 광덕솔밭길 86",
+  "latitude": 36.5433753,
+  "longitude": 128.5180061,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/73/3016973_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "영화 광해에서 이병헌이 총애하던 상궁의 집"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126510",
+  "name": "종묘 [유네스코 세계유산]",
+  "region": "SEOUL",
+  "address": "서울특별시 종로구 훈정동 종로 157",
+  "latitude": 37.5709802,
+  "longitude": 126.9951311,
+  "image": "https://tong.visitkorea.or.kr/cms/resource_photo/57/4063057_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "영화 <광해>의 시작 장면을 알리는 종묘"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126374",
+  "name": "담양 소쇄원",
+  "region": "JEONNAM",
+  "address": "전라남도 담양군 가사문학면 소쇄원길 17",
+  "latitude": 35.1843369,
+  "longitude": 127.0121768,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/70/4098370_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "이병헌을 반대하는 김명곤의 모의작당 장소"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "126398",
+  "name": "고창읍성",
+  "region": "JEONBUK",
+  "address": "전라북도 고창군 고창읍 모양성로 1",
+  "latitude": 35.4302858,
+  "longitude": 126.7043914,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/91/4094591_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "광해",
+    "kind": "MOVIE",
+    "scene": "이병헌을 살리는 김인권의 죽기 전 마지막 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-9908",
+  "name": "국민의숲길",
+  "region": "GANGWON",
+  "address": "강원도 평창군 대관령면 횡계리 14-362",
+  "latitude": 37.681403,
+  "longitude": 128.743108,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "숙희가 물감과 이젤을 들고 올라오는 곳"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-9909",
+  "name": "남양주 금선사",
+  "region": "GYEONGGI",
+  "address": "경기도 남양주시 화도읍 북한강로 1095-208",
+  "latitude": 37.615695,
+  "longitude": 127.329724,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "영화 아가씨에서 스님이 돈을 건넬 때 나온 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-9910",
+  "name": "풍산개마을 입구",
+  "region": "GYEONGGI",
+  "address": "경기도 안성시 삼죽면 계곡길 89",
+  "latitude": 37.087052,
+  "longitude": 127.381356,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "영화 아가씨에서 저택을 향하는 길에 등장하는 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-9913",
+  "name": "형도",
+  "region": "GYEONGGI",
+  "address": "경기도 화성시 송산면 독지리",
+  "latitude": 37.274333,
+  "longitude": 126.671683,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "히데코와 숙희가 열심히 달리기 하는 갈대밭"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-9915",
+  "name": "문화역서울284",
+  "region": "SEOUL",
+  "address": "서울특별시 중구 통일로 1",
+  "latitude": 37.555944,
+  "longitude": 126.971594,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "숙희와 히데코의 탈출문이 되는 장소"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-9916",
+  "name": "소록도 중앙공원",
+  "region": "JEONNAM",
+  "address": "전라남도 고흥군 도양읍 소록리 227",
+  "latitude": 34.509985,
+  "longitude": 127.121892,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "히데코의 이모가 목을 멘 나무가 있는 공원"
+   }
+  ]
+ },
+ {
+  "source": "MANUAL",
+  "externalId": "scene-9917",
+  "name": "변산반도 국립공원",
+  "region": "JEONBUK",
+  "address": "전라북도 부안군 변산면",
+  "latitude": 35.681146,
+  "longitude": 126.531991,
+  "image": null,
+  "scenes": [
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "변태성욕자인 남작의 집으로 가는 길을 찍은 곳"
+   }
+  ]
+ },
+ {
+  "source": "TOURAPI",
+  "externalId": "252582",
+  "name": "수성당",
+  "region": "JEONBUK",
+  "address": "전라북도 부안군 변산면 적벽강길 54",
+  "latitude": 35.6347739,
+  "longitude": 126.4603456,
+  "image": "https://tong.visitkorea.or.kr/cms/resource/06/3530406_image2_1.jpg",
+  "scenes": [
+   {
+    "work": "아가씨",
+    "kind": "MOVIE",
+    "scene": "아가씨 1부 초반부 바닷가 옆 절벽장면 찍은 곳"
+   }
+  ]
+ }
+]
