@@ -26,7 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "DB_URL=jdbc:mysql://replaced-by-testcontainers/welocation", "DB_USERNAME=unused", "DB_PASSWORD=unused",
         "REDIS_HOST=replaced-by-testcontainers", "REDIS_PORT=6379", "REDIS_PASSWORD=unused",
         // base64 of a 32-byte test value
-        "JWT_SECRET=MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWY="})
+        "JWT_SECRET=MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWY=",
+        // the 236 real spots would stay in the shared test database
+        "welocation.scenes.import=false"})
 @ActiveProfiles("prod")
 @AutoConfigureMockMvc
 @Import(TestcontainersConfig.class)

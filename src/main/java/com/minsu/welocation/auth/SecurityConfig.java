@@ -28,6 +28,8 @@ public class SecurityConfig {
     static final RequestMatcher PUBLIC_ENDPOINTS = new OrRequestMatcher(
             PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/api/spots"),
             PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/api/spots/**"),
+            PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/api/scenes"),
+            PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/api/scenes/works"),
             PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/api/auth/signup"),
             PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/api/auth/login"),
             PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/api/auth/oauth/**"),

@@ -22,6 +22,9 @@ public final class SpotDtos {
             Activity activity,
             SpotTag tag,
             @Size(max = 50) String q,
+            // false leaves out drama and film locations: the home page's "newest" row is for places the
+            // nightly sync found, and 229 imported at once would fill it for weeks
+            Boolean scenes,
             @Min(0) @Max(10_000) Integer page,
             @Min(1) @Max(50) Integer size) {
 
@@ -71,15 +74,15 @@ public final class SpotDtos {
     public record SpotDetail(Long id, String name, SpotCategory category, Activity activity, Region region,
                              String address, double latitude, double longitude, String description,
                              List<SpotTag> tags, List<String> images, int likeCount, long reviewCount, Double averageRating,
-                             String shortsVideoId, boolean manual) {
+                             String shortsVideoId, boolean manual, List<SceneView> scenes) {
 
-        static SpotDetail from(Spot spot, Rating rating) {
+        static SpotDetail from(Spot spot, Rating rating, List<SceneView> scenes) {
             return new SpotDetail(spot.getId(), spot.getName(), spot.getCategory(), spot.getActivity(), spot.getRegion(),
                     spot.getAddress(), spot.getLatitude(), spot.getLongitude(), spot.getDescription(),
                     spot.getTags().stream().sorted().toList(),
                     spot.getImages().stream().map(SpotImage::getUrl).toList(),
                     spot.getLikeCount(), rating.count(), rating.average(), spot.getShortsVideoId(),
-                    spot.getSource() == SpotSource.MANUAL);
+                    spot.getSource() == SpotSource.MANUAL, scenes);
         }
     }
 
@@ -132,5 +135,23 @@ public final class SpotDtos {
                     row.getAddress(), row.getLatitude(), row.getLongitude(), row.getThumbnailUrl(),
                     (int) Math.round(row.getDistanceMeters()));
         }
+    }
+
+    // a drama or film shot at the spot; scene is what happens there, in Korean
+    public record SceneView(String work, SceneKind kind, String scene) {
+
+        static SceneView from(SpotScene scene) {
+            return new SceneView(scene.getWork(), scene.getKind(), scene.getScene());
+        }
+    }
+
+    // cover: a photo from one of its spots, null when none of them has one
+    public record Work(String title, SceneKind kind, long spotCount, String coverUrl) {
+    }
+
+    public record WorkSpot(SpotSummary spot, String scene) {
+    }
+
+    public record WorkSpots(Work work, List<WorkSpot> spots) {
     }
 }

@@ -52,7 +52,7 @@ public class ManualSpotService {
                 clean(request.address()), request.latitude(), request.longitude(), SpotSource.MANUAL, null);
         spot.setActivity(activityOf(request));
         spot.describe(description(request));
-        return SpotDetail.from(spotRepository.save(spot), SpotDtos.Rating.NONE);
+        return SpotDetail.from(spotRepository.save(spot), SpotDtos.Rating.NONE, List.of());
     }
 
     @Transactional
