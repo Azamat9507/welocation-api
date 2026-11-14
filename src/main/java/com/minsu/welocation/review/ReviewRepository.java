@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Collection;
@@ -31,6 +32,10 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             group by r.spot.id
             """)
     List<RatingSummary> summarize(Collection<Long> spotIds);
+
+    @Modifying
+    @Query("delete from Review r where r.author.id = :authorId")
+    int deleteAllByAuthor(long authorId);
 
     interface RatingSummary {
         Long getSpotId();

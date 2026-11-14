@@ -71,6 +71,9 @@ welocation:
       # the app's REST API key
       client-id: ${KAKAO_CLIENT_ID:}
       client-secret: ${KAKAO_CLIENT_SECRET:}
+      # the primary admin key and app id, for the unlink webhook; empty admin key turns the webhook off
+      admin-key: ${KAKAO_ADMIN_KEY:}
+      app-id: ${KAKAO_APP_ID:}
       auth-url: https://kauth.kakao.com/oauth/authorize
       token-url: https://kauth.kakao.com/oauth/token
       user-url: https://kapi.kakao.com/v2/user/me
